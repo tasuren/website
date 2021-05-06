@@ -23,7 +23,7 @@ Powered by sanic
 from os.path import exists
 
 from sanic.response import file, html, redirect
-from sanic.exceptions import abort
+from sanic.exceptions import abort, NotFound
 from sanic import Sanic
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -77,13 +77,15 @@ async def favicon(request):
 
 @app.route('/<name>.html')
 async def normal(request, name):
-    if (exists('templates/' + name + '.html')
-            and name not in ['auth', 'embed', "help", "search"]):
+    if name == "menu":
+        return await template('menu.html')
+    try:
         if name[0] == "_":
             return await template(name + '.html')
         else:
-            return await template(name + '.html', file_name=name)
-    return await abort(404)
+            return await template('index.html', file_name=name)
+    except NotFound:
+        return await abort(404)
 
 
 app.run(host=HOST, port=PORT, ssl=SSL)
