@@ -20,6 +20,8 @@ Powered by sanic
 ▌     ▐                ▀▀▄▄▄▀
  ▀▀▄▄▀                           """
 
+from json import load, loads, dumps
+from aiofile import async_open
 from os.path import exists
 
 from sanic.response import file, html, redirect
@@ -28,6 +30,10 @@ from sanic import Sanic
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from flask_misaka import Misaka
+
+
+with open("data.json", "r", encoding="utf-8_sig") as f:
+    data = load(f)
 
 
 SSL = {
@@ -83,7 +89,7 @@ async def normal(request, name):
         if name[0] == "_":
             return await template(name + '.html')
         else:
-            return await template('index.html', file_name=name)
+            return await template('index.html', file_name=name, title=data["titles"].get(name))
     except NotFound:
         return await abort(404)
 

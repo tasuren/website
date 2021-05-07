@@ -4,14 +4,22 @@
     <META http-equiv="Content-Style-Type" content="text/css">
     <link href="static/style.css" rel="stylesheet" type="text/css">
     <TITLE>{{ title }}</TITLE>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script language="JavaScript">
+    $(document).ready( function () {
+       $("a[href^='http']:not([href*='" + location.hostname + "'])").attr('target', '_top');
+    })
+    </script>
   </HEAD>
-  <BODY text="#000000" bgcolor="#99cccc" link="#0000CC" vlink="#990099" alink="#660000" background="/static/wallpaper1.gif">
-    <div align="left" style="margin-left:30px">
+  <BODY style="background: url(/static/wallpaper1.gif); background-size: 10%;" text="#000000" bgcolor="#99cccc" link="#0000CC" vlink="#990099" alink="#660000">
+    <div align="left" style="margin-left:30px; color: #888084;">
         <br>
         <br>
         <font size="5">
           {% block content %} {% endblock %}
         </font>
+        <br>
+        <br>
     </div>
     </div>
   </BODY>
