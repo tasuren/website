@@ -3,3 +3,11 @@ __pychache__
 *.sublime-workspace
 *.crt
 *.key
+*.GIF
+*.gif
+*.PNG
+*.png
+*.JPG
+*.jpg
+*.zip
+*.jar
