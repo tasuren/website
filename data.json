@@ -3,6 +3,8 @@
         "profile": "tasurenのプロフィール",
         "index": "tasurenのホームページ",
         "layout": "ここは...",
-        "menu": "メニューリンク"
+        "menu": "メニューリンク",
+        "download": "tasurenの配布物",
+        "mods": "tasurenのMinecraftのMod"
     }
 }

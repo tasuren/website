@@ -81,17 +81,31 @@ async def favicon(request):
     return await file("static/favicon.ico")
 
 
-@app.route('/<name>.html')
-async def normal(request, name):
+async def normal(request, name, base=None):
+
     if name == "menu":
         return await template('menu.html')
     try:
         if name[0] == "_":
-            return await template(name + '.html')
+            file_name = f"/{base}/{name}" if base else name
+            return await template(file_name + '.html')
         else:
-            return await template('index.html', file_name=name, title=data["titles"].get(name))
+            file_name = f"/{base}/_{name}" if base else "_" + name
+            print(file_name)
+            return await template(
+                'index.html', file_name=file_name, title=data["titles"].get(name))
     except NotFound:
         return await abort(404)
+
+
+@app.route('/<name>.html')
+async def normal_one(request, name):
+    return await normal(request, name)
+
+
+@app.route('/<base>/<name>.html')
+async def normal_two(request, base, name):
+    return await normal(request, name, base)
 
 
 app.run(host=HOST, port=PORT, ssl=SSL)
