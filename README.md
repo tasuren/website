@@ -1,2 +1,4 @@
-# tasuren-website
-tasurenのウェブサイト
+# tasuren website
+tasurenのウェブサイトのコードです。
+阿部寛さんのホームページ風になっています。
+(古いサイトが好きだから。)
