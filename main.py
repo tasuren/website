@@ -63,10 +63,11 @@ async def normal_two(request, path: str):
                 return await template(path)
             else:
                 main_file_name = "_" + file_name
-                title = file_name[1:main_file_name.rfind(".")]
+                ext_index = main_file_name.rfind(".") - 1
+                title = file_name[:ext_index]
                 return await template(
                     "index.html", file_name=main_file_name,
-                    title=data["titles"].get(file_name, "notitle"))
+                    title=data["titles"].get(title, title))
         else:
             raise abort(404)
     else:
