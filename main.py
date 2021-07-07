@@ -1,27 +1,15 @@
-""" tasuren's web server
-Powered by sanic
-           ▄▄▄▄▄
-        ▀▀▀██████▄▄▄      _______________
-      ▄▄▄▄▄  █████████▄  /               \
-     ▀▀▀▀█████▌ ▀▐▄ ▀▐█ | Gotta go fast! |
-   ▀▀█████▄▄ ▀██████▄██ | _______________/
-   ▀▄▄▄▄▄  ▀▀█▄▀█════█▀ |/
-        ▀▀▀▄  ▀▀███ ▀       ▄▄
-     ▄███▀▀██▄████████▄ ▄▀▀▀▀▀▀█▌
-   ██▀▄▄▄██▀▄███▀ ▀▀████      ▄██
-▄▀▀▀▄██▄▀▀▌████▒▒▒▒▒▒███     ▌▄▄▀
-▌    ▐▀████▐███▒▒▒▒▒▐██▌
-▀▄▄▄▄▀   ▀▀████▒▒▒▒▄██▀
-          ▀▀█████████▀
-        ▄▄██▀██████▀█
-      ▄██▀     ▀▀▀  █
-     ▄█             ▐▌
- ▄▄▄▄█▌              ▀█▄▄▄▄▀▀▄
-▌     ▐                ▀▀▄▄▄▀
- ▀▀▄▄▀                           """
+# tasuren's website main program
 
-from json import load, loads, dumps
-from aiofile import async_open
+PROGRAM_NAME = "tasuren.website"
+HOST = "0.0.0.0"
+PORT = 80
+TEMPLATE_ENGINE_EXTS = ("html", "tmp", "tpl")
+BASE_PATH = "root"
+NORMAL_CONTENT_FILES = ("menu.html")
+
+
+from ujson import load, loads, dumps
+from aiofiles import open as async_open
 from os.path import exists
 
 from sanic.response import file, html, redirect
@@ -36,27 +24,16 @@ with open("data.json", "r", encoding="utf-8_sig") as f:
     data = load(f)
 
 
-SSL = {
-    "cert": "static/certificate.crt",
-    "key": "static/private.key",
-    "verify": "static/ca_certs.crt"
-}
-SSL = None
-PORT = 80
-HOST = "0.0.0.0"
-
-
 app = Sanic("RT-WebSite")
 
-app.static("/static", "static")
 
-
-# Jinja2 テンプレートエンジン。
-env = Environment(loader=FileSystemLoader("./templates"),
-                  autoescape=select_autoescape(['html', 'xml', 'tpl']),
+# Jinja2 テンプレートエンジンの定義。
+env = Environment(loader=FileSystemLoader("./" + BASE_PATH),
+                  autoescape=select_autoescape(TEMPLATE_ENGINE_EXTS),
                   enable_async=True)
 
 
+# Jinja2テンプレートエンジンを使用してHTMLを返すためのコルーチン関数。
 async def template(tpl, **kwargs):
     template = env.get_template(tpl)
     content = await template.render_async(kwargs)
@@ -76,36 +53,24 @@ async def index(request):
     return redirect("/index.html")
 
 
-@app.route("/favicon.ico")
-async def favicon(request):
-    return await file("static/favicon.ico")
-
-
-async def normal(request, name, base=None):
-
-    if name == "menu":
-        return await template('menu.html')
-    try:
-        if name[0] == "_":
-            file_name = f"/{base}/{name}" if base else name
-            return await template(file_name + '.html')
+@app.route('/<path:path>')
+async def normal_two(request, path: str):
+    if path.endswith(TEMPLATE_ENGINE_EXTS):
+        file_name = path.split("/")
+        if file_name:
+            file_name = file_name[-1]
+            if file_name == NORMAL_CONTENT_FILES or file_name.startswith("_"):
+                return await template(path)
+            else:
+                main_file_name = "_" + file_name
+                title = file_name[1:main_file_name.rfind(".")]
+                return await template(
+                    "index.html", file_name=main_file_name,
+                    title=data["titles"].get(file_name, "notitle"))
         else:
-            file_name = f"/{base}/_{name}" if base else "_" + name
-            print(file_name)
-            return await template(
-                'index.html', file_name=file_name, title=data["titles"].get(name))
-    except NotFound:
-        return await abort(404)
+            raise abort(404)
+    else:
+        return await file(BASE_PATH + "/" + path)
 
 
-@app.route('/<name>.html')
-async def normal_one(request, name):
-    return await normal(request, name)
-
-
-@app.route('/<base>/<name>.html')
-async def normal_two(request, base, name):
-    return await normal(request, name, base)
-
-
-app.run(host=HOST, port=PORT, ssl=SSL)
+app.run(host=HOST, port=PORT)
