@@ -2,7 +2,7 @@
 
 PROGRAM_NAME = "tasuren.website"
 HOST = "0.0.0.0"
-PORT = 80
+PORT = 800
 TEMPLATE_ENGINE_EXTS = ("html", "tmp", "tpl")
 BASE_PATH = "root"
 NORMAL_CONTENT_FILES = ("menu.html")
