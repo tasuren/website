@@ -9,5 +9,8 @@
         "softs": "tasurenのソフト",
         "freedomwall": "FreedomWall - 壁紙設定ソフト",
         "service": "tasurenのサービス"
+    },
+    "ext_js": {
+	"reprypt": "/javascripts/services/reprypt.js"
     }
 }

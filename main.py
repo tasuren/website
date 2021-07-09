@@ -60,14 +60,19 @@ async def normal_two(request, path: str):
         if file_name:
             file_name = file_name[-1]
             if file_name == NORMAL_CONTENT_FILES or file_name.startswith("_"):
-                return await template(path)
+                if file_name[0] == "_":
+                    title = file_name[1:file_name.rfind(".")]
+                    return await template(path, ext_js_name=data["ext_js"].get(title, "不明"))
+                else:
+                    return await template(path)
             else:
                 main_file_name = "_" + file_name
                 ext_index = main_file_name.rfind(".") - 1
                 title = file_name[:ext_index]
                 return await template(
                     "index.html", file_name=main_file_name,
-                    title=data["titles"].get(title, title))
+                    title=data["titles"].get(title, title)
+                )
         else:
             raise abort(404)
     else:

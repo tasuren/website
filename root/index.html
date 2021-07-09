@@ -5,10 +5,11 @@
     <META http-equiv="Content-Style-Type" content="text/css">
     <TITLE>{{ title }}</TITLE>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ ext_js_name }}"></script>
   </HEAD>
   <FRAMESET cols="18,82">
-    <FRAME name="frame1" src="/menu.html" marginheight="0" marginwidth="0" scrolling="auto">
-    <FRAME name="frame2" src="{{ file_name }}" marginheight="0" marginwidth="0" scrolling="auto">
+    <FRAME id="menu-frame" name="frame1" title="menu" src="/menu.html" marginheight="0" marginwidth="0" scrolling="auto">
+    <FRAME id="main-frame" name="frame2" title="{{ title }}" src="{{ file_name }}" marginheight="0" marginwidth="0" scrolling="auto">
     <NOFRAMES>
       <BODY>
       </BODY>

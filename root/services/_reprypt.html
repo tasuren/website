@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+{% filter markdown %}
+
+[戻る](/service.html)
+* * *
+# Reprypt - 暗号作成ツール
+Repryptというtasurenが作った独自の暗号化ツールで文章をパスワードつきで暗号化します。
+8500文字まで入力することが可能です。
+パスワードは30文字まで有効です。
+{% endfilter %}
+<textarea maxlength=8500 rows=3 cols=30 wrap="hard" id="repryptInput">暗号化する文章</textarea>
+<textarea maxlength=8500 rows=3 cols=30 wrap="hard" id="repryptOutput">暗号化された文章</textarea><br />
+<input maxlength=30 id="repryptKey" value="パスワード" />
+<button type="button" id="repryptEncrypt">暗号化</button> 
+<button type="button" id="repryptDecrypt">複合化</button><br />
+<div id="repryptNow">Now loading...</div>
+{% endblock %}
