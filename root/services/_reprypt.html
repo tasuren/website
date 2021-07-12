@@ -17,5 +17,10 @@ Repryptというtasurenが作った独自の暗号化ツールで文章をパス
 <input maxlength=30 id="repryptKey" value="パスワード" />
 <button type="button" id="repryptEncrypt">暗号化</button> 
 <button type="button" id="repryptDecrypt">複合化</button><br />
-<div id="repryptNow">Now loading...</div>
+<div id="repryptNow">Now loading...</div><br />
+{% filter markdown %}
+この暗号化するコードはPythonで書かれており[ここ](https://github.com/tasuren/reprypt)にあります。
+Pythonでライブラリとして`reprypt`が使えます。
+Pythonのライブラリの`reprypt`の使い方は[リファレンス](https://tasuren.github.io/reprypt)にあります。
+{% endfilter %}
 {% endblock %}
