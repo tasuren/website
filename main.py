@@ -5,7 +5,7 @@ HOST = "0.0.0.0"
 PORT = 800
 TEMPLATE_ENGINE_EXTS = ("html", "tmp", "tpl")
 BASE_PATH = "root"
-NORMAL_CONTENT_FILES = ("menu.html")
+NORMAL_CONTENT_FILES = ("menu.html", "googlebad1ca1c18db0f38.html")
 
 
 from ujson import load, loads, dumps
