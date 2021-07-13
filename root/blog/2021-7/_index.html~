@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+{% block content %}
+{% filter markdown %}
+[戻る](/blog) - *最終更新日:2021/7/13*
+* * *
+{% endfilter %}
+{% endblock %}

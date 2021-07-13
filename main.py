@@ -55,28 +55,36 @@ async def index(request):
 
 @app.route('/<path:path>')
 async def normal_two(request, path: str):
+    if path.endswith("/"):
+        path = path[:-1]
     if path.endswith(TEMPLATE_ENGINE_EXTS):
         file_name = path.split("/")
         if file_name:
             file_name = file_name[-1]
             if file_name == NORMAL_CONTENT_FILES or file_name.startswith("_"):
+                if not exists(BASE_PATH + "/" + path):
+                    return abort(404)
                 if file_name[0] == "_":
                     title = file_name[1:file_name.rfind(".")]
-                    return await template(path, ext_js_name=data["ext_js"].get(title, "不明"))
+                    return await template(path, ext_js_name=data["ext_js"].get(title, "/none.js"))
                 else:
                     return await template(path)
             else:
-                main_file_name = "_" + file_name
-                ext_index = main_file_name.rfind(".") - 1
-                title = file_name[:ext_index]
-                return await template(
-                    "index.html", file_name=main_file_name,
-                    title=data["titles"].get(title, title)
-                )
+                if "." in file_name:
+                    main_file_name = "_" + file_name
+                    ext_index = main_file_name.rfind(".") - 1
+                    title = file_name[:ext_index]
+                    return await template(
+                        "index.html", file_name=main_file_name,
+                        title=data["titles"].get(title, title)
+                    )
         else:
             raise abort(404)
     else:
-        return await file(BASE_PATH + "/" + path)
+        if exists(BASE_PATH + "/" + path + "/_index.html"):
+            return redirect("/" + path + "/index.html")
+        else:
+             return await file(BASE_PATH + "/" + path)
 
 
 app.run(host=HOST, port=PORT)
