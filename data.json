@@ -1,16 +1,20 @@
 {
     "titles": {
-        "profile": "tasurenのプロフィール",
-        "index": "tasurenのホームページ",
-        "layout": "ここは...",
-        "menu": "メニューリンク",
-        "download": "tasurenの配布物",
-        "mods": "tasurenのMinecraftのMod",
-        "softs": "tasurenのソフト",
-        "freedomwall": "FreedomWall - 壁紙設定ソフト",
-        "service": "tasurenのサービス"
+        "profile.html": "tasurenのプロフィール",
+        "index.html": "tasurenのホームページ",
+        "layout.html": "ここは...",
+        "menu.html": "メニューリンク",
+        "download.html": "tasurenの配布物",
+        "mods.html": "tasurenのMinecraftのMod",
+        "softs.html": "tasurenのソフト",
+        "freedomwall.html": "FreedomWall - 壁紙設定ソフト",
+        "service.html": "tasurenのサービス",
+        "storage/index.html": "tasurenの貯蔵庫",
+        "storage/blog/index.html": "tasurenのブログ",
+        "storage/tech/index.html": "tasurenの技術倉庫",
+        "storage/tech/human/index.html": "人間をリバースエンジニアリング！"
     },
     "ext_js": {
-	"reprypt": "/javascripts/services/reprypt.js"
+	"services/reprypt.html": "/javascripts/services/reprypt.js"
     }
 }
