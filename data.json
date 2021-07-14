@@ -1,6 +1,6 @@
 {
     "titles": {},
     "ext_js": {
-	"services/reprypt.html": "/javascripts/services/reprypt.js"
+	"services/_reprypt.html": "/javascripts/services/reprypt.js"
     }
 }
