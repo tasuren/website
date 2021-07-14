@@ -55,36 +55,51 @@ async def index(request):
 
 @app.route('/<path:path>')
 async def normal_two(request, path: str):
-    if path.endswith("/"):
+    if path[-1] == "/":
         path = path[:-1]
-    if path.endswith(TEMPLATE_ENGINE_EXTS):
-        file_name = path.split("/")
-        if file_name:
-            file_name = file_name[-1]
-            if file_name in NORMAL_CONTENT_FILES or file_name.startswith("_"):
-                if not exists(BASE_PATH + "/" + path):
-                    return abort(404)
-                if file_name[0] == "_":
-                    title = file_name[1:file_name.rfind(".")]
-                    return await template(
-                        path, ext_js_name=data["ext_js"].get(title, "/none.js"))
+    if "." not in path:
+        path = path + "/index.html"
+    true_path = BASE_PATH + "/" + path
+    file_split = path.rfind("/")
+    if file_split == -1:
+        file_split = 0
+    file_name = path[file_split:]
+    if file_name[0] == "/":
+        file_name = file_name[1:]
+    true_main_page = path[:file_split] + "/_" + file_name
+    if true_main_page[0] != "/":
+        true_main_page = "/" + true_main_page
+    true_main_page = BASE_PATH + true_main_page
+    menu_right_mode = exists(true_main_page)
+    if exists(true_path) or menu_right_mode:
+        if path.endswith(TEMPLATE_ENGINE_EXTS):
+            # titleを取得する。
+            titles = data["titles"].get(path, {})
+            if titles == {}:
+                json_path = ((BASE_PATH + "/" if file_split != 0 else BASE_PATH)
+                             + path[:file_split] + "/titles.json")
+                if exists(json_path):
+                    async with async_open(json_path, "r") as f:
+                        data["titles"][path] = loads(await f.read())
                 else:
-                    return await template(path)
+                    data["titles"][path] = {}
+                titles = data["titles"][path]
+            title = titles.get(file_name, file_name[:file_name.rfind(".")])
+            # ファイルを返す。
+            if menu_right_mode:
+                new_path = "index.html"
             else:
-                if "." in file_name:
-                    main_file_name = "_" + file_name
-                    return await template(
-                        "index.html", file_name=main_file_name,
-                        title=data["titles"].get(
-                            path, file_name[:main_file_name.rfind(".") - 1])
-                    )
+                new_path = path
+                file_name = ""
+            print(path)
+            return await template(
+                new_path, ext_js_name=data["ext_js"].get(path, "/none.js"),
+                title=title, file_name="/" + true_main_page[len(BASE_PATH) + 1:])
         else:
-            raise abort(404)
+            # 普通にファイルを返す場合。
+            return await file(true_path)
     else:
-        if exists(BASE_PATH + "/" + path + "/_index.html"):
-            return redirect("/" + path + "/index.html")
-        else:
-             return await file(BASE_PATH + "/" + path)
+        return abort(404)
 
 
 app.run(host=HOST, port=PORT)
