@@ -45,6 +45,10 @@ async def template(tpl, **kwargs):
 md = Misaka(
     autolink=True, wrap=True)
 env.filters.setdefault("markdown", md.render)
+# <code>を<pre><code>にするフィルターを登録する。(作りかけ)
+def code_pre(input):
+    input.replace("<code>", "<pre><code>").replace("</code>", "</code></pre>")
+env.filters["code_pre"] = code_pre
 
 
 # ===  MAIN ## === #

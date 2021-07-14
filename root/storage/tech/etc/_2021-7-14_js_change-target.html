@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+{% filter markdown %}
+[戻る](/storage/tech/etc), *技術倉庫裏 2021/7/14の記録*
+* * *
+# Javascriptでaタグのtargetを変更する。
+このサイトを調整している時気づいてしまった。
+別サイトのリンクを開いた後戻るボタンで戻るとリンクが使えなくなるということに。
+なぜこうなるのかはわからなかった。
+というわけで外部サイトのaタグのtargetには`_blank`、自分のサイトのaタグ
+には`_top`を割り当てるようにjavascriptで作ることにした。
+(`<a href="url" target="_brank">`とすることでurlを新しいタブで開くことができる。)
+## できたもの
+```html
+<script language="JavaScript">
+$(document).ready(function () {
+   let a = $("a");
+   a.attr("target", "_blank");
+   a.not("a[href^=http]").attr("target", "_top");
+})
+</script>
+```
+これが完成した。
+最近javascriptを触り始めたためまだまだ未熟な書き方かもしれないがまあ多少はね...
+どう言うものかというと、まずjQueryでaタグのを取得します。
+そしてaタグの全てのtargetに`_blank`を設定し、そのあと`http`から始まるurlじゃないaタグのみに`_top`を設定しています。
+`_top`と設定する理由はそう設定しないとこのウェブサイトの仕様上不具合が発生してしまうからです。
+何かこうすればもっとスマートだよと言うのがあれば[ここ](/profile.html)にあるメールにて優しく言ってくれると嬉しいです。
+{% endfilter %}
+{% endblock %}
