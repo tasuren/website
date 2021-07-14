@@ -11,7 +11,9 @@
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script language="JavaScript">
     $(document).ready( function () {
-       $("a").attr('target', '_top');
+       let a = $("a");
+       a.attr("target", "_blank");
+       a.not("a[href^=http]").attr("target", "_top");
     })
     </script>
     <script type="text/javascript" src="{{ ext_js_name }}"></script>
