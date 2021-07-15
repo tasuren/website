@@ -6,6 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link href="https://fonts.googleapis.com/css2?family=Yomogi&display=swap" rel="stylesheet">
+    <!- CSSの読み込み ->
     <link rel="stylesheet" href="/static/style.css">
     <!- 他 ->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/default.min.css">
@@ -21,8 +22,8 @@
     <script type="text/javascript" src="{{ ext_js_name }}"></script>
     <meta name="google-site-verification" content="obKIihRQsIwolkRqDzJgG1MyflwWpDpOc2cU_FBEcv8" />
   </HEAD>
-  <BODY style="background: url(/static/wallpaper1.gif); background-attachment: fixed; background-size: 10%;" bgcolor="#99cccc" link="#38a1db" vlink="#1e50a2" alink="#660000">
-    <div align="left" style="margin-left:30px; color: #88b2c1;">
+  <BODY>
+    <div align="left" class="main">
         <font size="5">
           {% block content %} {% endblock %}
         </font>
