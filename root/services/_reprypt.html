@@ -1,24 +1,68 @@
-{% extends "layout.html" %}
-{% block content %}
-{% filter markdown %}
-[戻る](/service.html), tasurenのサービス
-* * *
-# Reprypt - 暗号作成ツール
-Repryptというtasurenが作った独自の暗号化ツールで文章をパスワードつきで暗号化します。
-左が暗号前で右が暗号後です。
-暗号化する場合は左にある文章を暗号化して右に表示します。
-復号化はその逆でもとに戻します。
-8500文字まで入力することが可能です。
-パスワードは30文字まで有効です。
-{% endfilter %}
-<textarea maxlength=8500 rows=3 cols=30 wrap="hard" id="repryptInput">暗号化する文章</textarea>
-<textarea maxlength=13400 rows=3 cols=30 wrap="hard" id="repryptOutput">暗号化された文章</textarea><br />
-<input maxlength=30 id="repryptKey" value="パスワード" />
-<button type="button" id="repryptEncrypt">暗号化</button> 
-<button type="button" id="repryptDecrypt">複合化</button><br />
-<div id="repryptNow">Now loading...</div><br />
-{% filter markdown %}
-この暗号化するコードはPythonで書かれており[ここ](https://github.com/tasuren/reprypt)にあります。
-そしてPythonでライブラリとしてこの`reprypt`が使えて、[リファレンス](https://tasuren.github.io/reprypt)に詳細があります。
-{% endfilter %}
-{% endblock %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+  <HEAD>
+    <META http-equiv="Content-Style-Type" content="text/css">
+    <!- フォントの読み込み ->
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Yomogi&display=swap" rel="stylesheet">
+    <!- CSSの読み込み ->
+    <link rel="stylesheet" href="/static/style.css">
+    <!- 他 ->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script language="JavaScript">
+    $(document).ready( function () {
+       let a = $("a");
+       a.attr("target", "_blank");
+       a.not("a[href^=http]").attr("target", "_top");
+    })
+    </script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.10.2/brython.min.js">
+    </script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.10.2/brython_stdlib.js">
+    </script>
+    <meta name="google-site-verification" content="obKIihRQsIwolkRqDzJgG1MyflwWpDpOc2cU_FBEcv8" />
+  </HEAD>
+  <BODY>
+    <div align="left" class="main">
+        <font size="5">        
+            <body onload="brython()">
+                <script type="text/python">
+
+                from browser import document
+                import reprypt
+
+                def process(event, mode, content, write):
+                    document[write] = getattr(reprypt, mode)(
+                        content, document["repryptKey"].value
+                    )
+
+                def encrypt_(event, mode, content,write):
+                    process(
+                        event, "encrypt",
+                        document["repryptEncryption"].value, "repryptDecryption"
+                    )
+
+                def decrypt_(event):
+                    process(
+                        event, "decrypt",
+                        document["repryptDecryption"].value, "repryptEncryption"
+                    )
+
+                document["repryptEncrypt"].bind("click", encrypt_)
+                document["repryptDecrypt"].bind("click", decrypt_)
+                </script>
+                <textarea maxlength=8500 rows=3 cols=30 wrap="hard" id="repryptEncryption">暗号化する文章</textarea>
+                <textarea maxlength=13400 rows=3 cols=30 wrap="hard" id="repryptDecryption">暗号化された文章</textarea><br />
+                <input maxlength=30 id="repryptKey" value="パスワード" />
+                <button type="button" id="repryptEncrypt">暗号化</button>
+                <button type="button" id="repryptDecrypt">複合化</button><br />
+            </body>
+        </font>
+    </div>
+  </BODY>
+</HTML>

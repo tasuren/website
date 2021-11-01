@@ -1,6 +1,6 @@
 __pychache__
 *.sublime-project
-*.sublime-workspace
+*.*-workspace
 *.crt
 *.key
 *.GIF
