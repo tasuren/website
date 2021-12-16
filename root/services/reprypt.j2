@@ -1,68 +1,49 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
-  <HEAD>
-    <META http-equiv="Content-Style-Type" content="text/css">
-    <!- フォントの読み込み ->
-    <link rel="preconnect" href="https://fonts.googleapis.com"> 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-    <link href="https://fonts.googleapis.com/css2?family=Yomogi&display=swap" rel="stylesheet">
-    <!- CSSの読み込み ->
-    <link rel="stylesheet" href="/static/style.css">
-    <!- 他 ->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/default.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script language="JavaScript">
-    $(document).ready( function () {
-       let a = $("a");
-       a.attr("target", "_blank");
-       a.not("a[href^=http]").attr("target", "_top");
-    })
-    </script>
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.10.2/brython.min.js">
-    </script>
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.10.2/brython_stdlib.js">
-    </script>
-    <meta name="google-site-verification" content="obKIihRQsIwolkRqDzJgG1MyflwWpDpOc2cU_FBEcv8" />
-  </HEAD>
-  <BODY>
-    <div align="left" class="main">
-        <font size="5">        
-            <body onload="brython()">
-                <script type="text/python">
+{% extends "layout.html" %}
+{% block head %}
+<script type="text/javascript" src="/brython/brython.js"></script>
+<script type="text/javascript" src="/brython/brython_stdlib.js"></script>
+{% endblock %}
+{% block content %}
+<div align="left" class="main">
+  <font size="5">        
+    <body onload="brython()">
+      <br>
+      <a href="/service.html">戻る</a>
+      <hr></hr>
+      <h2>Reprypt 暗号メーカー</h2>
+      ここはRepryptというtasurenが考えた暗号化方法を使って暗号を作成するためのページです。<br>
+      また、PythonとRustのプログラミング言語には、このRepryptの暗号方法を使って暗号を作成するためのライブラリがあります。
+      <br><br>
+      <script type="text/python">
+      # Reprypt on Brython
 
-                from browser import document
-                import reprypt
+      from browser import document
+      import reprypt
 
-                def process(event, mode, content, write):
-                    document[write] = getattr(reprypt, mode)(
-                        content, document["repryptKey"].value
-                    )
+      def process(event, mode, id_, write):
+          document[write].value = getattr(reprypt, mode)(
+              document[id_].value, document["repryptKey"].value
+          )
 
-                def encrypt_(event, mode, content,write):
-                    process(
-                        event, "encrypt",
-                        document["repryptEncryption"].value, "repryptDecryption"
-                    )
-
-                def decrypt_(event):
-                    process(
-                        event, "decrypt",
-                        document["repryptDecryption"].value, "repryptEncryption"
-                    )
-
-                document["repryptEncrypt"].bind("click", encrypt_)
-                document["repryptDecrypt"].bind("click", decrypt_)
-                </script>
-                <textarea maxlength=8500 rows=3 cols=30 wrap="hard" id="repryptEncryption">暗号化する文章</textarea>
-                <textarea maxlength=13400 rows=3 cols=30 wrap="hard" id="repryptDecryption">暗号化された文章</textarea><br />
-                <input maxlength=30 id="repryptKey" value="パスワード" />
-                <button type="button" id="repryptEncrypt">暗号化</button>
-                <button type="button" id="repryptDecrypt">複合化</button><br />
-            </body>
-        </font>
-    </div>
-  </BODY>
-</HTML>
+      document["repryptEncrypt"].bind(
+          "click", lambda event: process(
+              event, "encrypt", "repryptEncryption", "repryptDecryption"
+          )
+      )
+      document["repryptDecrypt"].bind(
+          "click", lambda event: process(
+              event, "decrypt", "repryptDecryption", "repryptEncryption"
+          )
+      )
+      </script>
+      <textarea maxlength=8500 rows=3 cols=30 wrap="hard" id="repryptEncryption">暗号化する文章</textarea>
+      <textarea maxlength=13400 rows=3 cols=30 wrap="hard" id="repryptDecryption">暗号化された文章</textarea><br />
+      <input maxlength=30 id="repryptKey" value="パスワード" />
+      <button type="button" id="repryptEncrypt">暗号化</button>
+      <button type="button" id="repryptDecrypt">複合化</button>
+      <br><br>
+      ※ちなみに、このWebページで動いているRepryptは、Pythonのライブラリの`reprypt`を使用しており、Brythonを使って動かしています。
+    </body>
+  </font>
+</div>
+{% endblock %}

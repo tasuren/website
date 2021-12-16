@@ -4,6 +4,8 @@ __pychache__
 *.crt
 *.key
 static
+brython
 
+!static/style.css
 *.*~
 *.swp

@@ -23,3 +23,9 @@ a:visited {
     margin-left: 30px;
     color: #88b2c1;
 }
+
+
+code {
+    background-color: #0d0015 !important;
+    border-radius: 4.3px !important;
+}
