@@ -1,6 +1,40 @@
 {
-    "titles": {},
-    "ext_js": {
-	"services/_reprypt.html": "/javascripts/services/reprypt.js"
+    "app": {
+        "host": "0.0.0.0", "port": 80
+    },
+    "jinja2": {
+        "folder": "root", "exts": ["html", "j2"], "base": "_base.html"
+    },
+    "metas": {
+        "profile.html": {
+            "title": "tasurenのプロフィール",
+            "description": "tasurenというとある小さいプログラマーのプロフィール"
+        },
+        "index.html": {
+            "title": "tasurenのホームページ",
+            "description": "tasurenというとある小さいプログラマーのホームページ"
+        },
+        "download.html": {
+            "title": "tasurenの配布物",
+            "description": "tasurenというとある小さいプログラマーの配布物のページ"
+        },
+        "mods.html": {
+            "title": "tasurenのMinecraftのMod",
+            "description": "tasurenというとある小さいプログラマーのMinecraftのModの配布ページ"
+        },
+        "service.html": {
+            "title": "tasurenのサービス",
+            "description": "tasurenというとある小さいプログラマーの作ったサービス"
+        },
+        "soft": {
+            "freedom.html": {
+                "title": "FreedomWall - 壁紙設定ソフト",
+                "description": "どんなソフトにも壁紙をつけることができるソフトの配布ページ"
+            },
+            "softs.html": {
+                "title": "tasurenのソフト",
+                "description": "tasurenというとある小さいプログラマーの作ったソフトの配布ページ"
+            }
+        }
     }
 }

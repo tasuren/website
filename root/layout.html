@@ -19,13 +19,13 @@
        a.not("a[href^=http]").attr("target", "_top");
     })
     </script>
-    <script type="text/javascript" src="{{ ext_js_name }}"></script>
+    {% block head %}{% endblock %}
     <meta name="google-site-verification" content="obKIihRQsIwolkRqDzJgG1MyflwWpDpOc2cU_FBEcv8" />
   </HEAD>
   <BODY>
     <div align="left" class="main">
         <font size="5">
-          {% block content %} {% endblock %}
+          {% block content %}{% endblock %}
         </font>
         <br>
         <br>
