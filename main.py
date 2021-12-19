@@ -2,10 +2,11 @@
 
 from typing import List
 
-from urllib.parse import unquote
+from aiofiles import open as aioopen
 from aiofiles.os import wrap
+from urllib.parse import unquote
+from ujson import load, loads
 from os.path import exists
-from ujson import load
 
 from sanic.response import HTTPResponse, file as rfile, html, text
 from sanic.request import Request
@@ -78,6 +79,9 @@ async def on_request(request: Request):
 
 @app.route("/ping")
 async def ping(_: Request):
+    global data
+    async with aioopen("data.json", "r", encoding="utf-8_sig") as f:
+        app.ctx.data = data = loads(await f.read())
     return text("pong")
 
 
