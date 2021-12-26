@@ -9,3 +9,4 @@ brython
 !static/style.css
 *.*~
 *.swp
+.DS_Store
