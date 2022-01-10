@@ -21,7 +21,8 @@ Rustにすっごい興味がありPythonと同じくらいRustもできるよう
 でも普通のテンプレートエンジンではありません。
 ほぼ新しく覚える構文がありません。
 例えばjinjaというテンプレートエンジンの場合は以下のような感じです。
-```html
+
+```
 {% raw %}
 {% extends "layout.html" %}
 {% block body %}
@@ -34,7 +35,8 @@ Rustにすっごい興味がありPythonと同じくらいRustもできるよう
 {% endraw %}
 ```
 僕が今回作ったライブラリの方だとこうなります。
-```html
+
+```
 ^^
 manager.render(
     "layout.html",
