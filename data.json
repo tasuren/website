@@ -69,6 +69,19 @@
                         "title": "tasurenの2021/7/17のブログ",
                         "description": "AtCoderにはまった。"
                     }
+                },
+                "2022-1": {
+                    "index.html": {
+                        "title": "tasurenの2022/1のブログ一覧"
+                    },
+                    "6.html": {
+                        "title": "tasurenの2022/1/6のブログ",
+                        "description": "今更ながらあけましておめでとうございます。"
+                    },
+                    "10.html": {
+                        "title": "tasurenの2022/1/10のブログ",
+                        "description": "ここ数日あったことと1/10にあったこととか色々"
+                    }
                 }
             },
             "tech": {
