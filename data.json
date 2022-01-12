@@ -93,8 +93,15 @@
                     "index.html": {
                         "title": "tasurenの技術倉庫裏"
                     },
-                    "2021-7-14_js_change-target.html": {
-                        "title": "Javascriptでaタグのtargetを変更する。"
+		    "2022-1": {
+			"ish_python_c_ext.html": {
+			    "title": "iSH等のPythonで一部のライブラリがインストールできない。"
+			}
+		    },
+                    "2021-7": {
+			"js_change-target.html": {
+                            "title": "Javascriptでaタグのtargetを変更する。"
+			}
                     }
                 },
                 "human": {
