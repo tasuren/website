@@ -81,6 +81,10 @@
                     "10.html": {
                         "title": "tasurenの2022/1/10のブログ",
                         "description": "ここ数日あったことと1/10にあったこととか色々"
+                    },
+                    "16.html": {
+                        "title": "Discordで埋め込みを送信する方法",
+                        "description": "Discordで埋め込みを送信する方法の二つをまとめました。"
                     }
                 }
             },
