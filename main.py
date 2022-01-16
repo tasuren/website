@@ -85,4 +85,4 @@ async def ping(_: Request):
     return text("pong")
 
 
-app.run(**data["app"])
+app.run(**data["app"], fast=True)

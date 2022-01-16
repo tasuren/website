@@ -10,3 +10,9 @@ brython
 *.*~
 *.swp
 .DS_Store
+
+*.png
+*.jpg
+*.jpeg
+*.bmp
+*.gif
