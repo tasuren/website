@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
+from os.path import exists
+from urllib.parse import unquote
+
 from aiofiles import open as aioopen
 from aiofiles.os import wrap
-from urllib.parse import unquote
 from ujson import load, loads
-from os.path import exists
 
 from sanic.response import HTTPResponse, file as rfile, file_stream, html, text
 from sanic.request import Request
