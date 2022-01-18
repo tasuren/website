@@ -1,6 +1,6 @@
 # tasuren's website main program
 
-from typing import List
+from __future__ import annotations
 
 from aiofiles import open as aioopen
 from aiofiles.os import wrap
@@ -8,7 +8,7 @@ from urllib.parse import unquote
 from ujson import load, loads
 from os.path import exists
 
-from sanic.response import HTTPResponse, file as rfile, html, text
+from sanic.response import HTTPResponse, file as rfile, file_stream, html, text
 from sanic.request import Request
 from sanic import Sanic
 
@@ -40,7 +40,7 @@ async def template(tpl: str, **kwargs) -> HTTPResponse:
     )
 
 
-def get_metas(path: str, paths: List[str]) -> dict:
+def get_metas(path: str, paths: list[str]) -> dict:
     d = data["metas"]
     for key in (paths := path.split("/")):
         if key:
@@ -74,7 +74,10 @@ async def on_request(request: Request):
                 data['jinja2']['base'], **get_metas(path, paths)
             )
     if await exists(real_path):
-        return await rfile(real_path)
+        if real_path.endswith((".j2", ".html", ".xml", ".txt", "htm")):
+            return await rfile(real_path)
+        else:
+            return await file_stream(real_path)
 
 
 @app.route("/ping")
