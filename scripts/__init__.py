@@ -9,7 +9,7 @@ from datetime import datetime
 from pathlib import PurePath, Path
 from os.path import exists
 
-from nisshi import Page
+from nisshi import Bundle, Page
 from nisshi.tools import enum
 
 if TYPE_CHECKING:
@@ -39,33 +39,39 @@ class NewPage(Page):
         )
 
 
-index: PurePath | None = None
+class SimpleArticleSystem(Bundle):
+    "新しい記事または記事が更新されるたびに記事一覧のページを更新するようにするためのバンドルです。"
+
+    def __init__(self, manager: Manager):
+        self.manager = manager
+        self.nisshi: PurePath | None = None
+
+    def rebuild_index(self) -> None:
+        assert self.index is not None
+        self.manager.build(self.index, True)
+
+    def process(self, path: PurePath) -> None:
+        if self.index is None and path.stem != "index" \
+                and exists((path := path.parent.joinpath("index.md"))):
+            self.index = path
+            if not self.manager.is_building_all:
+                self.rebuild_index()
+
+    @Bundle.listen()
+    def on_after_build_page(self, page: NewPage) -> None:
+        self.process(page.input_path)
+
+    @Bundle.listen()
+    def on_after_build_directory(self, path: PurePath) -> None:
+        if self.index is not None and path.name == self.index.parent.name:
+            self.rebuild_index()
+
+    @Bundle.listen()
+    def on_clean(self, _, output_path: PurePath, is_directory: bool) -> None:
+        if not is_directory:
+            self.check(output_path)
+
+
 def setup(manager: Manager) -> None:
     manager.extend_page(NewPage)
-
-    # 新しい記事または記事が更新されるたびに記事一覧のページを更新するようにする。
-    def rebuild_index():
-        assert index is not None
-        manager.build(index, True)
-
-    def check(path: PurePath) -> None:
-        global index
-        if index is None and path.stem != "index" \
-                and exists((path := path.parent.joinpath("index.md"))):
-            index = path
-            if not manager.is_building_all:
-                rebuild_index()
-
-    @manager.listen()
-    def on_after_build_page(page: NewPage) -> None:
-        check(page.input_path)
-
-    @manager.listen()
-    def on_after_build_directory(path: PurePath) -> None:
-        if index is not None and path.name == index.parent.name:
-            rebuild_index()
-
-    @manager.listen()
-    def on_clean(input_path: PurePath | None, output_path: PurePath, is_directory: bool) -> None:
-        if not is_directory:
-            check(output_path)
+    manager.add_bundle(SimpleArticleSystem(manager))
