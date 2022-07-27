@@ -1,3 +1,7 @@
+^^
+self.ctx.title = "FreedomWall"
+self.ctx.description = "どんなソフトでも壁紙を付けることができるソフトについてのウェブページです。"
+^^
 <img src="https://camo.githubusercontent.com/444080972239819b0a3c046f99356dd1a7727b46049e399177af4b60e650bb3e/68747470733a2f2f727464626f742e7765622e6663322e636f6d2f46726565646f6d57616c6c5f446973636f72642e6a7067" alt="Discordに利用規約違反せずに壁紙をつけている様子" width="1000" height="600">
 # FreedomWall
 これはどんなソフトにも壁紙を付けることができるソフトです。  
