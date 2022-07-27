@@ -1,5 +1,1 @@
-sanic
-jinja2
-flask_misaka
-aiofiles
-ujson
+git+https://github.com/tasuren/nisshi

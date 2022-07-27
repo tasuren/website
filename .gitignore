@@ -1,18 +1,11 @@
 __pychache__
 *.*-project
 *.*-workspace
-*.crt
-*.key
-static
-brython
-
-!static/style.css
-*.*~
-*.swp
+.*
 .DS_Store
+!.github
+!.gitignore
 
-*.png
-*.jpg
-*.jpeg
-*.bmp
-*.gif
+__pycache__
+includes/assets
+outputs
