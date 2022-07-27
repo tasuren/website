@@ -3,7 +3,7 @@ self.ctx.title = "tasurenの部屋"
 self.ctx.description = "tasurenの配布物やブログ等をまとめたホームページです。"
 self.ctx.head = self.manager.config.metadata["head"]
 ^^
-# ようこそtasurenのホームページへ
+# Welcome
 どうもtasurenです。  
 色々と雑な感じなウェブサイトなのは自分が古いサイトが好きだから。  
 tasurenについては[ここ](about.html)から詳細を知れるよ。  
