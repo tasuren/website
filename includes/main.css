@@ -2,10 +2,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300&family=Yomogi&display=swap');
 
+/* リセット */
 * { padding-inline-start: 0; }
 h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; }
 
 .background-for-text {
+  /* 文章の後ろに黒い背景を入れる */
   background-color: rgba(13, 0, 21, 0.55);
   margin: 0 2%;
   border-radius: 15px;
@@ -30,17 +32,17 @@ nav { padding: 0.2%; }
 nav ul { margin: 1%; list-style: none; font-size: 3vw; }
 .text-right { text-align: right; }
 
-/* メイン */
+/*  内容部分 */
 .content { font-size: 2vw; }
 code {
   /* ソースコードのハイライトの背景 */
   background-color: #0f2350;
   border-radius: 0.4vh;
   padding: 0 0.3vw;
-  font-family: 'Kosugi', sans-serif;
-  font-family: 'Roboto Mono', monospace;
   font-family: 'Source Code Pro', monospace;
 }
+
+img { max-width: 100%; height: auto; }
 
 a { font-weight: bold; }
 a:link { color: #38a1db; }
