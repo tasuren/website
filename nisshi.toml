@@ -1,2 +1,7 @@
+extensions = ["nisshi.ext.articles"]
+
 [metadata]
 head = '<meta name="google-site-verification" content="obKIihRQsIwolkRqDzJgG1MyflwWpDpOc2cU_FBEcv8" />'
+
+[articles]
+markdown_format = '- [{title}]({file_name})  <br class="sp-only">{description}<br>  *{created_at}*'

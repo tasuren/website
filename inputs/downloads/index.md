@@ -5,4 +5,4 @@ self.ctx.description = "tasurenの作ったものを配布している場所で�
 # Downloads
 ここではtasurenが作ったものを配布しています。
 
-^^ self.articles ^^
+^^ self.format_articles() ^^

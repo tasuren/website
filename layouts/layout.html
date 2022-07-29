@@ -9,7 +9,14 @@
     <meta name="theme-color" content="#0d0015">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=yes">
     <!-- Assets -->
-    <link rel="stylesheet" href="/main.css">
+    ^^
+      """
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/base16/phd.min.css" integrity="sha512-VtA+ZaSvst0+aJz2Of6AODkGr/wseyNc4u/sq7QP4u187k86dCnjXv6G4L6GOAzQSYyHZ3/aeyPIpukjmLMRiw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script>
+      """ if "pre>" in self.content and "code>" in self.content else ""
+    ^^
+    <link rel="stylesheet" href="/main.css?last_updated=^^ str(__import__('time').time()) ^^">
     <script src="/main.js"></script>
     <script>
       // 外部リンクを`target=_blank`にして新しいタブで開くようにする。
@@ -29,23 +36,42 @@
     <div class="container">
       <nav>
         <div class="background-for-text">
-          <div class="title">tasurenの部屋</div>
+          <div id="title">tasurenの部屋</div>
           <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/profile.html">Profile</a></li>
             <li><a href="/downloads">Downloads</a></li>
-            <li><a href="/blog.html">Blog</a></li>
+            <li><a href="/blog">Blog</a></li>
           </ul>
         </div>
       </nav>
       <div class="content"><div class="background-for-text">^^
+        # サムネイルが設定されている場合は、そのサムネイルを付ける。
+        if "h1" not in self.content:
+          self.content = '{}{}'.format(f"<h1>{self.ctx.title}</h1>", self.content)
+        if hasattr(self.ctx, "thumbnail"):
+          self.content = '<img class="thumbnail" src="{}" />{}'.format(self.ctx.thumbnail, self.content)
+
         additional = ""
-        if self.output_path.parent.name != self.manager.config.output_folder \
-            and self.output_path.stem != "index":
-          additional = '<a href="/{}">戻る</a><hr>'.format(
-            self.manager.remove_local_folder_path(self.output_path).parent
+        # 最終更新日を入れる。
+        additional = "{}{}".format(
+          '<div class="right" id="last-updated"><em>Last updated:<br class="sp-only"> %s</em></div>'
+            % self.articles_bundle.format_time(self.ctx.last_updated_at),
+          additional
+        )
+        # 記事ページの場合は戻るボタンと最終更新日を付ける。
+        if (self.output_path.parent.name != self.manager.config.output_folder \
+            and self.output_path.stem != "index") or self.ctx.get("make_back_link", False):
+          path = self.manager.remove_local_folder_path(self.output_path)
+          if not path.stem != "index":
+            path = path.parent
+          additional = '<div class="left" id="back"><a href="/{}">戻る</a></div>{}'.format(
+            path.parent, additional
           )
-        "{}\n{}".format(additional, self.content)
+        else:
+          additional = f'<div class="left"></div>{additional}'
+        self.content = '<div class="frame">{}</div><hr>\n{}'.format(additional, self.content)
+        self.content
       ^^</div></div>
     </div>
   </body>

@@ -1,77 +1,24 @@
 # tasuren.f5.si - Script
 
-from __future__ import annotations
+from os import listdir
 
-from typing import TYPE_CHECKING
+from nisshi.ext.articles import Manager
 
-from datetime import datetime
+__import__("sys").setrecursionlimit(100)
+class NewPage(Manager.page_cls):
+    def process_blog_list_metadata(self) -> None:
+        "ブログの記事一覧のページのメタデータを設定したり、ブログの一覧のマークダウンを作ってそれを返したりします。"
+        self.ctx.make_back_link = True
+        self.ctx.title = f"{self.input_path.parent.name}年のtasurenのブログ記事一覧"
+        self.ctx.description = f"{self.input_path.parent.name}年にtasurenが書いた記事の一覧があるウェブページです。"
+        return f"# {self.input_path.parent.name}年のtasurenの記事一覧\n{self.format_articles()}"
 
-from pathlib import PurePath, Path
-from os.path import exists
-
-from nisshi import Bundle, Page
-from nisshi.tools import enum
-
-if TYPE_CHECKING:
-    from nisshi import Manager
-
-
-# TODO: 以下にあるものは記事をまとめるためのものと、それを`index.md`に書き込むものとなっている。
-#   これを拡張として別で用意したいと思っている。例：`nisshi.ext.articles`
-
-
-class NewPage(Page):
-    @property
-    def articles(self) -> str:
+    def make_blog_year_list(self) -> str:
+        "ブログの年別一覧を表示する。"
         return "\n".join(
-            "- *{}* : [{}](/{})".format(
-                datetime.fromtimestamp(t.st_ctime).strftime("%Y年%m月%d日 %H時%M分%S秒"),
-                path.stem, self.manager.exchange_extension(
-                    PurePath().joinpath(*path.parts[1:]),
-                    self.manager.config.output_ext
-                )
-            )
-            for path, t in sorted(map(
-                lambda p: (p, p.stat()),
-                enum(Path(self.input_path.parent))
-            ), key=lambda x: x[1].st_ctime)
-            if path.stem != "index"
+            f"- [{file_name}年]({file_name})"
+            for file_name in sorted(filter(
+                lambda n: len(n) == 4 and "." not in n,
+                listdir(self.input_path.parent)
+            ), key=int, reverse=True)
         )
-
-
-class SimpleArticleSystem(Bundle):
-    "新しい記事または記事が更新されるたびに記事一覧のページを更新するようにするためのバンドルです。"
-
-    def __init__(self, manager: Manager):
-        self.manager = manager
-        self.nisshi: PurePath | None = None
-
-    def rebuild_index(self) -> None:
-        assert self.index is not None
-        self.manager.build(self.index, True)
-
-    def process(self, path: PurePath) -> None:
-        if self.index is None and path.stem != "index" \
-                and exists((path := path.parent.joinpath("index.md"))):
-            self.index = path
-            if not self.manager.is_building_all:
-                self.rebuild_index()
-
-    @Bundle.listen()
-    def on_after_build_page(self, page: NewPage) -> None:
-        self.process(page.input_path)
-
-    @Bundle.listen()
-    def on_after_build_directory(self, path: PurePath) -> None:
-        if self.index is not None and path.name == self.index.parent.name:
-            self.rebuild_index()
-
-    @Bundle.listen()
-    def on_clean(self, _, output_path: PurePath, is_directory: bool) -> None:
-        if not is_directory:
-            self.check(output_path)
-
-
-def setup(manager: Manager) -> None:
-    manager.extend_page(NewPage)
-    manager.add_bundle(SimpleArticleSystem(manager))
