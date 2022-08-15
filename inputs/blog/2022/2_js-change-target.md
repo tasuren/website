@@ -1,6 +1,8 @@
 ^^
 self.ctx.title = "JavaScriptのaタグのtargetを変更する。"
 self.ctx.description = "JavaScriptのaタグのtargetを、リンクが外部サイトの場合のみ自動で`_blank`にするプログラムについて書かれているページです。"
+self.ctx.created_at = 1659062246.5936031
+self.ctx.last_updated_at = 1659068795.9837387
 ^^
 このウェブサイトの開発中にとあることに気づいた。  
 というのも、リンクを開くと同じタブで開かれてしまいとても不便だということ。  

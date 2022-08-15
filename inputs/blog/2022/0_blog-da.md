@@ -1,6 +1,8 @@
 ^^
 self.ctx.title = "tasurenのブログ！！"
 self.ctx.description = "tasurenのブログページの初投稿の記事です。"
+self.ctx.created_at = 1659048783.7571206
+self.ctx.last_updated_at = 1659069915.05285
 ^^
 なんと、tasurenがブログページを公開しました！  
 実はこのウェブページは僕が作った静的サイトジェネレータで作られている。  

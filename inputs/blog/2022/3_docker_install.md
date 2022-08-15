@@ -1,6 +1,8 @@
 ^^
 self.ctx.title = "Dockerのインストールでapt_pkgが見つからない問題"
 self.ctx.description = "Dockerのインストール時に`apt_pkg`というモジュールが見つからないというエラーが発生する問題を解決した話です。"
+self.ctx.created_at = 1659154429.1713786
+self.ctx.last_updated_at = 1659157346.6690958
 ^^
 Dockerを自分のUbuntu Serverにインストールしようとしたところよくわからんエラーで詰まった。  
 その時の対処法を同じことになっている他の人のためにここに書き記す。  

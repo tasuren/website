@@ -2,6 +2,8 @@
 self.ctx.title = "FreedomWall"
 self.ctx.description = "どんなソフトでも壁紙を付けることができるソフトについてのウェブページです。"
 self.ctx.thumbnail = "https://camo.githubusercontent.com/444080972239819b0a3c046f99356dd1a7727b46049e399177af4b60e650bb3e/68747470733a2f2f727464626f742e7765622e6663322e636f6d2f46726565646f6d57616c6c5f446973636f72642e6a7067"
+self.ctx.created_at = 1658886086.6890743
+self.ctx.last_updated_at = 1659056370.1733391
 ^^
 これはどんなソフトにも壁紙を付けることができるソフトです。  
 と言っても品質は低めな壁紙となりますが、どんなソフトにも手を加えずに壁紙を付けることができます。  

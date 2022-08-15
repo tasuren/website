@@ -1,6 +1,8 @@
 ^^
 self.ctx.title = "iSHのPythonで一部ライブラリを入れられない問題"
 self.ctx.description = "tasurenのブログの方針を軽くまとめてみた。"
+self.ctx.created_at = 1659056280.9349816
+self.ctx.last_updated_at = 1659059414.4900255
 ^^
 これは、iSHにてyarlやujson等のライブラリをインストールする際に、エラーが発生してインストールできない時の対処法をまとめたものです。  
 他のLinuxのディストリビューションでも起こり得ることだと思います。  
