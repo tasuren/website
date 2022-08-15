@@ -4,7 +4,7 @@ from os import listdir
 
 from nisshi.ext.articles import Manager
 
-__import__("sys").setrecursionlimit(100)
+
 class NewPage(Manager.page_cls):
     def process_blog_list_metadata(self) -> None:
         "ブログの記事一覧のページのメタデータを設定したり、ブログの一覧のマークダウンを作ってそれを返したりします。"
