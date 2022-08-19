@@ -5,6 +5,7 @@ self.ctx.created_at = 1660903711.2600121
 self.ctx.last_updated_at = 1660903711.2600121
 ^^
 `git pull`等をしようとすると以下のようなエラーが発生してしまうことが起きた。  
+
 ```shell
 $ git pull origin main
 remote: Enumerating objects: 3, done.
@@ -20,6 +21,7 @@ fatal: unpack-objects failed
 
 ## 解決方法
 以下のように、`chown`コマンドを使用して、`.git`フォルダ内の全てのものの所有者を自分にすることで、この問題は解消された。  
+
 ```shell
 $ sudo chown -R tasuren .git
 ```
