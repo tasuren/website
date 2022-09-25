@@ -14,6 +14,7 @@ self.ctx.description = "tasurenについての情報が記されているペー�
 ## Links
 tasurenに関係するリンク集です。
 
+- <a href="https://portfolio.tasuren.xyz" target="_blank">ポートフォリオ</a>
 - [Twitter](https://twitter.com/tasuren1022)
 - [YouTube](https://www.youtube.com/channel/UCHAumff8r8ZFnRpABLoQSnQ)
 - [GitHub](https://github.com/tasuren)
