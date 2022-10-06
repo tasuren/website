@@ -1,0 +1,1 @@
+^^ self.process_blog_list_metadata() ^^
