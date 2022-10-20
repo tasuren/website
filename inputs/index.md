@@ -3,10 +3,11 @@ self.ctx.title = "tasurenの部屋"
 self.ctx.description = "tasurenの配布物やブログ等をまとめたホームページです。"
 self.ctx.head = self.manager.config.metadata["head"]
 ^^
-# Welcome
-どうもtasurenです。  
-ここはtasurenという人のものをまとめているtasurenのウェブサイトだよ。  
-tasurenについては[ここ](profile.html)から詳細を知れるよ。  
 
-ちなみに、このホームページのソースコードは[ここ](https://github.com/tasuren/website)にある。  
-そして、このホームページは現在開発中のシンプルな静的サイトジェネレータである[nisshi](https://github.com/tasuren/nisshi)を使用して作られているよ。
+# Welcome
+どうもこんにちは！ここは私(tasuren)のウェブサイトです。  
+このウェブサイトでは、私が作った様々な物を公開しています。  
+また、私の技術メモや日記(のようなもの)をまとめているブログも公開しているよ！  
+まずはプロフィールを見てみよう。
+
+なお、このホームページのリポジトリは[ここ](https://github.com/tasuren/website)で公開されています。
