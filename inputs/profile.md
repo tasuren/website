@@ -12,8 +12,6 @@ self.ctx.description = "tasurenについての情報が記されているペー�
 - Discord: `tasuren#5161`
 
 ## Links
-tasurenに関係するリンク集です。
-
 - <a href="https://portfolio.tasuren.xyz" target="_blank">ポートフォリオ</a>
 - [Twitter](https://twitter.com/tasuren1022)
 - [Instagram](https://www.instagram.com/tasuren1022/)
