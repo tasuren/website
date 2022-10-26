@@ -16,18 +16,22 @@
       <script>hljs.highlightAll();</script>
       """ if "pre>" in self.content and "code>" in self.content else ""
     ^^
-    <link rel="stylesheet" href="/main.css?last_updated=^^ str(__import__('time').time()) ^^">
-    <script src="/main.js"></script>
+    <style>^^
+      if self.main_css is None:
+        with open("templates/main.css", "r") as f:
+          self.main_css = f.read()
+      self.main_css
+    ^^</style>
     <script>
       // 外部リンクを`target=_blank`にして新しいタブで開くようにする。
-      window.onload = function () {
+      window.addEventListener("load", function (_) {
         let url;
         for (element of document.getElementsByTagName("a")) {
           url = element.getAttribute("href");
           if (!url.startsWith(window.location.origin) && url.startsWith("http"))
             element.setAttribute("target", "_blank");
         };
-      };
+      });
     </script>
     <!-- Other -->
     ^^ self.ctx.head ^^

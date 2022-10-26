@@ -6,6 +6,9 @@ from nisshi.ext.articles import Manager
 
 
 class NewPage(Manager.page_cls):
+
+    main_css: str | None = None
+
     def process_blog_list_metadata(self) -> None:
         "ブログの記事一覧のページのメタデータを設定したり、ブログの一覧のマークダウンを作ってそれを返したりします。"
         self.ctx.make_back_link = True
