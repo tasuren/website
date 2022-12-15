@@ -1,2 +1,4 @@
 git+https://github.com/tasuren/nisshi
 mizu
+requests
+ciso8601
