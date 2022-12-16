@@ -1,12 +1,13 @@
-__pychache__
-*.*-project
-*.*-workspace
-.*
+# General
 .DS_Store
+.*
 !.github
 !.gitignore
 
+# Individual
+*.*-project
+*.*-workspace
+
+# Tools
 __pycache__
-includes/assets
-outputs
-articles.json
+output
