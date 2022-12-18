@@ -12,6 +12,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
