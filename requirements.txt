@@ -1,2 +1,5 @@
 git+https://github.com/tasuren/nisshi
 mizu
+requests
+orjson
+ciso8601
