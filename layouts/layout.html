@@ -11,7 +11,7 @@
     <!-- Assets -->
     ^^
       '''
-      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/paraiso.min.css">
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/black-metal-immortal.min.css">
       <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
       <script>
         // コードブロックの配色を行う。
@@ -64,6 +64,8 @@
           </ul>
         </div>
         <br>
+        <div class="background-for-text" hidden>
+        </div>
       </nav>
       <div class="content" id="right"><div class="background-for-text"><div id="main">^^
         # サムネイルが設定されている場合は、そのサムネイルを付ける。
@@ -95,7 +97,7 @@
           additional = f"{additional}<hr>"
 
         f"{additional}{self.content}"
-      ^^</div><br><div id="sub"></div></div></div>
+      ^^</div><br id="sub-pad"><div id="sub"></div></div></div>
     </div>
     <div id="tags" data-tags="^^
       if self.ctx.is_article:

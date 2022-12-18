@@ -10,13 +10,13 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; }
 
 /* カラーコードの定義 */
 :root {
-  --font-color: #ffb3b3;
-  --background-color: #190301;
-  --background-for-code-color: #2c1f2d;
+  --font-color: #b1b3b5;
+  --background-color: black;
+  --background-for-code-color: #170000;
   --background-for-text-color: #000601;
-  --link-color: #ff6666;
-  --link-visited-color: #ff4d4d;
-  --menu-link-visited-color: #ff6666;
+  --link-color: #8795a3;
+  --link-visited-color: #516d8a;
+  --menu-link-visited-color: #516d8a;
 }
 
 
@@ -102,13 +102,13 @@ nav ul a:visited { color: var(--menu-link-visited-color); }
 
 @media screen and (min-width: 960px) and (max-width: 1678px) {
   /* タブレット向け */
-  #title { font-size: 2.5vw; }
+  #title { font-size: 2.2vw; }
   nav { width: 25%; }
-  nav ul { font-size: 2vw; }
-  .content { width: 75%; font-size: 1.55vw; }
+  nav ul { font-size: 1.8vw; }
+  .content { width: 75%; font-size: 1.2vw; }
 
   code { padding: 0.1vh 0.35vw; }
-  pre code.hljs { padding: 1.5vw; font-size: 1.35vw; }
+  pre code.hljs { padding: 1.5vw; font-size: 1vw; }
 }
 
 @media screen and (min-width: 1679px) {
@@ -117,7 +117,7 @@ nav ul a:visited { color: var(--menu-link-visited-color); }
   #title { font-size: 1.55vw; }
   nav { width: 20%; }
   nav ul { font-size: 1.35vw; }
-  .content { width: 80%; font-size: 1vw; }
+  .content { width: 80%; font-size: 0.9vw; }
 
   code { padding: 0 0.3vw; margin: 0.1vw; }
   pre code.hljs { padding: 1.5vh; font-size: 0.8vw; }
