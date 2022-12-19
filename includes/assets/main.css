@@ -15,8 +15,8 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; }
   --background-for-code-color: black;
   --background-for-text-color: #0f1114;
   --link-color: #8795a3;
-  --link-visited-color: #516d8a;
-  --menu-link-visited-color: #516d8a;
+  --link-visited-color: #8795a3;
+  --menu-link-visited-color: #8795a3;
 }
 
 
