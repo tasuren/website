@@ -11,9 +11,9 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; }
 /* カラーコードの定義 */
 :root {
   --font-color: #b1b3b5;
-  --background-color: black;
-  --background-for-code-color: #170000;
-  --background-for-text-color: #000601;
+  --background-color: #141414;
+  --background-for-code-color: black;
+  --background-for-text-color: #0f1114;
   --link-color: #8795a3;
   --link-visited-color: #516d8a;
   --menu-link-visited-color: #516d8a;
