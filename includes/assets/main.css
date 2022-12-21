@@ -16,7 +16,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; }
   --background-for-text-color: rgb(12, 7, 24);
   --link-color: #84a2d4;
   --link-visited-color: #698aab;
-  --menu-link-visited-color: var(--link-visited-color);
+  --menu-link-visited-color: var(--link-color);
 }
 
 
