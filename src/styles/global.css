@@ -1,0 +1,41 @@
+/* tasuren.xyz - Global Style */
+
+@import url('https://fonts.googleapis.com/css2?family=Yomogi&display=swap');
+
+
+/* リセット */
+h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; }
+
+/* カラーコードの定義 */
+:root {
+  --font-color: #FBD9D9;
+  --background-color: rgb(13, 16, 29);
+  --background-for-code-color: black;
+  --background-for-text-color: rgb(12, 7, 24);
+  --link-color: #F7ABAB;
+  --link-visited-color: #F59393;
+  --menu-link-visited-color: var(--link-color);
+  color-scheme: dark;
+}
+
+
+nav, main {
+  /* 文章の後ろに黒い背景を入れる */
+  background-color: var(--background-for-text-color);
+  border-radius: 15px;
+  padding: 0.8vw 1.5vw;
+}
+
+
+/* 内容部分 */
+a:link { color: var(--link-color); }
+a:visited { color: var(--link-color); }
+
+code {
+  /* ソースコードのハイライトの背景 */
+  background-color: var(--background-for-code-color);
+  border-radius: 0.4vh; padding: 0.1vh 0.5vw; margin: 0.2vw;
+  font-family: 'Source Code Pro', monospace;
+}
+
+img { /* 画像サイズを適切なものにする。 */ max-width: 100%; height: auto; }
