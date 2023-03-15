@@ -1,0 +1,9 @@
+---
+interface Props { title: string, description: string };
+const { title, description } = Astro.props;
+---
+<!-- Web Page Metadata  -->
+<title>{title}</title>
+<meta name="description" content={description}>
+<meta name="author" content="Takagi Tasuku">
+<meta name="theme-color" content="#170000">

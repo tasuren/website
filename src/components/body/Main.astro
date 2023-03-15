@@ -1,0 +1,24 @@
+---
+import MainHeader from "./MainHeader.astro";
+---
+<style>
+  main { height: 100%; }
+  main ul { padding-inline-start: 2vw; }
+
+  @media screen and (max-width: 959px) {
+    main { margin: 2%; }
+  }
+
+  @media screen and (min-width: 960px) {
+    main { margin-left: 2vw; width: 100%; }
+  }
+
+  @media screen and (min-width: 960px) and (max-width: 1678px) {
+    main { font-size: 1.2vw; }
+  }
+
+  .right-text { margin-left: auto; }
+</style>
+<main data-metadata_html={Astro.props.metadataHtml}>
+  <MainHeader /><slot />
+</main>

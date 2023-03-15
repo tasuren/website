@@ -1,0 +1,13 @@
+---
+import Items from "@components/ItemsForMd.astro";
+
+import Layout from "@layouts/Main.astro";
+
+
+const posts = (await Astro.glob('./*.md')).filter((post) => !post.frontmatter.draft);
+---
+<Layout title="Works" description="tasurenが作っているものを列挙したページです。" metadataHtml="">
+  <h1>Works</h1>
+  ここではtasurenが作っているものを列挙しています。<br />
+  <Items data={posts} />
+</Layout>

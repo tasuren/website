@@ -1,0 +1,19 @@
+---
+import HighLight from "./HighLight.astro";
+
+interface Props { useHljs: boolean };
+---
+<!-- Assets and Scripts -->
+{Astro.props.useHljs && HighLight}
+<script>
+  // 外部リンクを`target=_blank`にして新しいタブで開くようにする。
+  window.addEventListener("load", function () {
+    var url, element;
+    for (element of document.getElementsByTagName("a")) {
+      url = element.getAttribute("href");
+      if (url && !url.startsWith(window.location.origin)
+          && url.startsWith("http"))
+        element.setAttribute("target", "_blank");
+    };
+  });
+</script>

@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/ros-pine.min.css">
+<script>
+  import hljs from "highlight.js";
+  // コードブロックの配色を行う。
+  window.addEventListener("load", function (_) {
+    var code, language;
+    for (let element of document.getElementsByTagName("pre")) {
+      code = element.lastElementChild;
+      code.classList.add("hljs");
+      if (code.innerText.indexOf("!(") == 0) {
+        language = code.innerText.slice(2, code.innerText.indexOf(")\\n"));
+        code.innerHTML = code.innerHTML.replace(`!(${language})\\n`, "");
+        code.classList.add(`language-${language}`);
+      };
+    };
+    hljs.highlightAll();
+  });
+</script>

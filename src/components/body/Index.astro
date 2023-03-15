@@ -1,0 +1,32 @@
+---
+import Header from "./Header.astro";
+import Main from "./Main.astro";
+---
+<style>
+  body {
+    margin: 0; padding: 0;
+    font-family: Yomogi, Monaco, Arial;
+    color: var(--font-color);
+    background-color: var(--background-color);
+  }
+
+  @media screen and (max-width: 959px) {
+    body { width: 100%; }
+  }
+
+  @media screen and (min-width: 960px) {
+    body { display: flex; align-items: flex-start; }
+  }
+
+  @media screen and (min-width: 960px) and (max-width: 1678px) {
+    body { margin: 2%; }
+  }
+
+  @media screen and (min-width: 1679px) {
+    body { margin: 5vh 10%; }
+  }
+</style>
+<body>
+  <Header />
+  <Main metadataHtml={Astro.props.metadataHtml}><slot /></Main>
+</body>
