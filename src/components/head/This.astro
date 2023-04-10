@@ -1,0 +1,26 @@
+---
+import Common from "@components/head/Common.astro";
+import Page from "@components/head/Page.astro";
+import AssetsAndScripts from "@components/head/AssetsAndScripts.astro";
+
+import { WEBSITE_TITLE } from "@root/constants.ts";
+
+
+interface Props {
+  title: string; description: string;
+  useHljs?: boolean;
+};
+
+
+var title = Astro.props.title;
+if (title) title = `${WEBSITE_TITLE} - ${title}`
+else title = WEBSITE_TITLE;
+
+
+const { description, useHljs = false } = Astro.props;
+---
+<head>
+  <Common />
+  <Page title={title} description={description} />
+  <AssetsAndScripts useHljs={useHljs} />
+</head>
