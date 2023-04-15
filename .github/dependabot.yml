@@ -1,0 +1,8 @@
+# Website - Configuration of DependaBot
+
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly

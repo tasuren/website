@@ -1,6 +1,3 @@
----
-import MainHeader from "./MainHeader.astro";
----
 <style>
   main { height: 100%; }
   main ul { padding-inline-start: 2vw; }
@@ -19,6 +16,6 @@ import MainHeader from "./MainHeader.astro";
 
   .right-text { margin-left: auto; }
 </style>
-<main data-metadata_html={Astro.props.metadataHtml}>
-  <MainHeader /><slot />
+<main>
+  <slot />
 </main>
