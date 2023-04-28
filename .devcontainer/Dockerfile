@@ -1,6 +1,6 @@
 # Dockerfile for developing of tasuren's website.
 
-FROM gcr.io/distroless/nodejs20-debian11
+FROM node:latest-slim
 
 RUN bash -c 'echo -e "\nexport PS1=\"${debian_chroot:+($debian_chroot)}\
 \[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\
