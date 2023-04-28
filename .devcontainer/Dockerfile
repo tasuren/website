@@ -7,7 +7,7 @@ RUN bash -c 'echo -e "\nexport PS1=\"${debian_chroot:+($debian_chroot)}\
 \$ \""' >> ~/.bashrc
 
 # Prepare requirements.
-RUN apt-get update && apt-get install -y --no-install-recommends git curl ca-certificates
+RUN apt-get update && apt-get install -y --no-install-recommends git nano curl ca-certificates
 RUN update-ca-certificates
 RUN curl -fsSL https://get.pnpm.io/install.sh | sh -
 
