@@ -4,10 +4,15 @@ import Body from "@components/body/This.astro";
 
 import "../styles/global.css";
 
-const { metadataHtml, title, description, useHljs } = Astro.props;
+interface Props {
+  title: string,
+  description: string
+};
+
+const { title, description } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="ja">
-  <Head title={title} description={description} useHljs={useHljs} />
-  <Body metadataHtml={metadataHtml}><slot /></Body>
+  <Head title={title} description={description} />
+  <Body><slot /></Body>
 </html>

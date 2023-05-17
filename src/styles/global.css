@@ -9,13 +9,24 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; }
 /* カラーコードの定義 */
 :root {
   --font-color: #FBD9D9;
-  --background-color: rgb(13, 16, 29);
-  --background-for-code-color: black;
-  --background-for-text-color: rgb(12, 7, 24);
+  --background-color: #16160E;
+  --background-color-for-code: black;
   --link-color: #F7ABAB;
   --link-visited-color: #F59393;
   --menu-link-visited-color: var(--link-color);
   color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --font-color: #FBD9D9;
+    --background-color: #16160E;
+    --background-color-for-code: black;
+    --link-color: #F7ABAB;
+    --link-visited-color: #F59393;
+    --menu-link-visited-color: var(--link-color);
+    color-scheme: light;
+  }
 }
 
 
