@@ -1,6 +1,7 @@
 {
     "name": "tasuren's website developing container",
     "dockerFile": "Dockerfile",
+    "initializeCommand": "pnpm i",
     "customizations": {
         "vscode": {
             "extensions": [
