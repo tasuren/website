@@ -1,13 +1,13 @@
 ---
-import Head from "@components/head/This.astro";
-import Body from "@components/body/This.astro";
+import Head from "@components/head/Self.astro";
+import { Props as HeadProps } from "@components/head/Self.astro";
+import Body from "@components/body/Self.astro";
 
 import "../styles/global.css";
 
-interface Props {
-  title: string,
-  description: string
-};
+
+interface Props extends HeadProps {};
+
 
 const { title, description } = Astro.props;
 ---

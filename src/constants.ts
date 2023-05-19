@@ -1,5 +1,3 @@
-// tasuren.xyz - Constants
+// tasuren's Website - Constants
 
-export const SERVICE_DOMAIN = "tasuren";
-export const WEBSITE_TITLE = "tasurenの部屋";
-export const ARTICLES_ENDPOINT = "articles";
+export const WEBSITE_TITLE = "懐古なレコード";

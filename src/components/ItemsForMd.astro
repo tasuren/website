@@ -1,9 +1,0 @@
----
-import Items from "./Items.astro";
-
-interface Props { data: any; };
----
-<Items data={Astro.props.data.map((post) => ({
-  url: post.url, title: post.frontmatter.title,
-  brief: post.frontmatter.brief
-}))} />

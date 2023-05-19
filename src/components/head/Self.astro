@@ -1,0 +1,28 @@
+---
+import { WEBSITE_TITLE } from "@root/constants";
+
+
+export interface Props {
+  title: string;
+  description: string;
+};
+
+
+var title = Astro.props.title;
+if (title) title = `${WEBSITE_TITLE} - ${title}`
+else title = WEBSITE_TITLE;
+
+
+const { description } = Astro.props;
+---
+<head>
+  <!-- General Metadata  -->
+  <meta charset="utf-8" />
+  <meta name="generator" content={Astro.generator} />
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=yes">
+  <!-- Web Page Metadata  -->
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <meta name="author" content="Takagi Tasuku">
+  <meta name="theme-color" content="#170000">
+</head>

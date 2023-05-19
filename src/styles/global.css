@@ -1,46 +1,36 @@
-/* tasuren.xyz - Global Style */
-
-@import url('https://fonts.googleapis.com/css2?family=Yomogi&display=swap');
+/* tasuren's Website - CSS for Global */
 
 
 /* リセット */
 h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; }
 
+
 /* カラーコードの定義 */
 :root {
-  --font-color: #FBD9D9;
-  --background-color: #16160E;
-  --background-color-for-code: black;
-  --link-color: #F7ABAB;
-  --link-visited-color: #F59393;
-  --menu-link-visited-color: var(--link-color);
+  --font-color: #0f0808;
+  --background-color: #FBD9D9;
+  --background-color-for-code: white;
+  --link-color: #340404;
+  --link-visited-color: #2c0404;
   color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --font-color: #FBD9D9;
-    --background-color: #16160E;
+    --background-color: #0f0808;
     --background-color-for-code: black;
     --link-color: #F7ABAB;
     --link-visited-color: #F59393;
-    --menu-link-visited-color: var(--link-color);
     color-scheme: light;
   }
 }
 
 
-nav, main {
-  /* 文章の後ろに黒い背景を入れる */
-  background-color: var(--background-for-text-color);
-  border-radius: 15px;
-  padding: 0.8vw 1.5vw;
-}
-
-
-/* 内容部分 */
+/* 一般 */
 a:link { color: var(--link-color); }
 a:visited { color: var(--link-color); }
+
 
 code {
   /* ソースコードのハイライトの背景 */
@@ -49,4 +39,4 @@ code {
   font-family: 'Source Code Pro', monospace;
 }
 
-img { /* 画像サイズを適切なものにする。 */ max-width: 100%; height: auto; }
+/* 画像サイズを適切に。 img { max-width: 100%; height: auto; } */

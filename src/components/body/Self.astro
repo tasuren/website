@@ -1,0 +1,27 @@
+---
+import Header from "./Header.astro";
+import Main from "./Main.astro";
+---
+<style is:global>
+  /*nav { margin-right: 5%; }*/
+  nav, main { height: 100%; }
+  main { width: 60%; }
+</style>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Yomogi&display=swap');
+
+  body {
+    background-color: var(--background-color);
+    font-family: Yomogi;
+    color: var(--font-color);
+    /* 位置調整 */
+    margin-top: 10%;
+    /* 横並び */
+    display: flex;
+    justify-content: space-evenly;
+  };
+</style>
+<body>
+  <Header />
+  <Main><slot /></Main>
+</body>
