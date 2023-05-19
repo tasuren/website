@@ -3,6 +3,7 @@ import Header from "./Header.astro";
 import Main from "./Main.astro";
 ---
 <style is:global>
+  /* レスポンシブ */
   nav { font-size: 140%; }
 
   @media (480px < width) {
@@ -29,7 +30,7 @@ import Main from "./Main.astro";
     font-family: Yomogi;
     color: var(--font-color);
     /* 位置調整 */
-    margin-top: 10%;
+    margin-top: 10%; margin-bottom: 10%;
   };
 </style>
 <body>
