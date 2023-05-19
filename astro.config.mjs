@@ -3,7 +3,7 @@
 import { defineConfig } from 'astro/config';
 
 
-const DEFAULT_LAYOUT = '/src/layouts/MainForMd.astro';
+const DEFAULT_LAYOUT = '/src/layouts/Main.astro';
 
 function setDefaultLayout() {
   return function (_, file) {
@@ -16,5 +16,8 @@ function setDefaultLayout() {
 export default defineConfig({
   markdown: {
     remarkPlugins: [setDefaultLayout]
+  },
+  experimental: {
+    assets: true
   }
 });
