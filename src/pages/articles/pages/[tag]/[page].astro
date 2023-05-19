@@ -1,33 +1,7 @@
 ---
-import Items from "@components/Items.astro";
-
 import Layout from "@layouts/Main.astro";
-
-import { getArticles } from "@libraries/cms";
-
-
-export async function getStaticPaths() {
-  let articles = []; var page = 0, count = 0;
-  for (let article of (await getArticles({fields: ["tags", "title", "id"]})).contents)
-    for (let tag of article.tags) {
-      articles.push({
-        params: {tag: tag, page: page},
-        props: {title: article.title, tags: article.tags}
-      });
-      count += 1;
-      if (count == 30) {
-        page += 1; count = 0;
-      };
-    };
-  console.log(articles);
-  return articles;
-};
-
-
-const { title, tags } = Astro.props;
-console.log(title);
 ---
-<Layout title="記事一覧" description="tasurenの書いたブログなどを含む記事の一覧ページです。" metadataHtml="">
+<Layout title="記事一覧" description="tasurenの書いたブログなどを含む記事の一覧ページです。">
   ここには、tasurenが書いたブログなどがあります。<br />
   <br />
 </Layout>

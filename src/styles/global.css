@@ -12,7 +12,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; }
   --background-color-for-code: white;
   --link-color: #340404;
   --link-visited-color: #2c0404;
-  color-scheme: dark;
+  color-scheme: dark
 }
 
 @media (prefers-color-scheme: dark) {

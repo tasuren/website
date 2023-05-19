@@ -3,9 +3,23 @@ import Header from "./Header.astro";
 import Main from "./Main.astro";
 ---
 <style is:global>
-  /*nav { margin-right: 5%; }*/
-  nav, main { height: 100%; }
-  main { width: 60%; }
+  nav { font-size: 140%; }
+
+  @media (480px < width) {
+    nav, main { height: 100%; }
+    main { width: 60%; }
+
+    body {
+      /* 横並び */
+      display: flex;
+      justify-content: space-evenly;
+    }
+  }
+
+  @media (width <= 480px) {
+    nav { margin: 0 auto; }
+    body { padding: 5%; font-size: 4.2vw; }
+  }
 </style>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Yomogi&display=swap');
@@ -16,9 +30,6 @@ import Main from "./Main.astro";
     color: var(--font-color);
     /* 位置調整 */
     margin-top: 10%;
-    /* 横並び */
-    display: flex;
-    justify-content: space-evenly;
   };
 </style>
 <body>
