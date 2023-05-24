@@ -10,7 +10,7 @@ function setDefaultLayout() {
     const { frontmatter } = file.data.astro;
     if (!frontmatter.layout) frontmatter.layout = DEFAULT_LAYOUT;
   };
-}
+};
 
 
 export default defineConfig({
