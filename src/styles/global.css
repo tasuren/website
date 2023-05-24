@@ -5,37 +5,36 @@
 h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; }
 
 
-/* カラーコードの定義 */
+/* カラーコードの定義。 */
 :root {
-  --font-color: #0f0808;
-  --background-color: #FBD9D9;
-  --background-color-for-code: white;
-  --link-color: #340404;
-  --link-visited-color: #2c0404;
-  color-scheme: dark
+  --kikuo: #f8f5f7;
+  --maretu: #170000;
 }
 
+:root {
+  --link-color: #5ba2f5;
+  --link-color-visited: #706caa;
+  /* ライトテーマ */
+  --font-color: black;
+  --background-color: var(--kikuo);
+  --background-color-for-code: var(--white);
+}
 @media (prefers-color-scheme: dark) {
   :root {
-    --font-color: #FBD9D9;
-    --background-color: #0f0808;
-    --background-color-for-code: black;
-    --link-color: #F7ABAB;
-    --link-visited-color: #F59393;
-    color-scheme: light;
+    /* ダークテーマ */
+    --font-color: white;
+    --background-color: var(--maretu);
+    --background-color-for-code: var(--black);
   }
 }
 
 
 /* 一般 */
 a:link { color: var(--link-color); }
-a:visited { color: var(--link-color); }
 
 
 code {
-  /* ソースコードのハイライトの背景 */
-  background-color: var(--background-for-code-color);
-  border-radius: 0.4vh; padding: 0.1vh 0.5vw; margin: 0.2vw;
+  /* ソースコードのハイライトの背景。 */
   font-family: 'Source Code Pro', monospace;
 }
 
