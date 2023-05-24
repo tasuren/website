@@ -1,13 +1,14 @@
 // tasuren's Website - CMS
-/*
+
 import { createClient, MicroCMSQueries } from "microcms-js-sdk";
 
-import { SERVICE_DOMAIN, ARTICLES_ENDPOINT as ENDPOINT } from "../constants";
+import { SERVICE_DOMAIN, BLOG_ENDPOINT as ENDPOINT } from "./constants";
 
 
-const client = createClient({
+export const API_KEY = import.meta.env.MICROCMS_API_KEY;
+export const client = createClient({
   serviceDomain: SERVICE_DOMAIN,
-  apiKey: import.meta.env.MICROCMS_API_KEY,
+  apiKey: API_KEY,
 });
 
 
@@ -42,4 +43,3 @@ export const getArticleDetail = async (
     contentId, queries,
   });
 };
-*/

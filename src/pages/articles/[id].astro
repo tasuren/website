@@ -1,0 +1,15 @@
+---
+import Layout from "@layouts/Main.astro";
+
+import { API_KEY, getArticles } from "@libraries/cms";
+
+
+const NULL = Object.freeze([]);
+const QUERIES = Object.freeze(["id"]);
+export async function getStaticPaths() {
+  if (API_KEY) { return NULL; };
+  let articles = getArticles({fields: QUERIES})
+  return 
+}
+---
+<Layout title="" description=""></Layout>
