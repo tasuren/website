@@ -5,10 +5,10 @@ import { API_KEY, getArticles } from "@libraries/cms";
 
 
 const NULL = Object.freeze([]);
-const QUERIES = Object.freeze(["id"]);
-export async function getStaticPaths() {
+const QUERIES = Object.freeze({limit: 1000, fields: ["id"]});
+export async function getStaticPaths({ paginate }) {
   if (API_KEY) { return NULL; };
-  let articles = getArticles({fields: QUERIES})
+  let articles = getArticles({QUERIES})
   return 
 }
 ---

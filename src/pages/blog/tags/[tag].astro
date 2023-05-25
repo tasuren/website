@@ -1,0 +1,42 @@
+---
+import Layout from "@layouts/Main.astro";
+
+import { API_KEY, Article, getArticles } from "@libraries/cms";
+import { sleep } from "@libraries/utils";
+
+
+async function* getAllArticles(max: number) {
+  var offset = 0;
+  var sink: { [name: string]: Article[] } = {};
+  while (true) {
+    // 記事を取得する。
+    let articles = await getArticles({limit: 178, offset: offset, fields: fields});
+    if (!articles.contents) { break; };
+    for (let article of articles.contents) {
+      for (let tag of article.tags) {
+        if (!(tag in sink)) {
+          sink[tag] = [];
+        };
+        sink[tag].push(article);
+        if (sink[tag].length > max) {
+          
+        };
+      };
+    };
+    yield articles.contents;
+    offset = articles.limit;
+    await sleep(0.04);
+  };
+}
+
+
+const REQUIRED_FIELDS = Object.freeze(["id", ""]);
+const NULL = Object.freeze([]);
+export async function getStaticPaths({ paginate }) {
+  if (API_KEY) { return NULL; };
+
+  await getAllArticles(["id", "tags"]);
+  return paginate(REQUIRED_FIELDS);
+}
+---
+<Layout title="" description=""></Layout>
