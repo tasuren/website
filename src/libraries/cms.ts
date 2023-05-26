@@ -2,12 +2,13 @@
 
 import { createClient, MicroCMSQueries } from "microcms-js-sdk";
 
-import { SERVICE_DOMAIN } from "./constants";
 import { sleep } from "./utils";
 
 
-export const API_KEY = process.env.NO_MICROCMS ? "" : import.meta.env.MICROCMS_API_KEY;
-console.log(SERVICE_DOMAIN);
+export const API_KEY = process.env.NO_MICROCMS
+  ? "" : import.meta.env.MICROCMS_API_KEY;
+export const SERVICE_DOMAIN = process.env.NO_MICROCMS
+  ? "" : import.meta.env.MICROCMS_SERVICE_DOMAIN;
 export const client = createClient({
   serviceDomain: SERVICE_DOMAIN,
   apiKey: API_KEY,
@@ -51,11 +52,13 @@ export async function* getAllArticles(
   endpoint: string, queries: MicroCMSQueries,
   interval: number = 0.04
 ): AsyncIterableIterator<Article[]> {
+  console.log("記事の読み込み中...")
   queries.offset = 0;
   while (true) {
     // 記事を取得する。
     let articles = await getArticles(endpoint, queries);
-    if (!articles.contents) { break; };
+    console.log(`microCMSの${endpoint}から${articles.contents.length}個の記事を取得。`);
+    if (!articles.contents.length) { break; };
     yield articles.contents;
     queries.offset = articles.limit;
     await sleep(interval);

@@ -17,7 +17,7 @@
   "license": "BSD4",
   "dependencies": {
     "@types/node": "^20.2.4",
-    "astro": "^2.5.0",
+    "astro": "^2.5.5",
     "highlight.js": "^11.8.0",
     "microcms-js-sdk": "^2.4.0"
   }
