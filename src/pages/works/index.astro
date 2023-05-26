@@ -1,7 +1,7 @@
 ---
 import Layout from "@layouts/Main.astro";
 
-import { Frontmatter } from "@libraries/post";
+import { Frontmatter } from "@libraries/types";
 
 
 const posts = (await Astro.glob<Frontmatter>('./*.md'))

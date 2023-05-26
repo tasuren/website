@@ -2,10 +2,12 @@
 
 import { createClient, MicroCMSQueries } from "microcms-js-sdk";
 
-import { SERVICE_DOMAIN, BLOG_ENDPOINT as ENDPOINT } from "./constants";
+import { SERVICE_DOMAIN } from "./constants";
+import { sleep } from "./utils";
 
 
-export const API_KEY = import.meta.env.MICROCMS_API_KEY;
+export const API_KEY = process.env.NO_MICROCMS ? "" : import.meta.env.MICROCMS_API_KEY;
+console.log(SERVICE_DOMAIN);
 export const client = createClient({
   serviceDomain: SERVICE_DOMAIN,
   apiKey: API_KEY,
@@ -31,15 +33,31 @@ export type Articles = {
 
 
 export const getArticles = async (
-  queries?: MicroCMSQueries
-) => await client.get<Articles>({endpoint: ENDPOINT, queries});
+  endpoint: string, queries?: MicroCMSQueries
+) => await client.get<Articles>({endpoint: endpoint, queries});
 
 export const getArticleDetail = async (
-  contentId: string,
+  endpoint: string, id: string,
   queries?: MicroCMSQueries
 ) => {
   return await client.getListDetail<Article>({
-    endpoint: ENDPOINT,
-    contentId, queries,
+    endpoint: endpoint,
+    contentId: id, queries,
   });
+};
+
+
+export async function* getAllArticles(
+  endpoint: string, queries: MicroCMSQueries,
+  interval: number = 0.04
+): AsyncIterableIterator<Article[]> {
+  queries.offset = 0;
+  while (true) {
+    // 記事を取得する。
+    let articles = await getArticles(endpoint, queries);
+    if (!articles.contents) { break; };
+    yield articles.contents;
+    queries.offset = articles.limit;
+    await sleep(interval);
+  };
 };
