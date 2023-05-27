@@ -1,0 +1,47 @@
+/* tasuren's Website - CSS for Global */
+
+
+/* リセット */
+h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; }
+
+
+/* カラーコードの定義。 */
+:root {
+  --kikuo: #f8f5f7;
+  --maretu: #170000;
+}
+
+:root {
+  --link-color: #5ba2f5;
+  --link-color-visited: #8d99c9;
+  /* ライトテーマ */
+  --font-color: black;
+  --background-color: var(--kikuo);
+  --background-color-for-code: var(--white);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* ダークテーマ */
+    --font-color: white;
+    --background-color: var(--maretu);
+    --background-color-for-code: var(--black);
+  }
+}
+
+
+/* 一般 */
+a:link { color: var(--link-color); }
+.no-visited-color a:visited { color: var(--link-color) }
+
+.neutral { opacity: 0.7; }
+
+@media (480px < width) { .sp-only { display: none; } }
+@media (480px >= width) { .pc-only { display: none; } }
+
+
+code {
+  /* ソースコードのハイライトの背景。 */
+  font-family: 'Source Code Pro', monospace;
+}
+
+/* 画像サイズを適切に。 img { max-width: 100%; height: auto; } */

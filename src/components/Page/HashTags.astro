@@ -1,0 +1,6 @@
+---
+interface Props { tags: string[], base?: string };
+---
+{Astro.props.tags.map(tag => <><a href={
+  `${Astro.props.base || "/blog/tags"}/${tag}/1`
+}>#{tag}</a> </>)}

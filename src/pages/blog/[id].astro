@@ -1,0 +1,60 @@
+---
+import { NO_MICROCMS, Article, getAllArticles } from "@libraries/cms";
+
+import PageTitle from "@components/Page/Title.astro";
+
+import Layout from "@layouts/Main.astro";
+import { SAMPLE_ARTICLE_ENUM_DATA, SAMPLE_ARTICLE_CONTENT_DATA } from "@libraries/constants";
+import HashTags from "@components/Page/HashTags.astro";
+
+
+interface Props { article: Article };
+
+
+export const toMeta = (article: Article) => ({
+    params: {id: article.id}, props: {article: article}
+});
+
+
+export const QUERIES = Object.freeze({fields: [
+  "id", "tags", "title", "content", "publishedAt", "revisedAt"
+], limit: 128});
+export async function getStaticPaths() {
+  let allArticles = [];
+  if (NO_MICROCMS) {
+    var tempArticle;
+    for (let articles of Object.values(SAMPLE_ARTICLE_ENUM_DATA))
+      for (let article of articles) {
+        tempArticle = {...SAMPLE_ARTICLE_CONTENT_DATA};
+        tempArticle.id = article.id;
+        allArticles.push(toMeta(tempArticle));
+      };
+  } else for await (let articles of getAllArticles("blog", QUERIES))
+    for (let article of articles) allArticles.push(toMeta(article));
+  return allArticles;
+};
+
+
+const { article } = Astro.props;
+---
+<style>
+  time { font-style: italic; }
+  .metadata-container { padding-bottom: 1em; }
+  .metadata-content { display: flex; justify-content: space-between; }
+</style>
+<Layout
+    title={article.title} description={article.tags
+      ? `#${article.tags.join(" #")}` : ""}>
+  <PageTitle>{article.title}</PageTitle>
+  <div class="metadata-container">
+    <div class="metadata-content">
+      <span><time datetime={article.publishedAt}>{
+        `投稿日時：${(new Date(article.publishedAt)).toLocaleString("ja-JP")}`
+      }</time> <time datetime={article.revisedAt}>{
+        `最終更新日時：${(new Date(article.revisedAt)).toLocaleString("ja-JP")}`
+      }</time></span><span><HashTags tags={article.tags} /></span>
+    </div>
+    <hr>
+  </div>
+  <div set:html={article.content} />
+</Layout>

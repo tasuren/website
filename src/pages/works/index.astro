@@ -1,0 +1,20 @@
+---
+import Layout from "@layouts/Main.astro";
+
+import { Frontmatter } from "@libraries/types";
+
+
+const posts = (await Astro.glob<Frontmatter>('./*.md'))
+  .filter(post => !(post.frontmatter.draft || false))
+  .map(post => { post.frontmatter.layout = "/src/layouts/Work.astro"; return post; });
+---
+<Layout title="Works" description="tasurenが作っているものを列挙したページです。">
+  <h1>Works</h1>
+  <p>ここではtasurenが作っているものを列挙しています。</p>
+  <ul>
+    {posts.map(post => <li>
+      <a href={post.url}>{post.frontmatter.title}</a>
+      {post.frontmatter.description ? `: ${post.frontmatter.description}` : ""}
+    </li>)}
+  </ul>
+</Layout>

@@ -1,0 +1,25 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "keywords": [
+    "homepage",
+    "website"
+  ],
+  "author": "Takagi Tasuku",
+  "license": "BSD4",
+  "dependencies": {
+    "@types/node": "^20.2.4",
+    "astro": "^2.5.5",
+    "date-fns": "^2.30.0",
+    "highlight.js": "^11.8.0",
+    "microcms-js-sdk": "^2.4.0"
+  }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "tasuren's website developing container",
+    "dockerFile": "Dockerfile",
+    "initializeCommand": "pnpm i",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "astro-build.astro-vscode",
+                "dbaeumer.vscode-eslint",
+                "unifiedjs.vscode-mdx"
+            ]
+        }
+    }
+}

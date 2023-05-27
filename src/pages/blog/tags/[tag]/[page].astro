@@ -1,0 +1,92 @@
+---
+import { Page } from "astro";
+
+import { formatDistanceToNow } from "date-fns";
+
+import Layout from "@layouts/Main.astro";
+
+import HashTags from "@components/Page/HashTags.astro";
+import DynamicBlank from "@components/DynamicBlank.astro";
+
+import { NO_MICROCMS, Article, getAllArticles } from "@libraries/cms";
+import { SAMPLE_ARTICLE_ENUM_DATA } from "@libraries/constants";
+
+
+interface Context { tags: string[] }
+interface ExtendedArticle extends Article { ctx: Context };
+
+
+export const PAGE_SIZE = import.meta.env.PAGE_SIZE || 30;
+export async function getStaticPaths({ paginate }) {
+  let allArticles: {[tag: string]: ExtendedArticle[]} = {"all": []};
+  let tags: string[] = [];
+  if (NO_MICROCMS) {
+    // もし`API_KEY`が設定されていない場合は、サンプルデータを使用する。`
+    Object.assign(allArticles, SAMPLE_ARTICLE_ENUM_DATA);
+    for (let articles of Object.values(allArticles))
+      for (let article of articles) article.ctx = {tags: tags};
+  } else {
+    // 取得して整理する。
+    for await (let articles of getAllArticles(
+      "blog", {limit: 183, fields: ["id", "title", "tags", "publishedAt"]}
+    ))
+      for (var article of articles.map
+          (article => article as ExtendedArticle)) {
+        article.ctx = {tags: tags};
+        allArticles["all"].push(article);
+        for (let tag of article.tags) {
+          if (!(tag in allArticles)) allArticles[tag] = [];
+          if (tag == "all") console.warn(`IDが${article.id}の記事が予約済みのタグを使っています。`);
+          allArticles[tag].push(article);
+        };
+      };
+    // console.log(JSON.stringify(allArticles));
+  };
+  tags.push(...Object.keys(allArticles));
+  return Object.keys(allArticles).map(tag => paginate(
+    allArticles[tag], { params: { tag: tag }, pageSize: PAGE_SIZE}
+  ));
+};
+
+
+var { tag } = Astro.params;
+if (tag == "all") tag = "";
+const hashedTag = tag ? `#${tag}` : "";
+const page: Page<ExtendedArticle> = Astro.props.page;
+---
+<Layout
+    title={`tasurenのブログ ${hashedTag}`}
+    description={tag ? `${tag}のタグが付いている記事の一覧ページです。`
+      : "tasurenの書いたブログの一覧があります。"}>
+  <h1>tasurenのブログ</h1>
+  <p>ここには、tasurenが色々まとめた記事があります。</p>
+  <details>
+    <summary>タグ一覧</summary>
+    {page.data.length ? <HashTags tags={
+      page.data[0].ctx.tags.filter(tag => tag != "all")
+    } /> : "まだありません。"}
+  </details>
+  <p />
+  <!-- 列挙 -->
+  <h2>
+    一覧{page.currentPage == 1 ? "" : `（${page.currentPage}ページ目）`}
+    <span class="pc-only">{hashedTag}</span>
+  </h2>
+  <p class="sp-only neutral">{hashedTag}</p>
+  <ul>
+    {page.data.map(article =><li>
+      <a href={`/blog/${article.id}`}>{article.title}</a>
+      <time datetime={article.publishedAt} class="neutral">
+        　{formatDistanceToNow(new Date(article.publishedAt))}前
+      </time>
+    </li>)}
+  </ul>
+  <!-- ページ切り替え  -->
+  <div class="no-visited-color" style="display: flex; justify-content: space-around;">
+    <a href="./1">1</a>
+    <a href={page.url.prev}>-</a>
+    <button id="select">jump</button>
+    <a href={page.url.next}>+</a>
+    <a href={`./${page.lastPage}`}>{page.lastPage}</a>
+  </div>
+</Layout>
