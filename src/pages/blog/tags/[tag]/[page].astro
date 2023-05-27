@@ -6,10 +6,10 @@ import { formatDistanceToNow } from "date-fns";
 import Layout from "@layouts/Main.astro";
 
 import HashTags from "@components/Page/HashTags.astro";
-import DynamicBlank from "@components/DynamicBlank.astro";
 
-import { NO_MICROCMS, Article, getAllArticles } from "@libraries/cms";
-import { SAMPLE_ARTICLE_ENUM_DATA } from "@libraries/constants";
+import { NO_MICROCMS } from "@libraries/cms";
+import { SAMPLE_ARTICLE_ENUM_DATA, Article, getArticles } from "@libraries/blog";
+import { toSnakeCase } from "@libraries/utils";
 
 
 interface Context { tags: string[] }
@@ -27,7 +27,7 @@ export async function getStaticPaths({ paginate }) {
       for (let article of articles) article.ctx = {tags: tags};
   } else {
     // 取得して整理する。
-    for await (let articles of getAllArticles(
+    for await (let articles of getArticles(
       "blog", {limit: 183, fields: ["id", "title", "tags", "publishedAt"]}
     ))
       for (var article of articles.map
@@ -43,19 +43,31 @@ export async function getStaticPaths({ paginate }) {
     // console.log(JSON.stringify(allArticles));
   };
   tags.push(...Object.keys(allArticles));
-  return Object.keys(allArticles).map(tag => paginate(
-    allArticles[tag], { params: { tag: tag }, pageSize: PAGE_SIZE}
-  ));
+  return Object.keys(allArticles).map(tag => paginate(allArticles[tag], {
+    params: { tag: toSnakeCase(tag) }, props: { tag: tag }, pageSize: PAGE_SIZE
+  }));
 };
 
 
-var { tag } = Astro.params;
+var { tag } = Astro.props;
 if (tag == "all") tag = "";
 const hashedTag = tag ? `#${tag}` : "";
 const page: Page<ExtendedArticle> = Astro.props.page;
 ---
+<script>
+  /* 数字入力によるページ切り替え。 */
+  document.getElementById("jump").addEventListener("click", e => {
+    let raw = prompt("ジャンプ先をどうぞ。");
+    if (!raw) return;
+    let page = parseInt(raw);
+    let max = (e.target as HTMLElement).getAttribute("data-max-page");
+    if (isNaN(page) || page > parseInt(max) || page == 0)
+      alert(`そのページは範囲外です。0から${max}ページまでが有効です。`)
+    else window.location.assign(`./${page}`);
+  });
+</script>
 <Layout
-    title={`tasurenのブログ ${hashedTag}`}
+    title={`ブログ ${hashedTag}`}
     description={tag ? `${tag}のタグが付いている記事の一覧ページです。`
       : "tasurenの書いたブログの一覧があります。"}>
   <h1>tasurenのブログ</h1>
@@ -77,7 +89,7 @@ const page: Page<ExtendedArticle> = Astro.props.page;
     {page.data.map(article =><li>
       <a href={`/blog/${article.id}`}>{article.title}</a>
       <time datetime={article.publishedAt} class="neutral">
-        　{formatDistanceToNow(new Date(article.publishedAt))}前
+        &ensp;{formatDistanceToNow(new Date(article.publishedAt))}前
       </time>
     </li>)}
   </ul>
@@ -85,7 +97,7 @@ const page: Page<ExtendedArticle> = Astro.props.page;
   <div class="no-visited-color" style="display: flex; justify-content: space-around;">
     <a href="./1">1</a>
     <a href={page.url.prev}>-</a>
-    <button id="select">jump</button>
+    <button id="jump" data-max-page={page.lastPage}>jump</button>
     <a href={page.url.next}>+</a>
     <a href={`./${page.lastPage}`}>{page.lastPage}</a>
   </div>

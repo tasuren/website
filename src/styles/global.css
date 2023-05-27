@@ -38,10 +38,10 @@ a:link { color: var(--link-color); }
 @media (480px < width) { .sp-only { display: none; } }
 @media (480px >= width) { .pc-only { display: none; } }
 
-
 code {
-  /* ソースコードのハイライトの背景。 */
+  background-color: #191724;
+  border-radius: 0.4vh;
+  padding: 0.5vh 0.8vh;
   font-family: 'Source Code Pro', monospace;
+  opacity: 0.8;
 }
-
-/* 画像サイズを適切に。 img { max-width: 100%; height: auto; } */

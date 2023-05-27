@@ -1,10 +1,18 @@
 ---
-import { NO_MICROCMS, Article, getAllArticles } from "@libraries/cms";
+import { load as cheerioLoad } from 'cheerio';
+import hljs from "highlight.js";
+
+import { NO_MICROCMS } from "@libraries/cms";
 
 import PageTitle from "@components/Page/Title.astro";
+import Hljs from "@components/Page/Hljs.astro";
 
 import Layout from "@layouts/Main.astro";
-import { SAMPLE_ARTICLE_ENUM_DATA, SAMPLE_ARTICLE_CONTENT_DATA } from "@libraries/constants";
+import {
+  SAMPLE_ARTICLE_ENUM_DATA,
+  SAMPLE_ARTICLE_CONTENT_DATA,
+  Article, getArticles
+} from "@libraries/blog";
 import HashTags from "@components/Page/HashTags.astro";
 
 
@@ -20,8 +28,10 @@ export const QUERIES = Object.freeze({fields: [
   "id", "tags", "title", "content", "publishedAt", "revisedAt"
 ], limit: 128});
 export async function getStaticPaths() {
+  // ブログ記事を読み込み、整理する。
   let allArticles = [];
   if (NO_MICROCMS) {
+    // CMSを使えない場合は、サンプルで賄う。
     var tempArticle;
     for (let articles of Object.values(SAMPLE_ARTICLE_ENUM_DATA))
       for (let article of articles) {
@@ -29,13 +39,31 @@ export async function getStaticPaths() {
         tempArticle.id = article.id;
         allArticles.push(toMeta(tempArticle));
       };
-  } else for await (let articles of getAllArticles("blog", QUERIES))
+  } else for await (let articles of getArticles("blog", QUERIES))
     for (let article of articles) allArticles.push(toMeta(article));
   return allArticles;
 };
 
 
 const { article } = Astro.props;
+
+
+// 記事内のコードブロックの色塗りを行う。
+var html = article.content;
+var usedHljs = false;
+if (article.content.includes("<code") && article.content.includes("<pre>")) {
+  let $ = cheerioLoad(article.content);
+  $("pre code").each((_, rawElement) => {
+    let e = $(rawElement);
+    e.html(hljs.highlight(
+      e.text(), {language : rawElement
+        .attribs.class.slice(9)}
+    ).value);
+    e.addClass("hljs");
+  });
+  html = $.html();
+  usedHljs = true;
+};
 ---
 <style>
   time { font-style: italic; }
@@ -45,16 +73,23 @@ const { article } = Astro.props;
 <Layout
     title={article.title} description={article.tags
       ? `#${article.tags.join(" #")}` : ""}>
+  {usedHljs ? <Hljs slot="meta-head" /> : null}
+  <!-- メタデータ -->
   <PageTitle>{article.title}</PageTitle>
   <div class="metadata-container">
     <div class="metadata-content">
-      <span><time datetime={article.publishedAt}>{
-        `投稿日時：${(new Date(article.publishedAt)).toLocaleString("ja-JP")}`
-      }</time> <time datetime={article.revisedAt}>{
-        `最終更新日時：${(new Date(article.revisedAt)).toLocaleString("ja-JP")}`
-      }</time></span><span><HashTags tags={article.tags} /></span>
+      <span>
+        <time datetime={article.publishedAt}>
+          {`PublishedAt: ${(new Date(article.publishedAt)).toLocaleString("ja-JP")}`}
+        </time>,&nbsp
+        <time datetime={article.revisedAt}>
+          {`RevisedAt: ${(new Date(article.revisedAt)).toLocaleString("ja-JP")}`}
+        </time>
+      </span>
+      <span><HashTags tags={article.tags} /></span>
     </div>
     <hr>
   </div>
-  <div set:html={article.content} />
+  <!-- 本文 -->
+  <div set:html={html} />
 </Layout>
