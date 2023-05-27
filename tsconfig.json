@@ -2,7 +2,6 @@
   "extends": "astro/tsconfigs/base",
   "compilerOptions": {
     "baseUrl": ".",
-    "forceConsistentCasingInFileNames": false,
     "paths": {
       "@components/*": ["src/components/*"],
       "@libraries/*": ["src/libraries/*"],
