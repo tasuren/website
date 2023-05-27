@@ -2,6 +2,9 @@
 
 import { defineConfig } from 'astro/config';
 
+import { setDefaultOptions } from 'date-fns';
+import jaLocale from "date-fns/locale/ja";
+
 
 const DEFAULT_LAYOUT = '/src/layouts/Main.astro';
 
@@ -21,3 +24,7 @@ export default defineConfig({
     assets: true
   }
 });
+
+
+// デフォルトのdate-fnsの言語設定を日本語にする。 
+setDefaultOptions({locale: jaLocale});

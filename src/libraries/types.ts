@@ -1,9 +1,14 @@
 // 投稿について。
 
-export interface Article {
+import { Article } from "./cms";
+
+
+export interface PageMetadata {
   title: string, description?: string
 }
 
-export interface Frontmatter extends Article {
+export interface Frontmatter extends PageMetadata {
   draft?: boolean, layout?: string
 }
+
+export type EnumOfArticles = {[name: string]: Article[]};

@@ -5,10 +5,16 @@ import { createClient, MicroCMSQueries } from "microcms-js-sdk";
 import { sleep } from "./utils";
 
 
+export const NO_MICROCMS = process.env.NO_MICROCMS;
+if (NO_MICROCMS) console.info(
+  "現在、microCMSを使わないモードですので、microCMSのライブラリは使用不可です。"
+);
+
+
 export const API_KEY = process.env.NO_MICROCMS
-  ? "" : import.meta.env.MICROCMS_API_KEY;
+  ? "..." : import.meta.env.MICROCMS_API_KEY;
 export const SERVICE_DOMAIN = process.env.NO_MICROCMS
-  ? "" : import.meta.env.MICROCMS_SERVICE_DOMAIN;
+  ? "_test_mode" : import.meta.env.MICROCMS_SERVICE_DOMAIN;
 export const client = createClient({
   serviceDomain: SERVICE_DOMAIN,
   apiKey: API_KEY,
@@ -50,17 +56,17 @@ export const getArticleDetail = async (
 
 export async function* getAllArticles(
   endpoint: string, queries: MicroCMSQueries,
-  interval: number = 0.04
+  interval: number = 1
 ): AsyncIterableIterator<Article[]> {
   console.log("記事の読み込み中...")
-  queries.offset = 0;
+  var offset = 0;
   while (true) {
     // 記事を取得する。
-    let articles = await getArticles(endpoint, queries);
+    let articles = await getArticles(endpoint, {offset: offset, ...queries});
     console.log(`microCMSの${endpoint}から${articles.contents.length}個の記事を取得。`);
     if (!articles.contents.length) { break; };
     yield articles.contents;
-    queries.offset = articles.limit;
+    offset = articles.limit;
     await sleep(interval);
   };
 };

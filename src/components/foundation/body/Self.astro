@@ -11,15 +11,19 @@ import Main from "./Main.astro";
     main { width: 60%; }
 
     body {
+      font-size: 16px;
       /* 横並び */
       display: flex;
       justify-content: space-evenly;
+      /* 位置調整 */
+      margin-top: 10%; margin-bottom: 10%;
     }
   }
 
-  @media (width <= 480px) {
+  @media (480px >= width) {
+    /* スマホ時。 */
     nav { margin: 0 auto; }
-    body { padding: 5%; font-size: 4.2vw; }
+    body { padding: 0 1%; }
   }
 </style>
 <style>
@@ -31,8 +35,6 @@ import Main from "./Main.astro";
     background-color: var(--background-color);
     font-family: 'Zen Kurenaido', sans-serif;
     color: var(--font-color);
-    /* 位置調整 */
-    margin-top: 10%; margin-bottom: 10%;
   };
 </style>
 <body>
