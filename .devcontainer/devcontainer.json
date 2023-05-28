@@ -1,7 +1,7 @@
 {
-    "name": "tasuren's website developing container",
-    "dockerFile": "Dockerfile",
-    "initializeCommand": "pnpm i",
+    "name": "tasuren's website",
+    "image": "mcr.microsoft.com/devcontainers/typescript-node",
+    "postCreateCommand": "npm install -g npm && npm install -g pnpm && pnpm install",
     "customizations": {
         "vscode": {
             "extensions": [
@@ -10,5 +10,11 @@
                 "unifiedjs.vscode-mdx"
             ]
         }
+    },
+    "portsAttributes": {
+		"3000": {
+			"label": "Astro Default HTTP Port",
+			"onAutoForward": "notify"
+		}
     }
 }
