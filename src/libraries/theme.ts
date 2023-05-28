@@ -71,7 +71,7 @@ export function effect(
 export function detectTheme(setting: Setting): Theme {
   if (setting == "auto")
     return window.matchMedia
-      ('(prefers-color-scheme: dark)')
+      ("(prefers-color-scheme: dark)")
         .matches ? "dark" : "light";
   else return setting;
 };
