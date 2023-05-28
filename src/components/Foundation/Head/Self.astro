@@ -26,5 +26,14 @@ const { description } = Astro.props;
   <meta name="author" content="Takagi Tasuku">
   <meta name="color-scheme" content="light dark">
   <!-- Other -->
+  <script is:inline>
+    let theme = localStorage.getItem("theme") || "auto";
+    if (theme != "auto") document.documentElement
+      .setAttribute("data-theme", theme)
+  </script>
+  <script>
+    import { initialize as initializeTheme } from "@libraries/theme";
+    initializeTheme();
+  </script>
   <slot />
 </head>
