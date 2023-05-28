@@ -102,5 +102,8 @@ import FloatButton from "@components/FloatButton.astro";
     // テーマを適用する。
     effect(detectTheme(setting), setting);
   });
+
+  // テーマ切り替えがゆったりするようにする。
+  document.body.style.transition = "background .5s";
 </script>
 <FloatButton id="theme-toggle" text="🌙" />

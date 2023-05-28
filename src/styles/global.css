@@ -15,14 +15,14 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; }
   --link-color: #5ba2f5;
   --link-color-visited: #8d99c9;
   /* ライトテーマ */
-  --font-color: black;
+  --color: black;
   --background-color: var(--kikuo);
   --background-color-for-code: #f9f4f1;
 }
 
 :root[data-theme="dark"] {
   /* ダークテーマ */
-  --font-color: white;
+  --color: white;
   --background-color: var(--maretu);
   --background-color-for-code: #191724;
 }

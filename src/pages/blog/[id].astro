@@ -67,8 +67,10 @@ if (article.content.includes("<code") && article.content.includes("<pre>")) {
 ---
 <style>
   time { font-style: italic; }
-  .metadata-container { padding-bottom: 1em; }
-  .metadata-content { display: flex; justify-content: space-between; }
+  .metadata .content { display: flex; justify-content: space-between; }
+  .metadata .content .left { padding-right: 1em; }
+  .metadata .content .left #published-at { padding-right: 0.5em; }
+  .metadata .left span, time { display: inline-block; }
 </style>
 <Layout
     title={article.title} description={article.tags
@@ -76,17 +78,18 @@ if (article.content.includes("<code") && article.content.includes("<pre>")) {
   {usedHljs ? <Hljs slot="meta-head" /> : null}
   <!-- メタデータ -->
   <PageTitle>{article.title}</PageTitle>
-  <div class="metadata-container">
-    <div class="metadata-content">
-      <span>
-        <time datetime={article.publishedAt}>
+  <p class="sp-only">
+  <div class="metadata">
+    <div class="content">
+      <span class="left">
+        <time id="published-at" datetime={article.publishedAt}>
           {`PublishedAt: ${(new Date(article.publishedAt)).toLocaleString("ja-JP")}`}
-        </time>,&nbsp
-        <time datetime={article.revisedAt}>
+        </time>
+        <time id="revised-at" class="pc-only" datetime={article.revisedAt}>
           {`RevisedAt: ${(new Date(article.revisedAt)).toLocaleString("ja-JP")}`}
         </time>
       </span>
-      <span><HashTags tags={article.tags} /></span>
+      <span class="right"><HashTags tags={article.tags} /></span>
     </div>
     <hr>
   </div>
