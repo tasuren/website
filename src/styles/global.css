@@ -17,15 +17,14 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; }
   /* ライトテーマ */
   --font-color: black;
   --background-color: var(--kikuo);
-  --background-color-for-code: var(--white);
+  --background-color-for-code: #f9f4f1;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* ダークテーマ */
-    --font-color: white;
-    --background-color: var(--maretu);
-    --background-color-for-code: var(--black);
-  }
+
+:root[data-theme="dark"] {
+  /* ダークテーマ */
+  --font-color: white;
+  --background-color: var(--maretu);
+  --background-color-for-code: #191724;
 }
 
 
@@ -39,9 +38,12 @@ a:link { color: var(--link-color); }
 @media (480px >= width) { .pc-only { display: none; } }
 
 code {
-  background-color: #191724;
+  background-color: var(--background-color-for-code);
   border-radius: 0.4vh;
-  padding: 0.5vh 0.8vh;
+  padding: 0.3vh 0.4vh;
   font-family: 'Source Code Pro', monospace;
   opacity: 0.8;
+  font-size: 13px;
 }
+
+.pointer { cursor: pointer; }

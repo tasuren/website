@@ -12,7 +12,7 @@ interface Props extends HeadProps {};
 const { title, description } = Astro.props;
 ---
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" data-theme="dark">
   <Head title={title} description={description}><slot name="meta-head" /></Head>
   <Body><slot /></Body>
 </html>

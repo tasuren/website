@@ -1,6 +1,7 @@
 ---
 import Header from "./Header.astro";
 import Main from "./Main.astro";
+import ThemeToggle from "./ThemeToggle.astro";
 ---
 <style is:global>
   /* レスポンシブ */
@@ -41,4 +42,5 @@ import Main from "./Main.astro";
 <body>
   <Header />
   <Main><slot /></Main>
+  <ThemeToggle />
 </body>

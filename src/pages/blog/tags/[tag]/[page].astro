@@ -72,7 +72,7 @@ const page: Page<ExtendedArticle> = Astro.props.page;
       : "tasurenの書いたブログの一覧があります。"}>
   <h1>tasurenのブログ</h1>
   <p>ここには、tasurenが色々まとめた記事があります。</p>
-  <details>
+  <details style="cursor: pointer;">
     <summary>タグ一覧</summary>
     {page.data.length ? <HashTags tags={
       page.data[0].ctx.tags.filter(tag => tag != "all")
