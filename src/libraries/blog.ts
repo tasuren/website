@@ -1,9 +1,6 @@
 // tasuren's website - Blog API
 
-import { MicroCMSQueries } from "microcms-js-sdk";
-
-import { client } from "./cms";
-import { sleep } from "./utils";
+import { NO_MICROCMS, getArticles } from "./cms";
 
 
 /* 型 */
@@ -17,39 +14,92 @@ export type Article = {
   content: string;
   tags: string[];
 };
-export type Articles = {
-  totalCount: number;
-  offset: number;
-  limit: number;
-  contents: Article[];
-};
 
-export type EnumOfArticles = {[tag: string]: Article[]};
+export type EnumOfArticles<T=Article> = {[tag: string]: T[]};
 
 
 /* 一般 */
-export async function* getArticles(
-  endpoint: string, queries: MicroCMSQueries,
-  interval: number = 1
-): AsyncIterableIterator<Article[]> {
-  console.log("記事の読み込み中...")
-  var offset = 0;
-  while (true) {
-    // 記事を取得する。
-    let articles = await client.get<Articles>({endpoint, queries: {offset, ...queries}});
-    console.log(`microCMSの${endpoint}から${articles.contents.length}個の記事を取得。クエリ:`, queries);
-    if (!articles.contents.length) { break; };
-    yield articles.contents;
-    offset = articles.limit;
-    await sleep(interval);
+
+
+/** 記事の内容のサンプルデータ。 */
+export const SAMPLE_ARTICLE_CONTENT_DATA: EnumOfArticles =
+  import.meta.env.SAMPLE_ARTICLE_CONTENT_DATA
+    ? JSON.parse(import.meta.env.SAMPLE_ARTICLE_CONTENT_DATA) : {
+      "id":"81011451445451919nna-",
+      "createdAt":"2023-02-14T23:57:31.148Z",
+      "updatedAt":"2023-02-17T07:25:04.182Z",
+      "publishedAt":"2023-02-15T23:16:33.847Z",
+      "revisedAt":"2023-02-17T07:25:04.182Z",
+      "title":"Astroプロジェクトのテストケースのタイトルでありますよ。",
+      "content":"<p>これはテストです。そうテストケース。</p><h1>見出し1</h1><p>wow</p>",
+      "tags":["cort_corporation","yjsnpi","tono"]
+    };
+export const QUERIES = Object.freeze({fields: [
+  "id", "tags", "title", "content", "publishedAt", "revisedAt"
+], limit: 128});
+/** microCMSから記事の内容を全て少しづつ取得します。 */
+export async function* getContents(): AsyncIterableIterator<Iterable<Article>> {
+  if (NO_MICROCMS) {
+    var tempArticle;
+    for (let articles of Object.values(SAMPLE_ARTICLE_ENUM_DATA))
+      yield articles.map(article => {
+        tempArticle = {...SAMPLE_ARTICLE_CONTENT_DATA};
+        tempArticle.id = article.id;
+        return tempArticle;
+      });
   };
+  for await (let articles of getArticles<Article>("blog", QUERIES)) yield articles;
+}
+
+
+/** 記事の小さい形でのメタデータのサンプル。 */
+export const SAMPLE_ARTICLE_SMALL_METADATA = {
+  "id": "5bopmct4enkv",
+  "title": "Darkmode.jsを使ってPythonドキュメントを簡単にダークモード対応してみた。",
+  "tags": ["Python", "JavaScript"],
 };
+/** 記事をタグ別でまとめた際のサンプルデータ。 */
+export const SAMPLE_ARTICLE_ENUM_DATA: EnumOfArticles = 
+  import.meta.env.SAMPLE_ARTICLE_ENUM_DATA ? JSON.parse(
+    import.meta.env.SAMPLE_ARTICLE_ENUM_DATA
+  ) : {
+    "all": [SAMPLE_ARTICLE_SMALL_METADATA],
+    "Python": [SAMPLE_ARTICLE_SMALL_METADATA],
+    "JavaScript": [SAMPLE_ARTICLE_SMALL_METADATA]
+  };
 
 
-export const SAMPLE_ARTICLE_ENUM_DATA: EnumOfArticles =
-  import.meta.env.SAMPLE_ARTICLE_ENUM_DATA
-    ? JSON.parse(import.meta.env.SAMPLE_ARTICLE_ENUM_DATA) : {};
-export const SAMPLE_ARTICLE_CONTENT_DATA: Article = 
-  import.meta.env.SAMPLE_ARTICLE_CONTENT_DATA ? JSON.parse(
-    import.meta.env.SAMPLE_ARTICLE_CONTENT_DATA
-  ) : {};
+export interface Context { allTags: string[] }
+export interface ArticleForEnum extends Article { ctx: Context };
+export async function getEnum(): Promise<EnumOfArticles<ArticleForEnum>> {
+  let allArticles: {[tag: string]: ArticleForEnum[]} = {"all": []};
+  // Astroの`paginate`した後でも、全てのタグに参照できるようにする。
+  // そのために、この配列を全ての記事データに同梱させる。そして、最後に中身を張る。
+  let allTags: string[] = [];
+
+  if (NO_MICROCMS) {
+    // もし`API_KEY`が設定されていない場合は、サンプルデータを使用する。`
+    Object.assign(allArticles, SAMPLE_ARTICLE_ENUM_DATA);
+    for (let articles of Object.values(allArticles))
+      for (let index in articles) articles[index].ctx = {allTags: allTags};
+  } else {
+    // 取得して整理する。
+    for await (let articles of getArticles<Article>(
+      "blog", {limit: 183, fields: ["id", "title", "tags", "publishedAt"]}
+    ))
+      for (var article of articles.map(article => article as ArticleForEnum)) {
+        article.ctx = {allTags: allTags};
+        allArticles["all"].push(article);
+        for (let tag of article.tags) {
+          if (!(tag in allArticles)) allArticles[tag] = [];
+          if (tag == "all") console.warn(`IDが${article.id}の記事が予約済みのタグを使っています。`);
+          allArticles[tag].push(article);
+        };
+      };
+    // テスト用：console.log(JSON.stringify(allArticles));
+  };
+
+  // 全てのタグをまとめる。
+  allTags.push(...Object.keys(allArticles));
+  return allArticles;
+}
