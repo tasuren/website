@@ -43,8 +43,9 @@ export async function* getContents(): AsyncIterableIterator<Iterable<Article>> {
         tempArticle.id = article.id;
         return tempArticle;
       });
-  };
-  for await (let articles of getArticles<Article>("blog", QUERIES)) yield articles;
+  } else for await (let articles of
+      getArticles<Article>("blog", QUERIES))
+    yield articles;
 };
 
 
