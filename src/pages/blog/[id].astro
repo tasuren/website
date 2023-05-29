@@ -2,17 +2,11 @@
 import { load as cheerioLoad } from 'cheerio';
 import hljs from "highlight.js";
 
-import { NO_MICROCMS } from "@libraries/cms";
-
 import PageTitle from "@components/Page/Title.astro";
 import Hljs from "@components/Page/Hljs.astro";
 
 import Layout from "@layouts/Main.astro";
-import {
-  SAMPLE_ARTICLE_ENUM_DATA,
-  SAMPLE_ARTICLE_CONTENT_DATA,
-  Article, getArticles
-} from "@libraries/blog";
+import { Article, getContents } from "@libraries/blog";
 import HashTags from "@components/Page/HashTags.astro";
 
 
@@ -22,25 +16,12 @@ interface Props { article: Article };
 export const toMeta = (article: Article) => ({
     params: {id: article.id}, props: {article: article}
 });
-
-
-export const QUERIES = Object.freeze({fields: [
-  "id", "tags", "title", "content", "publishedAt", "revisedAt"
-], limit: 128});
 export async function getStaticPaths() {
   // ブログ記事を読み込み、整理する。
-  let allArticles = [];
-  if (NO_MICROCMS) {
-    // CMSを使えない場合は、サンプルで賄う。
-    var tempArticle;
-    for (let articles of Object.values(SAMPLE_ARTICLE_ENUM_DATA))
-      for (let article of articles) {
-        tempArticle = {...SAMPLE_ARTICLE_CONTENT_DATA};
-        tempArticle.id = article.id;
-        allArticles.push(toMeta(tempArticle));
-      };
-  } else for await (let articles of getArticles("blog", QUERIES))
-    for (let article of articles) allArticles.push(toMeta(article));
+  var allArticles = [];
+  for await (let articles of getContents())
+    for (let article of articles)
+      allArticles.push(toMeta(article));
   return allArticles;
 };
 

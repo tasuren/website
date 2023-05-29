@@ -7,42 +7,13 @@ import Layout from "@layouts/Main.astro";
 
 import HashTags from "@components/Page/HashTags.astro";
 
-import { NO_MICROCMS } from "@libraries/cms";
-import { SAMPLE_ARTICLE_ENUM_DATA, Article, getArticles } from "@libraries/blog";
+import { ArticleForEnum, getEnum } from "@libraries/blog";
 import { toSnakeCase } from "@libraries/utils";
-
-
-interface Context { tags: string[] }
-interface ExtendedArticle extends Article { ctx: Context };
 
 
 export const PAGE_SIZE = import.meta.env.PAGE_SIZE || 30;
 export async function getStaticPaths({ paginate }) {
-  let allArticles: {[tag: string]: ExtendedArticle[]} = {"all": []};
-  let tags: string[] = [];
-  if (NO_MICROCMS) {
-    // もし`API_KEY`が設定されていない場合は、サンプルデータを使用する。`
-    Object.assign(allArticles, SAMPLE_ARTICLE_ENUM_DATA);
-    for (let articles of Object.values(allArticles))
-      for (let article of articles) article.ctx = {tags: tags};
-  } else {
-    // 取得して整理する。
-    for await (let articles of getArticles(
-      "blog", {limit: 183, fields: ["id", "title", "tags", "publishedAt"]}
-    ))
-      for (var article of articles.map
-          (article => article as ExtendedArticle)) {
-        article.ctx = {tags: tags};
-        allArticles["all"].push(article);
-        for (let tag of article.tags) {
-          if (!(tag in allArticles)) allArticles[tag] = [];
-          if (tag == "all") console.warn(`IDが${article.id}の記事が予約済みのタグを使っています。`);
-          allArticles[tag].push(article);
-        };
-      };
-    // console.log(JSON.stringify(allArticles));
-  };
-  tags.push(...Object.keys(allArticles));
+  let allArticles = await getEnum();
   return Object.keys(allArticles).map(tag => paginate(allArticles[tag], {
     params: { tag: toSnakeCase(tag) }, props: { tag: tag }, pageSize: PAGE_SIZE
   }));
@@ -52,7 +23,7 @@ export async function getStaticPaths({ paginate }) {
 var { tag } = Astro.props;
 if (tag == "all") tag = "";
 const hashedTag = tag ? `#${tag}` : "";
-const page: Page<ExtendedArticle> = Astro.props.page;
+const page: Page<ArticleForEnum> = Astro.props.page;
 ---
 <script>
   /* 数字入力によるページ切り替え。 */
@@ -75,7 +46,7 @@ const page: Page<ExtendedArticle> = Astro.props.page;
   <details style="cursor: pointer;">
     <summary>タグ一覧</summary>
     {page.data.length ? <HashTags tags={
-      page.data[0].ctx.tags.filter(tag => tag != "all")
+      page.data[0].ctx.allTags.filter(tag => tag != "all")
     } /> : "まだありません。"}
   </details>
   <p />
