@@ -15,12 +15,13 @@ function setDefaultLayout() {
     } = file.data.astro;
     if (!frontmatter.layout) frontmatter.layout = DEFAULT_LAYOUT;
   };
-}
-;
+};
 
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://tasuren.xyz",
+  base: "/",
   markdown: {
     remarkPlugins: [setDefaultLayout]
   },
