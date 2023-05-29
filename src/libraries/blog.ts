@@ -3,7 +3,6 @@
 import { NO_MICROCMS, getArticles } from "./cms";
 
 
-/* 型 */
 export type Article = {
   id: string;
   createdAt: string;
@@ -16,9 +15,6 @@ export type Article = {
 };
 
 export type EnumOfArticles<T=Article> = {[tag: string]: T[]};
-
-
-/* 一般 */
 
 
 /** 記事の内容のサンプルデータ。 */
@@ -49,7 +45,7 @@ export async function* getContents(): AsyncIterableIterator<Iterable<Article>> {
       });
   };
   for await (let articles of getArticles<Article>("blog", QUERIES)) yield articles;
-}
+};
 
 
 /** 記事の小さい形でのメタデータのサンプル。 */
@@ -71,6 +67,7 @@ export const SAMPLE_ARTICLE_ENUM_DATA: EnumOfArticles =
 
 export interface Context { allTags: string[] }
 export interface ArticleForEnum extends Article { ctx: Context };
+/** 一覧ページ用の記事データを取得します。 */
 export async function getEnum(): Promise<EnumOfArticles<ArticleForEnum>> {
   let allArticles: {[tag: string]: ArticleForEnum[]} = {"all": []};
   // Astroの`paginate`した後でも、全てのタグに参照できるようにする。
@@ -102,4 +99,4 @@ export async function getEnum(): Promise<EnumOfArticles<ArticleForEnum>> {
   // 全てのタグをまとめる。
   allTags.push(...Object.keys(allArticles));
   return allArticles;
-}
+};
