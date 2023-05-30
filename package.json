@@ -17,6 +17,7 @@
   "license": "BSD4",
   "dependencies": {
     "@astrojs/prefetch": "^0.2.3",
+    "@astrojs/sitemap": "^1.3.2",
     "@types/node": "^20.2.5",
     "astro": "^2.5.5",
     "cheerio": "1.0.0-rc.12",

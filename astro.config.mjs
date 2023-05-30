@@ -1,12 +1,10 @@
 /* tasuren.xyz - Astro's Config */
 
 import { defineConfig } from 'astro/config';
-
 import { setDefaultOptions } from 'date-fns';
 import jaLocale from "date-fns/locale/ja";
 import prefetch from "@astrojs/prefetch";
-
-
+import sitemap from "@astrojs/sitemap";
 const DEFAULT_LAYOUT = '/src/layouts/Main.astro';
 function setDefaultLayout() {
   return function (_, file) {
@@ -15,7 +13,8 @@ function setDefaultLayout() {
     } = file.data.astro;
     if (!frontmatter.layout) frontmatter.layout = DEFAULT_LAYOUT;
   };
-};
+}
+;
 
 
 // https://astro.build/config
@@ -28,9 +27,8 @@ export default defineConfig({
   experimental: {
     assets: true
   },
-  integrations: [prefetch()]
+  integrations: [prefetch(), sitemap()]
 });
-
 
 // デフォルトのdate-fnsの言語設定を日本語にする。 
 setDefaultOptions({
