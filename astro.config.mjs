@@ -4,7 +4,7 @@ import { defineConfig } from 'astro/config';
 
 import { setDefaultOptions } from 'date-fns';
 import jaLocale from "date-fns/locale/ja";
-//import prefetch from "@astrojs/prefetch";
+import prefetch from "@astrojs/prefetch";
 
 
 const DEFAULT_LAYOUT = '/src/layouts/Main.astro';
@@ -28,7 +28,7 @@ export default defineConfig({
   experimental: {
     assets: true
   },
-  //integrations: [prefetch()]
+  integrations: [prefetch()]
 });
 
 
