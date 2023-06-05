@@ -53,6 +53,7 @@ export async function* getContents(): AsyncIterableIterator<Iterable<Article>> {
 export const SAMPLE_ARTICLE_SMALL_METADATA = {
   "id": "5bopmct4enkv",
   "title": "Darkmode.jsを使ってPythonドキュメントを簡単にダークモード対応してみた。",
+  "publishedAt": "2022-01-14T15:30:00.000Z",
   "tags": ["Python", "JavaScript"],
 };
 /** 記事をタグ別でまとめた際のサンプルデータ。 */
