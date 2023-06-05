@@ -2,6 +2,7 @@
   "extends": "astro/tsconfigs/base",
   "compilerOptions": {
     "forceConsistentCasingInFileNames": false,
+    "types": ["vite/client"],
     "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"],
