@@ -23,7 +23,12 @@ export async function getStaticPaths({ paginate }) {
 var { tag } = Astro.props;
 if (tag == "all") tag = "";
 const hashedTag = tag ? `#${tag}` : "";
-const page: Page<ArticleForEnum> = Astro.props.page;
+const prop = Astro.props.page as Page<ArticleForEnum>;
+
+
+const firstPage = prop.currentPage == 1 ? null : "1";
+const lastPage = prop.currentPage == prop.lastPage
+  ? null : String(prop.lastPage);
 ---
 <script>
   /* 数字入力によるページ切り替え。 */
@@ -45,19 +50,19 @@ const page: Page<ArticleForEnum> = Astro.props.page;
   <p>ここには、tasurenが色々まとめた記事があります。</p>
   <details style="cursor: pointer;">
     <summary>タグ一覧</summary>
-    {page.data.length ? <HashTags tags={
-      page.data[0].ctx.allTags.filter(tag => tag != "all")
+    {prop.data.length ? <HashTags tags={
+      prop.data[0].ctx.allTags.filter(tag => tag != "all")
     } /> : "まだありません。"}
   </details>
   <p />
   <!-- 列挙 -->
   <h2>
-    一覧{page.currentPage == 1 ? "" : `（${page.currentPage}ページ目）`}
+    一覧{prop.currentPage == 1 ? "" : `（${prop.currentPage}ページ目）`}
     <span class="pc-only">{hashedTag}</span>
   </h2>
   <p class="sp-only neutral">{hashedTag}</p>
   <ul>
-    {page.data.map(article =><li>
+    {prop.data.map(article => <li>
       <a href={`/blog/${article.id}`}>{article.title}</a>
       <time datetime={article.publishedAt} class="neutral">
         &ensp;{formatDistanceToNow(new Date(article.publishedAt))}前
@@ -66,10 +71,10 @@ const page: Page<ArticleForEnum> = Astro.props.page;
   </ul>
   <!-- ページ切り替え  -->
   <div class="no-visited-color" style="display: flex; justify-content: space-around;">
-    <a href="./1">1</a>
-    <a href={page.url.prev}>-</a>
-    <button id="jump" data-max-page={page.lastPage}>jump</button>
-    <a href={page.url.next}>+</a>
-    <a href={`./${page.lastPage}`}>{page.lastPage}</a>
+    <a rel={firstPage ? "prefetch" : null} href={firstPage}>1</a>
+    <a rel={prop.url.next ? "prefetch" : null} href={prop.url.prev}>-</a>
+    <button id="jump" data-max-page={prop.lastPage}>jump</button>
+    <a rel={prop.url.next ? "prefetch" : null} href={prop.url.next}>+</a>
+    <a rel={lastPage ? "prefetch" : null} href={lastPage}>{prop.lastPage}</a>
   </div>
 </Layout>
