@@ -6,7 +6,13 @@ import Logo from "./Me.astro";
   a:visited { color: var(--link-color); }
   ul { padding-left: 0; }
   li { list-style: none; }
+
+  @media (width > 480px) {
+    nav { position: sticky; top: 10%; }
+  }
+
   @media (width <= 480px) {
+    /* スマホ */
     ul { display: flex; justify-content: space-around; }
     li { display: inline; }
   }
