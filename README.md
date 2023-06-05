@@ -1,6 +1,6 @@
 [![Discord](https://img.shields.io/discord/777430548951728149?label=chat&logo=discord)](https://discord.gg/kfMwZUyGFG)
 # 私のウェブサイト
-このリポジトリの所有者のウェブサイトです。  
+このリポジトリの所有者の[ウェブサイト](https://tasuren.xyz/)です。  
 ウェブフレームワークにAstroを使用していて、ブログページはmicroCMSとの連携によって実現しており、ウェブサイトはJamstackな構成となっています。
 
 ## 必要要件
