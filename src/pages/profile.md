@@ -13,14 +13,13 @@ description: tasurenについての情報が記されているページです。
 - Discord: `tasuren#5161`
 
 ## Links
-- <a href="https://portfolio.tasuren.xyz" target="_blank">ポートフォリオ</a>
-- [Twitter](https://twitter.com/tasuren1022)
-- [Mastodon](https://mstdn.jp/web/@tasuren1022)
-- [Instagram](https://www.instagram.com/tasuren1022/)
-- [YouTube](https://www.youtube.com/@tasuren)
-- [GitHub](https://github.com/tasuren)
-- [Buy Me a Coffee](https://www.buymeacoffee.com/tasuren)
-- [欲しい物リスト](https://www.amazon.jp/hz/wishlist/ls/JNO8G3WBMKAX?ref_=wl_share)
+- <a href="https://twitter.com/tasuren1022/" target="_blank">Twitter</a>
+- <a href="https://mstdn.jp/web/@tasuren1022/" target="_blank">Mastodon</a>
+- <a href="https://www.instagram.com/tasuren1022/" target="_blank">Instagram</a>
+- <a href="https://www.youtube.com/@tasuren/" target="_blank">YouTube</a>
+- <a href="https://github.com/tasuren/" target="_blank">GitHub</a>
+- <a href="https://www.buymeacoffee.com/tasuren/" target="_blank">Buy Me a Coffee</a>
+- <a href="https://www.amazon.jp/hz/wishlist/ls/JNO8G3WBMKAX?ref_=wl_share" target="_blank">欲しい物リスト</a>
 
 ## Tips
 最近Mastodonで語るのにハマってるのよね。
