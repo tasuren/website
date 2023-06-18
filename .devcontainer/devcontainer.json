@@ -12,9 +12,9 @@
         }
     },
     "portsAttributes": {
-		"3000": {
-			"label": "Astro Default HTTP Port",
-			"onAutoForward": "notify"
-		}
+        "3000": {
+            "label": "Astro Default HTTP Port",
+            "onAutoForward": "notify"
+        }
     }
 }
