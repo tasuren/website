@@ -1,8 +1,8 @@
-/* tasuren.xyz - Astro's Config */
-
 import { defineConfig } from 'astro/config';
 import prefetch from "@astrojs/prefetch";
 import sitemap from "@astrojs/sitemap";
+
+import compress from "astro-compress";
 
 import { setDefaultOptions } from 'date-fns';
 import jaLocale from "date-fns/locale/ja";
@@ -16,7 +16,8 @@ function setDefaultLayout() {
     } = file.data.astro;
     if (!frontmatter.layout) frontmatter.layout = DEFAULT_LAYOUT;
   };
-};
+}
+;
 
 
 // https://astro.build/config
@@ -29,7 +30,7 @@ export default defineConfig({
   experimental: {
     assets: true
   },
-  integrations: [prefetch(), sitemap()]
+  integrations: [prefetch(), sitemap(), compress()]
 });
 
 
