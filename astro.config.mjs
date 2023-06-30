@@ -2,8 +2,6 @@ import { defineConfig } from 'astro/config';
 import prefetch from "@astrojs/prefetch";
 import sitemap from "@astrojs/sitemap";
 
-import compress from "astro-compress";
-
 import { setDefaultOptions } from 'date-fns';
 import jaLocale from "date-fns/locale/ja";
 
@@ -30,7 +28,7 @@ export default defineConfig({
   experimental: {
     assets: true
   },
-  integrations: [prefetch(), sitemap(), compress()]
+  integrations: [prefetch(), sitemap()]
 });
 
 
