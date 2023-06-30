@@ -20,7 +20,7 @@ function setDefaultLayout() {
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://tasuren.xyz",
+  site: "https://tasuren.jp",
   base: "/",
   markdown: {
     remarkPlugins: [setDefaultLayout]
