@@ -9,7 +9,7 @@ interface Props { additionalClass: string };
     font-size: 34px; text-align: center;
     text-decoration: none;
   }
-  a:link { color: var(--color); }
-  a:visited { color: var(--color); }
+  a:link { color: var(--color) !important; }
+  a:visited { color: var(--color) !important; }
 </style>
 <a class={Astro.props.additionalClass} href="/">{LOGO}</a>
