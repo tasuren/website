@@ -43,10 +43,7 @@ code {
   padding: 0.3vh 0.4vh;
   font-family: 'Source Code Pro', monospace;
   opacity: 0.88;
-}
-
-@media (480px < width) {
-  code { font-size: 16px; }
+  font-size: 14px;
 }
 
 .pointer { cursor: pointer; }
