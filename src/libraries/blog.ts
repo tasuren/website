@@ -27,7 +27,7 @@ export const SAMPLE_ARTICLE_CONTENT_DATA: EnumOfArticles =
       "publishedAt":"2023-02-15T23:16:33.847Z",
       "revisedAt":"2023-02-17T07:25:04.182Z",
       "title":"Astroプロジェクトのテストケースのタイトルでありますよ。",
-      "content":"<p>これはテストです。そうテストケース。</p><h1>見出し1</h1><p>wow</p>",
+      "content":"<p>これはテストです。そうテストケース。</p><h1>見出し1</h1><p>wow</p><pre><code class=\"language-python\">from random import randint\nprint(randint(1, 6))</code></pre>",
       "tags":["cort_corporation","yjsnpi","tono"]
     };
 export const QUERIES = Object.freeze({fields: [
