@@ -1,19 +1,11 @@
 ---
-import { WEBSITE_TITLE } from "@libraries/constants";
-
-
 export interface Props {
   title: string;
   description: string;
 };
 
 
-var title = Astro.props.title;
-if (title) title = `${WEBSITE_TITLE} - ${title}`
-else title = WEBSITE_TITLE;
-
-
-const { description } = Astro.props;
+const { title, description } = Astro.props;
 ---
 <head>
   <!-- General Metadata  -->

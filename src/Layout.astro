@@ -1,0 +1,30 @@
+---
+import Head from "@components/Foundation/Head.astro";
+import { Props as HeadProps } from "@components/Foundation/Head.astro";
+import Body from "@components/Foundation/Body/Self.astro";
+
+import "./global.css";
+
+
+interface Frontmatter extends HeadProps {};
+
+interface Props {
+  title?: string;
+  description?: string;
+  frontmatter?: Frontmatter
+};
+
+
+var { title, description } = Astro.props;
+if (!title) title = Astro.props.frontmatter.title;
+if (!description) description = Astro.props.frontmatter.description;
+
+if (!title) console.warn(
+  `タイトルがないページがあります：${Astro.url.pathname}`
+);
+---
+<!DOCTYPE html>
+<html lang="ja" data-theme="dark">
+  <Head title={title} description={description}><slot name="meta-head" /></Head>
+  <Body><slot /></Body>
+</html>

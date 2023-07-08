@@ -6,7 +6,7 @@ import { setDefaultOptions } from 'date-fns';
 import jaLocale from "date-fns/locale/ja";
 
 
-const DEFAULT_LAYOUT = '/src/layouts/Main.astro';
+const DEFAULT_LAYOUT = '/src/Layout.astro';
 function setDefaultLayout() {
   return function (_, file) {
     const {
