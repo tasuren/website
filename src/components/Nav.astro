@@ -1,0 +1,26 @@
+---
+import Logo from "./Me.astro";
+---
+<style>
+  /* メニュー */
+  a:visited { color: var(--link-color); }
+  ul { padding-left: 0; }
+  li { list-style: none; }
+
+  @media (width > 480px) {
+    nav { position: sticky; top: 10%; }
+  }
+
+  @media (width <= 480px) {
+    /* スマホ */
+    ul { display: flex; justify-content: space-around; }
+    li { display: inline; }
+  }
+</style>
+<Logo additionalClass="pc-only" />
+<ul>
+  <li><a rel="prefetch-intent" rel="prefetch" href="/profile">Profile</a></li>
+  <li><a rel="prefetch-intent" href="/works">Works</a></li>
+  <li><a rel="prefetch-intent" href="/blog/tags/all/1">Blog</a></li>
+  <li><Logo additionalClass="sp-only" /></li>
+</ul>

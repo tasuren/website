@@ -3,6 +3,8 @@ import Head from "@components/Foundation/Head.astro";
 import { Props as HeadProps } from "@components/Foundation/Head.astro";
 import Body from "@components/Foundation/Body/Self.astro";
 
+import Nav from "@components/Nav.astro";
+
 import "./global.css";
 
 
@@ -23,8 +25,14 @@ if (!title) console.warn(
   `タイトルがないページがあります：${Astro.url.pathname}`
 );
 ---
+
 <!DOCTYPE html>
 <html lang="ja" data-theme="dark">
-  <Head title={title} description={description}><slot name="meta-head" /></Head>
-  <Body><slot /></Body>
+  <Head title={title} description={description}>
+    <slot name="meta-head" />
+  </Head>
+  <Body>
+    <Nav slot="header" />
+    <slot />
+  </Body>
 </html>

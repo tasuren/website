@@ -38,7 +38,7 @@ import ThemeToggle from "./ThemeToggle.astro";
   }
 </style>
 <body>
-  <Header />
+  <Header><slot name="header" /></Header>
   <Main><slot /></Main>
   <ThemeToggle />
 </body>
