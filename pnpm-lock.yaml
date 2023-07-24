@@ -9,8 +9,8 @@ dependencies:
     specifier: ^0.3.0
     version: 0.3.0
   '@astrojs/sitemap':
-    specifier: ^1.3.3
-    version: 1.4.0
+    specifier: ^2.0.1
+    version: 2.0.1
   '@types/node':
     specifier: ^20.4.1
     version: 20.4.2
@@ -103,8 +103,8 @@ packages:
       prismjs: 1.29.0
     dev: false
 
-  /@astrojs/sitemap@1.4.0:
-    resolution: {integrity: sha512-uTK77kcg7iTiik+u7rTGG6vK4ZWTfYMaVnFndOVQrLzaE5xivmQgIbVLtlN+xRcME5n/m6vYQFJmogFR+elGCw==}
+  /@astrojs/sitemap@2.0.1:
+    resolution: {integrity: sha512-unoaSEyHuR8IApsPN467SD5FMm4PBnaQSHbtvt4dVS3PMDObZV5/lKIbjlfSad7ENzuvpBSLCGyLDOykXUNu6w==}
     dependencies:
       sitemap: 7.1.1
       zod: 3.21.4
