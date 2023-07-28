@@ -1,5 +1,5 @@
 ---
-title: 主のプロフィール
+title: Profile
 description: tasurenについての情報が記されているページです。
 ---
 # Profile
