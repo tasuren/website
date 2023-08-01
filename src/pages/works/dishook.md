@@ -1,7 +1,6 @@
 ---
 title: Dishook
-description: DiscordのWebhookでメッセージを送信するためのソフトについてのページです。
-brief: チャットアプリDiscordのWebhookでメッセージ送信をするためのソフト
+description: DiscordのWebhookでメッセージを送信するためのソフト
 ---
 # Dishook
 DiscordのWebhookでメッセージを送信するためのソフトで、tasuren初のRustでできたソフトです。  

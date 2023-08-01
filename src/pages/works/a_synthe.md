@@ -1,7 +1,6 @@
 ---
 title: aSynthe
-description: 音程を検出するためのツールであるaSyntheの簡単な説明を載せたページです。
-brief: 音程を検出するための簡易的なツール
+description: 音程を検出するための簡易的なソフト
 ---
 # aSynthe
 これは、マイクで拾った音の音程を表示したりMIDI出力したりするソフトで、名前はAnySyntheの略です。  
