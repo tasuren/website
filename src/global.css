@@ -41,7 +41,7 @@ code {
   background-color: var(--background-color-for-code);
   border-radius: 0.4vh;
   padding: 0.3vh 0.4vh;
-  font-family: 'Source Code Pro', monospace;
+  font-family: "Source Code Pro", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
   opacity: 0.88;
   font-size: 14px;
 }
