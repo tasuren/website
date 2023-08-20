@@ -17,9 +17,9 @@
   "license": "BSD4",
   "dependencies": {
     "@astrojs/prefetch": "^0.3.0",
-    "@astrojs/sitemap": "^2.0.1",
-    "@types/node": "^20.4.5",
-    "astro": "^2.9.6",
+    "@astrojs/sitemap": "^2.0.2",
+    "@types/node": "^20.5.1",
+    "astro": "^2.10.12",
     "cheerio": "1.0.0-rc.12",
     "date-fns": "^2.30.0",
     "highlight.js": "^11.8.0",
