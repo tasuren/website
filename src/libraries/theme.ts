@@ -11,7 +11,7 @@ declare var window: MyWindow;
 export type Theme = "dark" | "light";
 export type Setting = Theme | "auto";
 export const EMOJIS: {[theme: string]: string} = {
-  auto: "🌓", dark: "🌙", light: "☀️"
+  auto: "🌓", dark: "🌙", light: "🌤"
 };
 
 
