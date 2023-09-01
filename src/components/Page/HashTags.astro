@@ -6,7 +6,7 @@ interface Props {
   base?: string,
   useSnakeCaseOnLink?: boolean
 };
----
+--- 
 <style>a { display: inline-block; }</style>
 {Astro.props.tags.map(tag => <><a href={
   `${Astro.props.base || "/blog/tags"}/${

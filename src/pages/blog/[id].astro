@@ -63,7 +63,7 @@ if (article.content.includes("<code") && article.content.includes("<pre>")) {
     title={article.title} description={article.tags
       ? `#${article.tags.join(" #")}` : ""}>
   {usedHljs ? <Hljs slot="meta-head" /> : null}
-  <!-- メタデータ -->
+
   <PageTitle>{article.title}</PageTitle>
   <p class="sp-only">
   <div class="metadata">

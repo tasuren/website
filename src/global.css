@@ -1,4 +1,4 @@
-/* tasuren's Website - CSS for Global */
+@import url('https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap');
 
 
 /* リセット */
@@ -27,6 +27,12 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; }
   --background-color-for-code: #191724;
 }
 
+body {
+  background-color: var(--background-color);
+  font-family: 'Zen Kurenaido', sans-serif;
+  color: var(--color);
+  opacity: 0.85;
+}
 
 /* 一般 */
 a:link { color: var(--link-color); }
