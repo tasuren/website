@@ -46,7 +46,7 @@ const lastPage = prop.currentPage == prop.lastPage
     title={`Blog ${hashedTag}`}
     description={tag ? `${tag}のタグが付いている記事の一覧ページです。`
       : "tasurenの書いたブログの一覧があります。"}>
-  <h1>Blog</h1>
+  <h1>Blog {hashedTag}</h1>
   <p>ここには、tasurenが色々まとめた記事があります。</p>
   <details style="cursor: pointer;">
     <summary>タグ一覧</summary>
@@ -58,9 +58,7 @@ const lastPage = prop.currentPage == prop.lastPage
   <!-- 列挙 -->
   <h2>
     一覧{prop.currentPage == 1 ? "" : `（${prop.currentPage}ページ目）`}
-    <span class="pc-only">{hashedTag}</span>
   </h2>
-  <p class="sp-only neutral">{hashedTag}</p>
   <ul>
     {prop.data.map(article => <li>
       <a href={`/blog/${article.id}`}>{article.title}</a>
