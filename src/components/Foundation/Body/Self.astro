@@ -28,7 +28,8 @@ import ThemeToggle from "./ThemeToggle.astro";
   }
 </style>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap');
+  /*@import url('https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap');*/
+  // NOTE: これをすると、一部ページにてCSSの一番上に配置されずフォントが適用されない。だから、今はlinkタグで対応中。
 
   body {
     background-color: var(--background-color);
@@ -38,7 +39,10 @@ import ThemeToggle from "./ThemeToggle.astro";
   }
 </style>
 <body>
-  <Header><slot name="header" /></Header>
+  <link slot="meta-head" rel="preconnect" href="https://fonts.googleapis.com">
+  <link slot="meta-head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link slot="meta-head" href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
+  <nav><slot name="header" /></nav>
   <Main><slot /></Main>
   <ThemeToggle />
 </body>
