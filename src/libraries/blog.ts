@@ -16,7 +16,7 @@ export type EnumOfArticles<T=Article> = {[tag: string]: T[]};
 
 
 /** 記事の内容のサンプルデータ。 */
-export const SAMPLE_ARTICLE_CONTENT_DATA: EnumOfArticles =
+export const SAMPLE_ARTICLE_CONTENT_DATA: Article =
   import.meta.env.SAMPLE_ARTICLE_CONTENT_DATA
     ? JSON.parse(import.meta.env.SAMPLE_ARTICLE_CONTENT_DATA) : {
       "id":"81011451445451919nna-",
@@ -35,7 +35,7 @@ export const QUERIES = Object.freeze({fields: [
 /** microCMSから記事の内容を全て少しづつ取得します。 */
 export async function* getContents(): AsyncIterableIterator<Iterable<Article>> {
   if (NO_MICROCMS) {
-    var tempArticle;
+    var tempArticle: Article;
     for (let articles of Object.values(SAMPLE_ARTICLE_ENUM_DATA))
       yield articles.map(article => {
         tempArticle = {...SAMPLE_ARTICLE_CONTENT_DATA};
