@@ -6,7 +6,7 @@ import PageTitle from "@components/Page/Title.astro";
 import Hljs from "@components/Page/Hljs.astro";
 
 import Layout from "@root/Layout.astro";
-import { Article, getContents } from "@libraries/blog";
+import { type Article, getContents } from "@libraries/blog";
 import HashTags from "@components/Page/HashTags.astro";
 
 
@@ -34,14 +34,17 @@ var html = article.content;
 var usedHljs = false;
 if (article.content.includes("<code") && article.content.includes("<pre>")) {
   let $ = cheerioLoad(article.content);
+
   $("pre code").each((_, rawElement) => {
     let e = $(rawElement);
+
     e.html(hljs.highlight(
       e.text(), {language : rawElement
         .attribs.class.slice(9)}
     ).value);
     e.addClass("hljs");
   });
+
   html = $.html();
   usedHljs = true;
 };

@@ -1,5 +1,5 @@
 ---
-import { Page } from "astro";
+import { type Page } from "astro";
 
 import { formatDistanceToNow } from "date-fns";
 
@@ -7,14 +7,14 @@ import Layout from "@root/Layout.astro";
 
 import HashTags from "@components/Page/HashTags.astro";
 
-import { ArticleForEnum, getEnum } from "@libraries/blog";
+import { type ArticleForEnum, getEnum } from "@libraries/blog";
 import { toSnakeCase } from "@libraries/utils";
 
 
 export const PAGE_SIZE = import.meta.env.PAGE_SIZE || 30;
 export async function getStaticPaths({ paginate }) {
   let allArticles = await getEnum();
-  return Object.keys(allArticles).map(tag => paginate(allArticles[tag], {
+  return Object.keys(allArticles).flatMap(tag => paginate(allArticles[tag], {
     params: { tag: toSnakeCase(tag) }, props: { tag: tag }, pageSize: PAGE_SIZE
   }));
 };

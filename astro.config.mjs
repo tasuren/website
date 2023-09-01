@@ -25,10 +25,6 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [setDefaultLayout]
   },
-  compressHTML: true,
-  experimental: {
-    assets: true
-  },
   integrations: [prefetch(), sitemap()]
 });
 
