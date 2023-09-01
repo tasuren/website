@@ -35,13 +35,16 @@ const lastPage = prop.currentPage == prop.lastPage
   document.getElementById("jump").addEventListener("click", e => {
     let raw = prompt("ジャンプ先をどうぞ。");
     if (!raw) return;
+
     let page = parseInt(raw);
     let max = (e.target as HTMLElement).getAttribute("data-max-page");
+
     if (isNaN(page) || page > parseInt(max) || page == 0)
       alert(`そのページは範囲外です。0から${max}ページまでが有効です。`)
     else window.location.assign(`./${page}`);
   });
 </script>
+
 <Layout
     title={`Blog ${hashedTag}`}
     description={tag ? `${tag}のタグが付いている記事の一覧ページです。`
@@ -55,6 +58,7 @@ const lastPage = prop.currentPage == prop.lastPage
     } /> : "まだありません。"}
   </details>
   <p />
+
   <!-- 列挙 -->
   <h2>
     一覧{prop.currentPage == 1 ? "" : `（${prop.currentPage}ページ目）`}
@@ -67,6 +71,7 @@ const lastPage = prop.currentPage == prop.lastPage
       </time>
     </li>)}
   </ul>
+
   <!-- ページ切り替え  -->
   <div class="no-visited-color" style="display: flex; justify-content: space-around;">
     <a rel={firstPage ? "prefetch" : null} href={firstPage}>1</a>

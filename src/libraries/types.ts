@@ -1,6 +1,3 @@
-// 投稿について。
-
-
 export interface PageMetadata {
   title: string, description?: string
 }

@@ -1,6 +1,3 @@
-// tasuren's Website - テーマ
-
-
 // 実験ができるようにウィンドウを拡張。
 interface MyWindow extends Window { resetTheme(): void; };
 /** @ts-ignore */
@@ -16,14 +13,17 @@ export const EMOJIS: {[theme: string]: string} = {
 
 
 // 設定変更用のAPI。
+
 /** テーマの設定を取得します。まだ設定がなければ`"auto"`が返されます。 */
 export function get(): Setting {
   return localStorage.getItem("theme") as Setting || "auto"
 };
+
 /** テーマを設定します。 */
 export function set(setting: Setting): Setting {
   localStorage.setItem("theme", setting); return setting;
 };
+
 /**
  * テーマの設定が存在する場合、その設定を削除します。
  * デバッグ用として、`window.resetTheme`からこの関数を扱えるようにしています。
@@ -44,7 +44,9 @@ export function roll(setting: Setting): Setting {
 
 
 // highlight.jsのスタイルデータの取り扱いのためのAPI。
+
 export let styleLinks = null;
+
 /** コードブロックの配色のテーマ切り替えをします。 */
 export function updateHighlightStyle(theme: Theme) {
   if (styleLinks == null) {
@@ -52,14 +54,17 @@ export function updateHighlightStyle(theme: Theme) {
     if (element) styleLinks = JSON.parse(element.innerText);
     else styleLinks = {};
   };
+
   if (theme in styleLinks) {
     var link = document.getElementById("highlight-style") as HTMLLinkElement | null;
+
     if (!link) {
       link = document.createElement("link");
       link.rel = "stylesheet";
       link.id = "highlight-style";
       document.head.append(link);
     };
+
     if (link.getAttribute("data-theme") != theme) {
       link.href = styleLinks[theme];
       link.setAttribute("data-theme", theme);
@@ -68,11 +73,13 @@ export function updateHighlightStyle(theme: Theme) {
 };
 
 export var emoji = EMOJIS.dark;
+
 /** 絵文字を更新します。 */
 export function updateEmoji(setting: Setting) {
   emoji = EMOJIS[setting];
   dispatchEvent(new CustomEvent("updateemoji", { detail: EMOJIS[setting] }));
 };
+
 /** テーマを適用します。 */
 export function effect(
   setting?: Setting, theme?: Theme,
@@ -83,6 +90,7 @@ export function effect(
   if (setting) updateEmoji(setting);
   if (enableUpdateHighlightStyle) updateHighlightStyle(theme);
 };
+
 /** 設定を元にテーマを検出します。 */
 export function detectTheme(setting: Setting): Theme {
   if (setting == "auto")
@@ -97,11 +105,13 @@ export function detectTheme(setting: Setting): Theme {
 export function initialize(updateTheme: boolean = true) {
   // 前の設定を引き継ぐ。
   let setting = get();
+
   // 初期化する。
   let theme = detectTheme(setting);
   if (updateTheme) {
     if (theme == "light") effect(setting, "light", false);
     else if (setting == "auto") updateEmoji(setting);
   } else if (setting != "dark") updateEmoji(setting);
+
   updateHighlightStyle(theme);
 };

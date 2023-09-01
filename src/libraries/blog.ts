@@ -1,5 +1,3 @@
-// tasuren's website - Blog API
-
 import { NO_MICROCMS, getArticles } from "./cms";
 
 
@@ -33,6 +31,7 @@ export const SAMPLE_ARTICLE_CONTENT_DATA: EnumOfArticles =
 export const QUERIES = Object.freeze({fields: [
   "id", "tags", "title", "content", "publishedAt", "revisedAt"
 ], limit: 128});
+
 /** microCMSから記事の内容を全て少しづつ取得します。 */
 export async function* getContents(): AsyncIterableIterator<Iterable<Article>> {
   if (NO_MICROCMS) {
@@ -43,9 +42,9 @@ export async function* getContents(): AsyncIterableIterator<Iterable<Article>> {
         tempArticle.id = article.id;
         return tempArticle;
       });
-  } else for await (let articles of
-      getArticles<Article>("blog", QUERIES))
-    yield articles;
+  } else
+    for await (let articles of getArticles<Article>("blog", QUERIES))
+      yield articles;
 };
 
 
@@ -69,6 +68,7 @@ export const SAMPLE_ARTICLE_ENUM_DATA: EnumOfArticles =
 
 export interface Context { allTags: string[] }
 export interface ArticleForEnum extends Article { ctx: Context };
+
 /** 一覧ページ用の記事データを取得します。 */
 export async function getEnum(): Promise<EnumOfArticles<ArticleForEnum>> {
   let allArticles: {[tag: string]: ArticleForEnum[]} = {"all": []};
@@ -89,6 +89,7 @@ export async function getEnum(): Promise<EnumOfArticles<ArticleForEnum>> {
       for (var article of articles.map(article => article as ArticleForEnum)) {
         article.ctx = {allTags: allTags};
         allArticles["all"].push(article);
+
         for (let tag of article.tags) {
           if (!(tag in allArticles)) allArticles[tag] = [];
           if (tag == "all") console.warn(`IDが${article.id}の記事が予約済みのタグを使っています。`);

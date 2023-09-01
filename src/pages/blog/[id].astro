@@ -19,9 +19,11 @@ export const toMeta = (article: Article) => ({
 export async function getStaticPaths() {
   // ブログ記事を読み込み、整理する。
   var allArticles = [];
+
   for await (let articles of getContents())
     for (let article of articles)
       allArticles.push(toMeta(article));
+
   return allArticles;
 };
 
@@ -56,6 +58,7 @@ if (article.content.includes("<code") && article.content.includes("<pre>")) {
   .metadata .content .left #published-at { padding-right: 0.5em; }
   .metadata .left span, time { display: inline-block; }
 </style>
+
 <Layout
     title={article.title} description={article.tags
       ? `#${article.tags.join(" #")}` : ""}>
@@ -77,6 +80,7 @@ if (article.content.includes("<code") && article.content.includes("<pre>")) {
     </div>
     <hr>
   </div>
+
   <!-- 本文 -->
   <div set:html={html} />
 </Layout>
