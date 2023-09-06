@@ -1,7 +1,7 @@
 {
     "name": "tasuren's website",
     "image": "mcr.microsoft.com/devcontainers/typescript-node",
-    "postCreateCommand": "npm install -g npm pnpm && pnpm setup& & pnpm install",
+    "postCreateCommand": "npm install -g npm pnpm && pnpm setup && pnpm install",
     "customizations": {
         "vscode": {
             "extensions": [
