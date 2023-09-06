@@ -18,7 +18,7 @@ const { title, description } = Astro.props;
   <meta name="description" content={description}>
   <meta name="author" content="Takagi Tasuku">
   <meta name="color-scheme" content="light dark">
-  <!-- Other -->
+  <!-- Scripts -->
   <script is:inline>
     var theme = localStorage.getItem("theme") || "auto";
     if (theme == "auto") theme = window.matchMedia
@@ -30,5 +30,6 @@ const { title, description } = Astro.props;
     import { initialize as initializeTheme } from "@libraries/theme";
     initializeTheme(false);
   </script>
+  <!-- Other -->
   <slot />
 </head>

@@ -3,7 +3,7 @@ import Head from "@components/Foundation/Head.astro";
 import { type Props as HeadProps } from "@components/Foundation/Head.astro";
 import Body from "@components/Foundation/Body/Self.astro";
 
-import Nav from "@components/Nav.astro";
+import Menu from "@components/Menu.astro";
 
 import "./global.css";
 
@@ -28,10 +28,10 @@ if (!title) console.warn(
 <!DOCTYPE html>
 <html lang="ja" data-theme="dark">
   <Head title={title} description={description}>
-    <slot name="meta-head" />
+    <slot name="head" />
   </Head>
   <Body>
-    <Nav slot="header" />
+    <Menu slot="header" />
     <slot />
   </Body>
 </html>

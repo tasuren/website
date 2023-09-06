@@ -1,5 +1,5 @@
 ---
-import { load as cheerioLoad } from 'cheerio';
+import { load as cheerioLoad } from "cheerio";
 import hljs from "highlight.js";
 
 import PageTitle from "@components/Page/Title.astro";
@@ -62,7 +62,7 @@ if (article.content.includes("<code") && article.content.includes("<pre>")) {
 <Layout
     title={article.title} description={article.tags
       ? `#${article.tags.join(" #")}` : ""}>
-  {usedHljs ? <Hljs slot="meta-head" /> : null}
+  {usedHljs ? <Hljs slot="head" /> : null}
 
   <PageTitle>{article.title}</PageTitle>
   <p class="sp-only">
