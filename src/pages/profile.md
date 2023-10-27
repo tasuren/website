@@ -1,6 +1,12 @@
 ---
 title: Profile
 description: tasurenについての情報が記されているページです。
+type: profile
+properties:
+  - ["profile:first_name", Takagi]
+  - ["profile:last_name", Tasuku]
+  - ["profile:username", tasuren]
+  - ["profile:gender", Non-binary]
 ---
 
 # Profile

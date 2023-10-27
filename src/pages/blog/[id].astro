@@ -33,10 +33,12 @@ const { article } = Astro.props;
 
 // 記事内のコードブロックの色塗りを行う。
 var html = article.content;
+var description;
 var usedHljs = false;
-if (article.content.includes("<code") && article.content.includes("<pre>")) {
-  let $ = cheerioLoad(article.content);
 
+let $ = cheerioLoad(article.content);
+
+if (article.content.includes("<code") && article.content.includes("<pre>")) {
   $("pre code").each((_, rawElement) => {
     let e = $(rawElement);
 
@@ -50,6 +52,17 @@ if (article.content.includes("<code") && article.content.includes("<pre>")) {
   html = $.html();
   usedHljs = true;
 };
+
+description = `${$.text().slice(0, 77)}...`;
+
+
+var properties = [
+  ["article:published_time", article.publishedAt],
+  ["article:modified_time", article.revisedAt],
+  ["article:author", "https://www.facebook.com/tasuren"]
+];
+for (let tag of article.tags)
+  properties.push(["article:tag", tag]);
 ---
 <style>
   time { font-style: italic; }
@@ -60,8 +73,9 @@ if (article.content.includes("<code") && article.content.includes("<pre>")) {
 </style>
 
 <Layout
-    title={article.title} description={article.tags
-      ? `#${article.tags.join(" #")}` : ""}>
+    title={article.title} description={description}
+    keywords={article.tags} type="article"
+    properties={properties}>
   {usedHljs ? <Hljs slot="head" /> : null}
 
   <PageTitle>{article.title}</PageTitle>

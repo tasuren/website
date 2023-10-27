@@ -8,18 +8,14 @@ import Menu from "@components/Menu.astro";
 import "./global.css";
 
 
-interface Frontmatter extends HeadProps {};
-
-interface Props {
-  title?: string;
-  description?: string;
-  frontmatter?: Frontmatter
+interface Props extends HeadProps {
+  frontmatter?: HeadProps
 };
 
 
-var { title, description } = Astro.props;
-if (!title) title = Astro.props.frontmatter.title;
-if (!description) description = Astro.props.frontmatter.description;
+let props = Astro.props;
+if (props.frontmatter) props = props.frontmatter;
+var { title, description, keywords, type, properties } = props;
 
 if (!title) console.warn(
   `タイトルがないページがあります：${Astro.url.pathname}`
@@ -27,7 +23,10 @@ if (!title) console.warn(
 ---
 <!DOCTYPE html>
 <html lang="ja" data-theme="dark">
-  <Head title={title} description={description}>
+  <Head
+    title={title} description={description}
+    keywords={keywords} type={type}
+    properties={properties}>
     <slot name="head" />
   </Head>
   <Body>

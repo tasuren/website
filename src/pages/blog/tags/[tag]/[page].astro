@@ -51,12 +51,14 @@ const lastPage = prop.currentPage == prop.lastPage
       : "tasurenの書いたブログの一覧があります。"}>
   <h1>Blog {hashedTag}</h1>
   <p>ここには、tasurenが色々まとめた記事があります。</p>
+
   <details style="cursor: pointer;">
     <summary>タグ一覧</summary>
     {prop.data.length ? <HashTags tags={
       prop.data[0].ctx.allTags.filter(tag => tag != "all")
     } /> : "まだありません。"}
   </details>
+
   <p />
 
   <!-- 列挙 -->
