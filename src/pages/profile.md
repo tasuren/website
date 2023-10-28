@@ -1,6 +1,6 @@
 ---
 title: Profile
-description: tasurenについての情報が記されているページです。
+description: tasurenのプロフィールがあります。
 type: profile
 properties:
   - ["profile:first_name", Takagi]
@@ -13,7 +13,7 @@ properties:
 友人曰く、合理的な陰キャ。多分、優しいやつ。
 
 - 性別：男性
-- 性自認：不明（多分、理想は可愛いの）
+- 性自認：ノンバイナリー？（多分、理想は可愛いの）
 - 代名詞：they/them (OPTIONAL)
 - MBTI：INFJ-T（提唱者）
 - 職業：学生
@@ -36,7 +36,7 @@ properties:
 - 稲葉曇
 - 月裏
 - 糸奇はな
-- たっくーTVらいでぃお
+- たっくーTVれいでぃお
 
 ## Links
 - <a href="https://x.com/tasuren1022/" target="_blank">X（旧Twitter）</a>

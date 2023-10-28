@@ -1,6 +1,6 @@
 ---
-title: tasuren's homepage
-description: tasurenという人のホームページです。このウェブサイトには、色々な私が作ったものをまとめてます。
+title: tasurenのホームページ
+description: tasurenという人のホームページです。このウェブサイトでは、色々な私が作ったものをまとめてます。
 ---
 
 # Welcome

@@ -1,6 +1,6 @@
 ---
 title: RT Discord Bot
-description: Discordの管理サービス
+description: Discordサーバーの管理サービス
 ---
 # RT Discord Bot
 これは、多機能で便利なこれ一つでサーバーの管理が済むDiscordのBotです。  
