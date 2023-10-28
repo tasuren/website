@@ -1,8 +1,6 @@
 ---
 import { type Page } from "astro";
 
-import { formatDistanceToNow } from "date-fns";
-
 import Layout from "@root/Layout.astro";
 
 import HashTags from "@components/Page/HashTags.astro";
@@ -30,6 +28,7 @@ const firstPage = prop.currentPage == 1 ? null : "1";
 const lastPage = prop.currentPage == prop.lastPage
   ? null : String(prop.lastPage);
 ---
+<script src="../../../../libraries/init-date-fns.ts" />
 <script>
   /* 数字入力によるページ切り替え。 */
   document.getElementById("jump").addEventListener("click", e => {
@@ -43,6 +42,13 @@ const lastPage = prop.currentPage == prop.lastPage
       alert(`そのページは範囲外です。0から${max}ページまでが有効です。`)
     else window.location.assign(`./${page}`);
   });
+
+  /* 日付表示のためのコンポーネント */
+  import {} from "@libraries/init-date-fns";
+  import { formatDistanceToNow } from "date-fns";
+
+  for (let element of document.getElementsByClassName("publication-date"))
+    (element as HTMLElement).innerText = ` ${formatDistanceToNow(new Date())}前`
 </script>
 
 <Layout
@@ -68,8 +74,8 @@ const lastPage = prop.currentPage == prop.lastPage
   <ul>
     {prop.data.map(article => <li>
       <a href={`/blog/${article.id}`}>{article.title}</a>
-      <time datetime={article.publishedAt} class="neutral">
-        &ensp;{formatDistanceToNow(new Date(article.publishedAt))}前
+      <time datetime={article.publishedAt} class="neutral publication-date">
+        ...
       </time>
     </li>)}
   </ul>
