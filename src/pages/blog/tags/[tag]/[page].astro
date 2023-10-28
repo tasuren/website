@@ -48,7 +48,9 @@ const lastPage = prop.currentPage == prop.lastPage
   import { formatDistanceToNow } from "date-fns";
 
   for (let element of document.getElementsByClassName("publication-date"))
-    (element as HTMLElement).innerText = ` ${formatDistanceToNow(new Date())}前`
+    (element as HTMLElement).innerText = ` ${
+      formatDistanceToNow(new Date((element as HTMLTimeElement).dateTime))
+    }前`;
 </script>
 
 <Layout
