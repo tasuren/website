@@ -28,7 +28,6 @@ const firstPage = prop.currentPage == 1 ? null : "1";
 const lastPage = prop.currentPage == prop.lastPage
   ? null : String(prop.lastPage);
 ---
-<script src="../../../../libraries/init-date-fns.ts" />
 <script>
   /* 数字入力によるページ切り替え。 */
   document.getElementById("jump").addEventListener("click", e => {
