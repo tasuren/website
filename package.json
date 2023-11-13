@@ -19,7 +19,7 @@
     "@astrojs/prefetch": "^0.4.1",
     "@astrojs/sitemap": "^3.0.3",
     "@types/node": "^20.8.10",
-    "astro": "^3.4.3",
+    "astro": "^3.5.3",
     "cheerio": "1.0.0-rc.12",
     "date-fns": "^2.30.0",
     "highlight.js": "^11.9.0",
