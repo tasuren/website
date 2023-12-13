@@ -26,7 +26,7 @@
     "microcms-js-sdk": "^2.7.0"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.3.1",
+    "@astrojs/check": "^0.3.2",
     "typescript": "^5.3.2"
   }
 }
