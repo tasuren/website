@@ -83,12 +83,24 @@ const lastPage = prop.currentPage == prop.lastPage
 
   <!-- ページ切り替え  -->
   <div class="no-visited-color" style="display: flex; justify-content: space-around;">
-    <a data-astro-prefetch={firstPage ? "hover" : "false"} href={firstPage}>1</a>
-    <a data-astro-prefetch={prop.url.next ? "hover" : "false"} href={prop.url.prev}>-</a>
+    <a
+      data-astro-prefetch={firstPage ? "hover" : "false"}
+      href={firstPage}
+    >1</a>
+    <a
+      data-astro-prefetch={prop.url.prev ? "hover" : "false"}
+      href={prop.url.prev}
+    >-</a>
 
     <button id="jump" data-max-page={prop.lastPage}>jump</button>
 
-    <a data-astro-prefetch={prop.url.next ? "hover" : "false"} href={prop.url.next}>+</a>
-    <a data-astro-prefetch={lastPage ? "hover" : "false"} href={lastPage}>{prop.lastPage}</a>
+    <a
+      data-astro-prefetch={prop.url.next ? "hover" : "false"}
+      href={prop.url.next}
+    >+</a>
+    <a
+      data-astro-prefetch={lastPage ? "hover" : "false"}
+      href={lastPage}
+    >{prop.lastPage}</a>
   </div>
 </Layout>
