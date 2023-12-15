@@ -1,5 +1,4 @@
 import { defineConfig } from 'astro/config';
-import prefetch from "@astrojs/prefetch";
 import sitemap from "@astrojs/sitemap";
 
 
@@ -19,8 +18,9 @@ function setDefaultLayout() {
 export default defineConfig({
   site: "https://tasuren.jp",
   base: "/",
+  prefetch: true,
   markdown: {
     remarkPlugins: [setDefaultLayout]
   },
-  integrations: [prefetch(), sitemap()]
+  integrations: [sitemap()]
 });

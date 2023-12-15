@@ -16,7 +16,6 @@
   "author": "Takagi Tasuku",
   "license": "BSD4",
   "dependencies": {
-    "@astrojs/prefetch": "^0.4.1",
     "@astrojs/sitemap": "^3.0.3",
     "@types/node": "^20.10.4",
     "astro": "^4.0.5",
