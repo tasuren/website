@@ -54,9 +54,18 @@ code {
 
 .pointer { cursor: pointer; }
 
+/* 画像の最大の横幅を設定し、はみ出ないようにする。 */
 main {
   width: 100%;
 }
 main img {
   max-width: 100%;
+}
+
+/* スマホなど、`ul`の点の左の余白が大きすぎて狭くならないようにするやつ。 */
+@media (width <= 768px) {
+  .padding-left-override-for-sp {
+    padding-inline-start: 10px;
+    list-style-position: inside;
+  }
 }

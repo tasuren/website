@@ -11,7 +11,7 @@ const posts = (await Astro.glob<Frontmatter>('./*.md'))
 <Layout title="Works" description="tasurenが作っているものを列挙したページです。">
   <h1>Works</h1>
   <p>ここでは私が作っているものを列挙しています。</p>
-  <ul>
+  <ul class="padding-left-override-for-sp">
     {posts.map(post => <li>
       <a href={post.url}>{post.frontmatter.title}</a>
       {post.frontmatter.description ? `: ${post.frontmatter.description}` : ""}

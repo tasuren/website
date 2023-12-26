@@ -52,15 +52,6 @@ const lastPage = prop.currentPage == prop.lastPage
     }前`;
 </script>
 
-<style>
-  @media (width <= 768px) {
-    ul {
-      padding-inline-start: 10px;
-      list-style-position: inside;
-    }
-  }
-</style>
-
 <Layout
     title={`Blog ${hashedTag}`}
     description={tag ? `${tag}のタグが付いている記事の一覧ページです。`
@@ -81,7 +72,7 @@ const lastPage = prop.currentPage == prop.lastPage
   <h2>
     一覧{prop.currentPage == 1 ? "" : `（${prop.currentPage}ページ目）`}
   </h2>
-  <ul>
+  <ul class="padding-left-override-for-sp">
     {prop.data.map(article => <li>
       <a href={`/blog/${article.id}`}>{article.title}</a>
       <time datetime={article.publishedAt} class="neutral publication-date">
