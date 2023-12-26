@@ -65,11 +65,34 @@ for (let tag of article.tags)
   properties.push(["article:tag", tag]);
 ---
 <style>
-  time { font-style: italic; }
-  .metadata .content { display: flex; justify-content: space-between; }
-  .metadata .content .left { padding-right: 1em; }
-  .metadata .content .left #published-at { padding-right: 0.5em; }
-  .metadata .left span, time { display: inline-block; }
+  .metadata time {
+    font-style: italic;
+  }
+
+  .metadata { opacity: 0.9; }
+
+  .metadata .content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media (width <= 480px) {
+    .metadata .content {
+      padding-bottom: 15px;
+    }
+  }
+
+  .metadata .content .left {
+    padding-right: 1em;
+  }
+  .metadata .content .left #published-at {
+    padding-right: 0.5em;
+  }
+  .metadata .left span, .metadata time {
+    display: inline-block;
+  }
+
+  .metadata .right { text-align: right; }
 </style>
 
 <Layout
@@ -78,22 +101,30 @@ for (let tag of article.tags)
     properties={properties}>
   {usedHljs ? <Hljs slot="head" /> : null}
 
-  <PageTitle>{article.title}</PageTitle>
-  <p class="sp-only">
   <div class="metadata">
+
     <div class="content">
       <span class="left">
-        <time id="published-at" datetime={article.publishedAt}>
-          {`PublishedAt: ${(new Date(article.publishedAt)).toLocaleString("ja-JP")}`}
-        </time>
-        <time id="revised-at" class="pc-only" datetime={article.revisedAt}>
-          {`RevisedAt: ${(new Date(article.revisedAt)).toLocaleString("ja-JP")}`}
-        </time>
+        <span>
+          📥 <time id="published-at" datetime={article.publishedAt}>
+            {`${(new Date(article.publishedAt)).toLocaleString("ja-JP")}`}
+          </time>
+        </span>
+
+        <span>
+          📝 <time id="revised-at" datetime={article.revisedAt}>
+            {(new Date(article.revisedAt)).toLocaleString("ja-JP")}
+          </time>
+        </span>
       </span>
+
       <span class="right"><HashTags tags={article.tags} /></span>
     </div>
-    <hr>
+
+    <hr class="pc-only">
   </div>
+
+  <PageTitle>{article.title}</PageTitle>
 
   <!-- 本文 -->
   <div set:html={html} />
