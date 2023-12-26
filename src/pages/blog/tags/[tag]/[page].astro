@@ -52,6 +52,15 @@ const lastPage = prop.currentPage == prop.lastPage
     }前`;
 </script>
 
+<style>
+  @media (width <= 768px) {
+    ul {
+      padding-inline-start: 10px;
+      list-style-position: inside;
+    }
+  }
+</style>
+
 <Layout
     title={`Blog ${hashedTag}`}
     description={tag ? `${tag}のタグが付いている記事の一覧ページです。`
