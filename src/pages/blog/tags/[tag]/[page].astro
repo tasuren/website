@@ -66,19 +66,25 @@ const lastPage = prop.currentPage == prop.lastPage
     } /> : "まだありません。"}
   </details>
 
-  <p />
-
   <!-- 列挙 -->
   <h2>
     一覧{prop.currentPage == 1 ? "" : `（${prop.currentPage}ページ目）`}
   </h2>
+
   <ul class="padding-left-override-for-sp">
-    {prop.data.map(article => <li>
-      <a href={`/blog/${article.id}`}>{article.title}</a>
-      <time datetime={article.publishedAt} class="neutral publication-date">
-        ...
-      </time>
-    </li>)}
+    {
+      prop.data.map(article =>
+        <li>
+          <a href={`/blog/${article.id}`}>{article.title}</a>
+          <time
+            datetime={article.publishedAt}
+            class="neutral publication-date"
+          >
+            ...
+          </time>
+        </li>
+      )
+    }
   </ul>
 
   <!-- ページ切り替え  -->
