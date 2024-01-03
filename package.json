@@ -18,7 +18,7 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.0.3",
     "@types/node": "^20.10.5",
-    "astro": "^4.0.7",
+    "astro": "^4.0.8",
     "cheerio": "1.0.0-rc.12",
     "date-fns": "^3.0.6",
     "highlight.js": "^11.9.0",
