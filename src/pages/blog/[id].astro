@@ -42,11 +42,12 @@ if (article.content.includes("<code") && article.content.includes("<pre>")) {
   $("pre code").each((_, rawElement) => {
     let e = $(rawElement);
 
-    e.html(hljs.highlight(
-      e.text(), {language : rawElement
-        .attribs.class.slice(9)}
-    ).value);
-    e.addClass("hljs");
+    if (rawElement.attribs.class)
+      e.html(hljs.highlight(
+        e.text(), {language : rawElement
+          .attribs.class.slice(9)}
+      ).value);
+      e.addClass("hljs");
   });
 
   html = $.html();
