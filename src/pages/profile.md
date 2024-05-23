@@ -14,14 +14,14 @@ properties:
 よく常識がないと言われます。（少し自覚している）
 
 - 性別：男性
-- 性自認：ノンバイナリー？
-- 代名詞：they/them (OPTIONAL)
-- MBTI：INFJ-T（提唱者）
+- 性自認：Xジェンダー（ノンバイナリー）
+- 代名詞：he, they/them (OPTIONAL)
+- MBTI：ENFJ-T（主人公）
 - 職業：学生
 - 好物
-  - 奥が深いもの
-    - 数学や国語等
-    - 研究ちっくな話
+  - 哲学
+  - コンピュータ
+  - 学術的な話全般
   - おいしいもの
   - かわいいもの
 - 趣味
@@ -33,11 +33,10 @@ properties:
 
 ## Respect
 - Kikuo
-- MARETU
+- いよわ
 - 稲葉曇
+- MARETU
 - 月裏
-- 糸奇はな
-- たっくーTVれいでぃお
 
 ## Links
 - <a href="https://x.com/tasuren1022/" target="_blank">X（旧Twitter）</a>
