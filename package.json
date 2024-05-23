@@ -16,9 +16,9 @@
   "author": "Takagi Tasuku",
   "license": "BSD4",
   "dependencies": {
-    "@astrojs/sitemap": "^3.1.4",
+    "@astrojs/sitemap": "^3.1.5",
     "@types/node": "^20.12.12",
-    "astro": "^4.8.6",
+    "astro": "^4.9.0",
     "cheerio": "1.0.0-rc.12",
     "date-fns": "^3.4.0",
     "highlight.js": "^11.9.0",
