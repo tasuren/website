@@ -9,11 +9,11 @@ dependencies:
     specifier: ^3.1.6
     version: 3.1.6
   '@types/node':
-    specifier: ^20.14.2
-    version: 20.14.2
+    specifier: ^20.14.4
+    version: 20.14.4
   astro:
     specifier: ^4.10.2
-    version: 4.10.2(@types/node@20.14.2)(typescript@5.4.5)
+    version: 4.10.2(@types/node@20.14.4)(typescript@5.4.5)
   cheerio:
     specifier: 1.0.0-rc.12
     version: 1.0.0-rc.12
@@ -1297,8 +1297,8 @@ packages:
     resolution: {integrity: sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==}
     dev: false
 
-  /@types/node@20.14.2:
-    resolution: {integrity: sha512-xyu6WAMVwv6AKFLB+e/7ySZVr/0zLCzOa7rSpq6jNwpqOrUbcACDWC+53d4n2QHOnDou0fbIsg8wZu/sxrnI4Q==}
+  /@types/node@20.14.4:
+    resolution: {integrity: sha512-1ChboN+57suCT2t/f8lwtPY/k3qTpuD/qnqQuYoBg6OQOcPyaw7PiZVdGpaZYAvhDDtqrt0oAaM8+oSu1xsUGw==}
     dependencies:
       undici-types: 5.26.5
     dev: false
@@ -1306,7 +1306,7 @@ packages:
   /@types/sax@1.2.7:
     resolution: {integrity: sha512-rO73L89PJxeYM3s3pPPjiPgVVcymqU490g0YO5n5By0k2Erzj6tay/4lr1CHAAU4JyOWd1rpQ8bCf6cZfHU96A==}
     dependencies:
-      '@types/node': 20.14.2
+      '@types/node': 20.14.4
     dev: false
 
   /@types/unist@2.0.10:
@@ -1474,7 +1474,7 @@ packages:
     resolution: {integrity: sha512-I1jXZMjAgCMmxT4qxXfPXa6SthSoE8h6gkSI9BGGNv8mP8G/v0blc+qFnZu6K42vTOiuME596QaLO0TP3Lk0xg==}
     dev: false
 
-  /astro@4.10.2(@types/node@20.14.2)(typescript@5.4.5):
+  /astro@4.10.2(@types/node@20.14.4)(typescript@5.4.5):
     resolution: {integrity: sha512-SBdkoOanPsxKlKVU4uu/XG0G7NYAFoqmfBtq9SPMJ34B7Hr1MxVdEugERs8IwYN6UaxdDVcqA++9PvH6Onq2cg==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
@@ -1536,7 +1536,7 @@ packages:
       tsconfck: 3.1.0(typescript@5.4.5)
       unist-util-visit: 5.0.0
       vfile: 6.0.1
-      vite: 5.2.13(@types/node@20.14.2)
+      vite: 5.2.13(@types/node@20.14.4)
       vitefu: 0.2.5(vite@5.2.13)
       which-pm: 2.2.0
       yargs-parser: 21.1.1
@@ -3794,7 +3794,7 @@ packages:
       vfile-message: 4.0.2
     dev: false
 
-  /vite@5.2.13(@types/node@20.14.2):
+  /vite@5.2.13(@types/node@20.14.4):
     resolution: {integrity: sha512-SSq1noJfY9pR3I1TUENL3rQYDQCFqgD+lM6fTRAM8Nv6Lsg5hDLaXkjETVeBt+7vZBCMoibD+6IWnT2mJ+Zb/A==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -3822,7 +3822,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 20.14.2
+      '@types/node': 20.14.4
       esbuild: 0.20.2
       postcss: 8.4.38
       rollup: 4.18.0
@@ -3838,7 +3838,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 5.2.13(@types/node@20.14.2)
+      vite: 5.2.13(@types/node@20.14.4)
     dev: false
 
   /volar-service-css@0.0.45(@volar/language-service@2.2.5):
