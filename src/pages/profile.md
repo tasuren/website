@@ -16,7 +16,7 @@ properties:
 - 性別：男性
 - 性自認：Xジェンダー（ノンバイナリー）
 - 代名詞：he, they/them (OPTIONAL)
-- MBTI：ENFJ-T（主人公）
+- MBTI：ENFJ-A（主人公）
 - 職業：学生
 - 好物
   - 哲学
