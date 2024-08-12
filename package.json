@@ -19,7 +19,7 @@
     "@astrojs/sitemap": "^3.1.6",
     "@types/node": "^22.1.0",
     "astro": "^4.13.1",
-    "cheerio": "1.0.0-rc.12",
+    "cheerio": "1.0.0",
     "date-fns": "^3.4.0",
     "highlight.js": "^11.10.0",
     "microcms-js-sdk": "^3.1.2"
