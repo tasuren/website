@@ -1,13 +1,13 @@
 {
     "name": "tasuren's website",
-    "image": "mcr.microsoft.com/devcontainers/typescript-node",
-    "postCreateCommand": "npm install -g npm pnpm && pnpm setup && pnpm install",
+    "image": "mcr.microsoft.com/devcontainers/base:debian",
     "customizations": {
         "vscode": {
             "extensions": [
                 "astro-build.astro-vscode",
                 "dbaeumer.vscode-eslint",
-                "unifiedjs.vscode-mdx"
+                "unifiedjs.vscode-mdx",
+                "ms-vscode.ms-typescript-next"
             ]
         }
     },

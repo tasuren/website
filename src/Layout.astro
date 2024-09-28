@@ -1,0 +1,29 @@
+---
+import Body from "@components/Body.astro";
+import Head from "@components/Head.astro";
+import { type Props as HeadProps } from "@components/Head.astro";
+
+interface Props extends HeadProps {
+    frontmatter?: HeadProps;
+}
+
+const { title, description, keywords, type, properties } = Astro.props;
+
+if (!title) console.warn("タイトルがないページがあります。", Astro.self.name);
+---
+
+<!DOCTYPE html>
+<html lang="ja" data-theme="dark">
+  <Head
+    title={title}
+    description={description}
+    keywords={keywords}
+    type={type}
+    properties={properties}
+  >
+    <slot name="head" />
+  </Head>
+  <Body>
+    <slot />
+  </Body>
+</html>
