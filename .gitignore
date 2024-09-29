@@ -110,6 +110,9 @@ web_modules/
 
 .parcel-cache
 
+# Astro
+.astro
+
 # Next.js build output
 
 .next
@@ -173,3 +176,6 @@ dist
 
 # Finder (MacOS) folder config
 .DS_Store
+
+# Editor
+*.code-workspace
