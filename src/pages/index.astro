@@ -1,4 +1,24 @@
 ---
-import { Content } from "./index.md";
+import Layout from "@layouts/Layout.astro";
+
+import { Content } from "./index.mdx";
+import AccessCounter from "@components/AccessCounter.astro";
 ---
-<Content />
+
+<Layout
+  title="髙木祐来のホームページ"
+  description="髙木祐来（tasuren）についての情報とリンクなど確認できます。"
+>
+  <Content />
+
+  <div class="mt-10 flex justify-around">
+    <AccessCounter />
+  </div>
+</Layout>
+
+<style is:global>
+  li, ul {
+    margin-bottom: 1px !important;
+    margin-top: 1px !important;
+  }
+</style>

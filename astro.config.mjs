@@ -1,26 +1,10 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
+import mdx from "@astrojs/mdx";
+import tailwind from "@astrojs/tailwind";
 
-
-const DEFAULT_LAYOUT = '/src/Layout.astro';
-function setDefaultLayout() {
-  return function (_, file) {
-    const {
-      frontmatter
-    } = file.data.astro;
-    if (!frontmatter.layout) frontmatter.layout = DEFAULT_LAYOUT;
-  };
-}
-;
-
-
-// https://astro.build/config
 export default defineConfig({
-  site: "https://tasuren.jp",
-  base: "/",
-  prefetch: true,
-  markdown: {
-    remarkPlugins: [setDefaultLayout]
-  },
-  integrations: [sitemap()]
+    site: "https://tasuren.jp",
+    prefetch: true,
+    integrations: [sitemap(), mdx(), tailwind()],
 });

@@ -1,7 +1,4 @@
 ---
-import { WEBSITE_TITLE } from '@libraries/constants'; 
-
-
 export interface Props {
   title: string;
   description: string;
@@ -13,27 +10,29 @@ export interface Props {
 
 const { title, description, keywords, type, properties } = Astro.props;
 ---
+
 <head>
-  <!-- General Metadata  -->
+  <!-- Website metadata -->
   <meta charset="utf-8">
   <meta name="generator" content={Astro.generator}>
-  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,user-scalable=yes">
+  <!-- <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,user-scalable=yes"> -->
   <link rel="sitemap" href="/sitemap-index.xml">
-  <!-- Web Page Metadata  -->
-  <title>{title}</title>
+
+  <!-- Page metadata -->
   <meta name="description" content={description}>
   <meta name="author" content="Takagi Tasuku">
   <meta name="color-scheme" content="light dark">
   {keywords ? <meta name="keywords" content={keywords.join(",")}> : null}
-
+  
   <meta property="og:title" content={title}>
   <meta property="og:description" content={description}>
   <meta property="og:locale" content="ja_JP">
-  <meta property="og:site_name" content={WEBSITE_TITLE}>
+  <meta property="og:site_name" content="髙木祐来のウェブサイト">
   <meta property="og:type" content={type || "website"}>
   {properties ? properties.map(
     v => <meta property={v[0]} content={v[1]}>
   ) : null}
+
 
   <!-- Scripts -->
   <script is:inline>
@@ -43,10 +42,4 @@ const { title, description, keywords, type, properties } = Astro.props;
     if (theme != "dark") document.documentElement
       .setAttribute("data-theme", theme)
   </script>
-  <script>
-    import { initialize as initializeTheme } from "@libraries/theme";
-    initializeTheme(false);
-  </script>
-  <!-- Other -->
-  <slot />
 </head>
