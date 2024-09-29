@@ -1,13 +1,14 @@
 name: Deploy to GitHub Pages
 
 on:
-  repository_dispatch:
-    types:
-      - update_cms
+  # Trigger the workflow every time you push to the `main` branch
+  # Using a different branch name? Replace `main` with your branch’s name
   push:
-    branches: [main]
+    branches: [ main ]
+  # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
 
+# Allow this job to clone the repo and create a page deployment
 permissions:
   contents: read
   pages: write
@@ -16,17 +17,13 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: github-pages
-    env:
-      MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
-      MICROCMS_SERVICE_DOMAIN: ${{ vars.MICROCMS_SERVICE_DOMAIN}}
     steps:
       - name: Checkout your repository using git
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install, build, and upload your site
-        uses: withastro/action@v0
+        uses: withastro/action@v3
         with:
-          pnpm-version: ^8.7.1
+          package-manager: bun@1
 
   deploy:
     needs: build
@@ -37,4 +34,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
