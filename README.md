@@ -1,15 +1,12 @@
-# website
+# tasuren's website
+髙木祐来のウェブサイトのソースコード。
 
-To install dependencies:
-
-```bash
-bun install
+## セットアップ
+まず以下で依存関係をインストール。
+```shell
+bun i
 ```
-
-To run:
-
-```bash
-bun run index.ts
+後は以下で開発サーバーを起動。
+```shell
+bun dev
 ```
-
-This project was created using `bun init` in bun v1.1.18. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.

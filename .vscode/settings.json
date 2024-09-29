@@ -3,5 +3,7 @@
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
         "source.organizeImports.biome": "explicit"
-    }
+    },
+    "biome.enabled": true,
+    "prettier.enable": false,
 }

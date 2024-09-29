@@ -1,5 +1,4 @@
 ---
-import Body from "@components/Body.astro";
 import Head from "@components/Head.astro";
 import { type Props as HeadProps } from "@components/Head.astro";
 
@@ -23,7 +22,10 @@ if (!title) console.warn("タイトルがないページがあります。", Ast
   >
     <slot name="head" />
   </Head>
-  <Body>
-    <slot />
-  </Body>
+
+  <body>
+    <main class="mx-auto my-10 px-4" style="width: 65ch;">
+      <slot />
+    </main>
+  </body>
 </html>
