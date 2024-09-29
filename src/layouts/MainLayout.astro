@@ -26,7 +26,7 @@ if (!title) console.warn("タイトルがないページがあります。", Ast
   </Head>
 
   <body>
-    <main class="mx-auto my-10 px-4" style="width: 65ch;">
+    <main class="mx-auto my-10" style="max-width: 65ch;">
       <slot />
     </main>
   </body>
@@ -34,7 +34,7 @@ if (!title) console.warn("タイトルがないページがあります。", Ast
 
 <style>
   li, ul {
-    margin-bottom: 1px !important;
-    margin-top: 1px !important;
+    margin-bottom: 1px;
+    margin-top: 1px;
   }
 </style>

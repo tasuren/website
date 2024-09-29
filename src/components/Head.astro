@@ -23,6 +23,7 @@ const { title, description, keywords, type, properties } = Astro.props;
   <meta name="author" content="Takagi Tasuku">
   <meta name="color-scheme" content="light dark">
   {keywords ? <meta name="keywords" content={keywords.join(",")}> : null}
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   
   <meta property="og:title" content={title}>
   <meta property="og:description" content={description}>
