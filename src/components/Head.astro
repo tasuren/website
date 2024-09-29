@@ -1,12 +1,11 @@
 ---
 export interface Props {
-  title: string;
-  description: string;
-  keywords?: string[];
-  type?: string;
-  properties?: string[][];
-};
-
+    title: string;
+    description: string;
+    keywords?: string[];
+    type?: string;
+    properties?: string[][];
+}
 
 const { title, description, keywords, type, properties } = Astro.props;
 ---
@@ -15,7 +14,7 @@ const { title, description, keywords, type, properties } = Astro.props;
   <!-- Website metadata -->
   <meta charset="utf-8">
   <meta name="generator" content={Astro.generator}>
-  <!-- <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,user-scalable=yes"> -->
+  <link rel="icon" href="/favicon.ico" />
   <link rel="sitemap" href="/sitemap-index.xml">
 
   <!-- Page metadata -->
@@ -32,14 +31,4 @@ const { title, description, keywords, type, properties } = Astro.props;
   {properties ? properties.map(
     v => <meta property={v[0]} content={v[1]}>
   ) : null}
-
-
-  <!-- Scripts -->
-  <script is:inline>
-    var theme = localStorage.getItem("theme") || "auto";
-    if (theme == "auto") theme = window.matchMedia
-      ("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    if (theme != "dark") document.documentElement
-      .setAttribute("data-theme", theme)
-  </script>
 </head>
