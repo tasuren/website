@@ -7,7 +7,6 @@ import tailwind from "@astrojs/tailwind";
 
 export default defineConfig({
     site: "https://tasuren.jp",
-    base: "/",
     prefetch: true,
     integrations: [sitemap(), mdx(), tailwind()],
 });
