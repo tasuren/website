@@ -1,3 +1,11 @@
+---
+layout: ../layouts/MainLayout.astro
+title: 髙木祐来のホームページ
+description: 髙木祐来のホームページで、彼の活動やプロフィール、リンクなどが記載されている。
+---
+
+import AccessCounter from "@components/AccessCounter.astro"
+
 <img alt="tasurenのJdenticon" src="Jdenticon.svg" class="block mx-auto my-10" />
 
 # 髙木祐来のホームページ
@@ -5,7 +13,7 @@
 [こちら](https://github.com/tasuren/website)。  
 
 ちな、2024年9月にこのウェブサイトはリニューアルした。
-リニューアル前のは[こちら](https://web.archive.org/web/20240828184015/https://tasuren.jp/)から閲覧可能。
+リニューアル前のは[ここ](https://web.archive.org/web/20240828184015/https://tasuren.jp/)から閲覧可能。
 過去のブログだとかもここから見れる。
 
 ## 直近の活動
@@ -25,6 +33,7 @@
 - 技術記事
     - [Qiita](https://qiita.com/tasuren)
     - [Zenn](https://zenn.dev/tasuren)
+- プログラミング：[GitHub](https://github.com/tasuren)
 - SNS
     - 日記：[X（旧Twitter）](https://x.com/tasuren1022/)
     - 写真：[Instagram](https://www.instagram.com/tasuren1022/)
@@ -68,3 +77,6 @@
 
 お友達にはマックス週１で必要な時にハグしてあげます。（前例無し）
 
+<div class="my-10 flex justify-around">
+    <AccessCounter />
+</div>

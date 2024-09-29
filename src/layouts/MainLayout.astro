@@ -6,7 +6,9 @@ interface Props extends HeadProps {
     frontmatter?: HeadProps;
 }
 
-const { title, description, keywords, type, properties } = Astro.props;
+let props = Astro.props;
+if (Astro.props.frontmatter) props = Astro.props.frontmatter;
+const { title, description, keywords, type, properties } = props;
 
 if (!title) console.warn("タイトルがないページがあります。", Astro.self.name);
 ---
@@ -29,3 +31,10 @@ if (!title) console.warn("タイトルがないページがあります。", Ast
     </main>
   </body>
 </html>
+
+<style>
+  li, ul {
+    margin-bottom: 1px !important;
+    margin-top: 1px !important;
+  }
+</style>
