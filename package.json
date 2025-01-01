@@ -1,25 +1,25 @@
 {
-    "name": "website",
-    "module": "index.ts",
-    "type": "module",
-    "scripts": {
-        "dev": "astro dev",
-        "start": "astro dev",
-        "build": "astro build",
-        "preview": "astro preview"
-    },
-    "devDependencies": {
-        "@biomejs/biome": "^1.9.2",
-        "@types/bun": "latest"
-    },
-    "peerDependencies": {
-        "typescript": "^5.6.2"
-    },
-    "dependencies": {
-        "@astrojs/mdx": "^3.1.7",
-        "@astrojs/sitemap": "^3.1.6",
-        "@astrojs/tailwind": "^5.1.1",
-        "astro": "^4.15.9",
-        "tailwindcss": "^3.4.13"
-    }
+  "name": "website",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^3.1.9",
+    "@astrojs/sitemap": "^3.2.1",
+    "@astrojs/tailwind": "^5.1.4",
+    "astro": "^4.16.18",
+    "tailwindcss": "^3.4.17"
+  }
 }
