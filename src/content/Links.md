@@ -1,0 +1,13 @@
+- SNS
+    - 日記：[X（旧Twitter）](https://x.com/tasuren1022/)
+    - 写真：[Instagram](https://www.instagram.com/tasuren1022/)
+    - 哲学：[Threads](https://www.threads.net/@tasuren1022/)
+    - Discord: `tasuren`
+- ブログ：[Hatena Blog](https://tasuren.hateblo.jp/)
+- エッセイ：[しずかなインターネット](https://sizu.me/tasuren)
+- 技術記事
+    - [Qiita](https://qiita.com/tasuren)
+    - [Zenn](https://zenn.dev/tasuren)
+- プログラミング：[GitHub](https://github.com/tasuren)
+- 動画：[YouTube](https://www.youtube.com/@tasuren/)
+- メールアドレス：`tasuren@outlook.jp`

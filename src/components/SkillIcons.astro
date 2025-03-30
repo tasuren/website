@@ -1,0 +1,11 @@
+---
+interface Props {
+    skills: string;
+    class?: string;
+}
+---
+
+<img
+    src={`https://go-skill-icons.vercel.app/api/icons?i=${Astro.props.skills}`}
+    class={Astro.props.class}
+/>

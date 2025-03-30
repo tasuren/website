@@ -1,10 +1,13 @@
-import { defineConfig } from "astro/config";
-import sitemap from "@astrojs/sitemap";
-import mdx from "@astrojs/mdx";
-import tailwind from "@astrojs/tailwind";
+import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
+import mdx from '@astrojs/mdx';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-    site: "https://tasuren.jp",
+    site: 'https://tasuren.jp',
     prefetch: true,
-    integrations: [sitemap(), mdx(), tailwind()],
+    integrations: [sitemap(), mdx()],
+    vite: {
+        plugins: [tailwindcss()],
+    },
 });

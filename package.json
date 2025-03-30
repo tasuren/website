@@ -9,17 +9,22 @@
         "preview": "astro preview"
     },
     "devDependencies": {
-        "@biomejs/biome": "^1.9.4",
-        "@types/bun": "latest"
+        "@tailwindcss/typography": "^0.5.16",
+        "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+        "@types/bun": "^1.2.6",
+        "prettier": "^3.5.3",
+        "prettier-plugin-astro": "^0.14.1"
     },
     "peerDependencies": {
-        "typescript": "^5.7.2"
+        "typescript": "^5.8.2"
     },
     "dependencies": {
-        "@astrojs/mdx": "^4.0.3",
-        "@astrojs/sitemap": "^3.2.1",
-        "@astrojs/tailwind": "^5.1.4",
-        "astro": "^5.1.3",
-        "tailwindcss": "^3.4.17"
+        "@astrojs/mdx": "^4.2.2",
+        "@astrojs/sitemap": "^3.3.0",
+        "@tailwindcss/vite": "^4.0.17",
+        "astro": "^5.5.5",
+        "marked": "^15.0.7",
+        "tailwindcss": "^4.0.17",
+        "toml": "^3.0.0"
     }
 }

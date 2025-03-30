@@ -1,0 +1,85 @@
+[[products]]
+id = "playark-sm"
+title = "Discord 顧客管理ソフト"
+description = """
+Arkプレイヤーの集いの顧客とゲームサーバーを管理するためのシステム。  
+顧客の契約情報に合わせてゲームサーバー上の権限を同期したりする。"""
+skills = ["python", "sqlite", "sqlalchemy", "stripe", "discord"]
+link = "https://playark.jp"
+
+[[products]]
+id = "rt-discord-bot"
+title = "RT Discord Bot"
+description = """
+中高生の頃に作っていた、Discordコミュニティ管理サービス。現在は[Neody](https://neody.land/)で稼働中。  
+僕のコンピュータ知識の基礎を固めたきっかけ。"""
+skills = ["python", "mysql", "linux", "kubernetes", "discord"]
+link = "https://rt.neody.land/"
+
+[[products]]
+id = "tibani-link"
+title = "Tibani Link"
+description = """
+千葉工業大学生専用の短縮URLサービス。  
+千葉工業大学のGoogleアカウントでログインすることで、自分の好きな短縮URLを作り放題！"""
+skills = ["html", "ts", "hono", "drizzle", "htmx", "tailwind", "cloudflare"]
+link = "https://github.com/sofmes/tibani-link"
+
+[[products]]
+id = "shabe2x"
+title = "しゃべしゃべ"
+description = """
+HTMLをコピペできる、シンプルなシャドーイング支援アプリ。  
+ウェブ音声 APIを使うことで、処理はローカルで完結する。"""
+skills = ["html", "ts", "solidjs", "tailwind"]
+link = "https://shabe2x.tasuren.jp/"
+
+[[products]]
+id = "tiwer"
+title = "Twier"
+description = """
+X（旧Twitter）投稿専用クライアント  
+タイムラインを開けない、文字通り投稿しかできないXクライアント。"""
+skills = ["ts", "tauri"]
+link = "https://github.com/tasuren/twier"
+
+[[products]]
+id = "freedom-wall"
+title = "FreedomWall"
+description = """
+Discordに利用規約違反せずに壁紙を付けれるアプリ。  
+仕組みとしては、半透明な壁紙ウィンドウをDiscordの上に配置するだけ。改造はしない。後継を開発中..."""
+skills = ["html", "css", "js", "rust"]
+link = "https://github.com/tasuren/freedom-wall"
+
+[[products]]
+id = "website"
+title = "ウェブサイト"
+description = "今あなたが閲覧中のウェブサイト"
+skills = ["html", "ts", "astro", "tailwind"]
+link = "https://github.com/tasuren/website"
+
+[[products]]
+id = "a-synthe"
+title = "aSynthe"
+description = """
+音程検出アプリ  
+マイクで拾った音の音程をフーリエ変換で求めるだけの単純なアプリ。完全に勉強のために作った、あまり実用性のないもの。"""
+skills = ["rust"]
+link = "https://github.com/tasuren/a-synthe"
+
+[[products]]
+id = "tsuchimod"
+title = "土ーと"
+description = """
+土でダイヤモンドが作れるMinecraftのMOD。  
+小学６年生くらいの頃に作ったネタMOD。まさかバズるとは思ってなかった。HPのパスワード忘れて更新できない。"""
+skills = ["minecraft"]
+link = "https://tsuchimod.kojyuro.com/"
+
+[[products]]
+id = "i21y"
+title = "i21y"
+description = "Python向けi18nライブラリ  \nYAMLやJSONに対応して、キーを手軽に連結するヘルパー付き。"
+skills = ["python"]
+link = "https://github.com/tasuren/i21y"
