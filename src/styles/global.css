@@ -1,3 +1,16 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@theme {
+    --color-foreground: white;
+    --color-link: #da0037;
+    --color-background: black;
+}
+
+body {
+    @apply bg-background text-foreground;
+}
+
+a {
+    @apply underline text-link;
+}

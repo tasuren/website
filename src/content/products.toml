@@ -22,7 +22,7 @@ title = "Tibani Link"
 description = """
 千葉工業大学生専用の短縮URLサービス。  
 千葉工業大学のGoogleアカウントでログインすることで、自分の好きな短縮URLを作り放題！"""
-skills = ["html", "ts", "hono", "drizzle", "htmx", "tailwind", "cloudflare"]
+skills = ["html5", "typescript", "hono", "drizzle", "htmx", "tailwindcss", "cloudflare"]
 link = "https://github.com/sofmes/tibani-link"
 
 [[products]]
@@ -31,7 +31,7 @@ title = "しゃべしゃべ"
 description = """
 HTMLをコピペできる、シンプルなシャドーイング支援アプリ。  
 ウェブ音声 APIを使うことで、処理はローカルで完結する。"""
-skills = ["html", "ts", "solidjs", "tailwind"]
+skills = ["html5", "typescript", "solid", "tailwindcss"]
 link = "https://shabe2x.tasuren.jp/"
 
 [[products]]
@@ -40,7 +40,7 @@ title = "Twier"
 description = """
 X（旧Twitter）投稿専用クライアント  
 タイムラインを開けない、文字通り投稿しかできないXクライアント。"""
-skills = ["ts", "tauri"]
+skills = ["typescript", "tauri"]
 link = "https://github.com/tasuren/twier"
 
 [[products]]
@@ -49,14 +49,14 @@ title = "FreedomWall"
 description = """
 Discordに利用規約違反せずに壁紙を付けれるアプリ。  
 仕組みとしては、半透明な壁紙ウィンドウをDiscordの上に配置するだけ。改造はしない。後継を開発中..."""
-skills = ["html", "css", "js", "rust"]
+skills = ["html5", "css", "javascript", "rust"]
 link = "https://github.com/tasuren/freedom-wall"
 
 [[products]]
 id = "website"
 title = "ウェブサイト"
 description = "今あなたが閲覧中のウェブサイト"
-skills = ["html", "ts", "astro", "tailwind"]
+skills = ["html5", "typescript", "astro", "tailwindcss"]
 link = "https://github.com/tasuren/website"
 
 [[products]]
@@ -74,7 +74,7 @@ title = "土ーと"
 description = """
 土でダイヤモンドが作れるMinecraftのMOD。  
 小学６年生くらいの頃に作ったネタMOD。まさかバズるとは思ってなかった。HPのパスワード忘れて更新できない。"""
-skills = ["minecraft"]
+skills = []
 link = "https://tsuchimod.kojyuro.com/"
 
 [[products]]

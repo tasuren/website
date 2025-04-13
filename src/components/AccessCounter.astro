@@ -1,4 +1,18 @@
-<div class="mt-4">
-  <script type="text/javascript" src="//counter1.fc2.com/counter.php?id=36082755&main=1"></script>
-  <noscript><img src="//counter1.fc2.com/counter_img.php?id=36082755&main=1" /></noscript>
-<div>
+---
+interface Props {
+    class?: string;
+}
+---
+
+<div class={Astro.props.class}>
+    <script
+        type="text/javascript"
+        src="//counter1.fc2.com/counter.php?id=36082755&main=1"></script>
+
+    <noscript>
+        <img
+            src="//counter1.fc2.com/counter_img.php?id=36082755&main=1"
+            alt=""
+        />
+    </noscript>
+</div>

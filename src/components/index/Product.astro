@@ -4,7 +4,7 @@ import SkillIcons from "./SkillIcons.astro";
 
 interface Props {
     title: string;
-    skills: string;
+    skills: string[];
     link: string;
 }
 
@@ -20,7 +20,7 @@ function getFaviconUrl(link: string): string {
 
 <div
     class={cl(
-        "px-4 py-2",
+        "box-border md:px-4 not-md:px-3 py-2",
         "bg-zinc-950 shadow-md",
         "rounded-lg",
         "md:h-52",
@@ -36,14 +36,8 @@ function getFaviconUrl(link: string): string {
         </div>
     </div>
 
-    <div class="text-start mt-2">
-        <SkillIcons skills={skills} class="h-[32px]" />
-
-        <a
-            href={link}
-            target="_blank"
-            class="text-zinc-500 text-[14px] block mt-1"
-        >
+    <div class="text-start mt-2 flex justify-between items-center">
+        <div class="text-zinc-500 text-[14px] mt-1">
             <img
                 class="inline rounded-[2px]"
                 src={getFaviconUrl(link)}
@@ -51,7 +45,12 @@ function getFaviconUrl(link: string): string {
                 height="18"
                 alt=""
             />
-            <span class="align-baseline ml-1">{new URL(link).host}</span>
-        </a>
+
+            <a href={link} target="_blank" class="align-baseline">
+                {new URL(link).host}
+            </a>
+        </div>
+
+        <SkillIcons skills={skills} />
     </div>
 </div>

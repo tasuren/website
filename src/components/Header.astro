@@ -1,0 +1,46 @@
+---
+import { Icon } from "astro-icon/components";
+import { getCollection } from "astro:content";
+
+const sns = await getCollection("sns");
+---
+
+<header
+    class:list={[
+        "mb-10",
+        "py-5",
+        "border-b border-foreground/20",
+        "sticky",
+        "top-0",
+        "left-0",
+        "backdrop-blur-md",
+    ]}
+>
+    <div class="mx-auto not-md:px-4 max-w-[80ch] flex justify-between">
+        <h1 class="text-2xl">髙木 祐来</h1>
+
+        <div class="flex justify-around items-center space-x-[15px]">
+            {
+                sns.map((sns) => (
+                    <a
+                        href={sns.data.link}
+                        target="_blank"
+                        class="no-underline! text-foreground!"
+                    >
+                        {sns.data.src ? (
+                            <Icon
+                                name={sns.data.src}
+                                class="size-10 fill-white"
+                            />
+                        ) : (
+                            <Icon
+                                name={`simple-icons:${sns.id}`}
+                                class="size-[29px]"
+                            />
+                        )}
+                    </a>
+                ))
+            }
+        </div>
+    </div>
+</header>

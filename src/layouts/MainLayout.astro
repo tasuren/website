@@ -1,6 +1,8 @@
 ---
 import "@/styles/global.css";
+import AccessCounter from "@components/AccessCounter.astro";
 import Head, { type Props as HeadProps } from "@components/Head.astro";
+import Header from "@components/Header.astro";
 
 interface Props extends HeadProps {
     frontmatter?: HeadProps;
@@ -31,11 +33,21 @@ if (!title) console.warn("タイトルがないページがあります。", Ast
         <slot name="head" />
     </Head>
 
-    <body class="mx-auto my-10 max-w-[80ch] not-md:px-4 bg-white dark:bg-black">
-        <main class="prose dark:prose-invert max-w-none">
-            <h1 class="text-2xl">{title}</h1>
+    <body>
+        <Header />
 
+        <main
+            class="md:mx-auto not-md:px-4 md:max-w-[80ch] prose dark:prose-invert"
+        >
             <slot />
         </main>
+
+        <footer class="pt-10 pb-5">
+            <div class="w-fit mx-auto">
+                <AccessCounter class="mb-1 w-full text-center" />
+
+                © 2025 髙木 祐来
+            </div>
+        </footer>
     </body>
 </html>

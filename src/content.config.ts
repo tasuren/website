@@ -15,4 +15,15 @@ const products = defineCollection({
     }),
 });
 
-export const collections = { products };
+const sns = defineCollection({
+    loader: file("src/content/sns.toml", {
+        parser: (text) => parse(text).sns,
+    }),
+    schema: z.object({
+        id: z.string(),
+        link: z.string().url(),
+        src: z.string().optional(),
+    }),
+});
+
+export const collections = { products, sns };

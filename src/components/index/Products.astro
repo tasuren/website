@@ -1,0 +1,15 @@
+---
+import { getCollection } from "astro:content";
+import Product from "./Product.astro";
+import { marked } from "marked";
+
+const products = await getCollection("products");
+---
+
+{
+    products.map(({ data }) => (
+        <Product title={data.title} skills={data.skills} link={data.link}>
+            {<Fragment set:html={marked.parse(data.description)} />}
+        </Product>
+    ))
+}
