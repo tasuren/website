@@ -2,15 +2,31 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-    --color-foreground: white;
-    --color-link: #da0037;
-    --color-background: black;
+    --color-foreground: #ffe4e1;
+    --color-link: #d9333f;
+    --color-background: oklch(0.25 0.0705 21.71);
+    --color-card: oklch(0.34 0.1365 18.43);
 }
 
+html,
 body {
-    @apply bg-background text-foreground;
+    @apply bg-background;
+
+    & .prose * {
+        @apply text-foreground;
+    }
+
+    & h1,
+    h2,
+    h3 {
+        @apply text-foreground;
+    }
+}
+
+li::marker {
+    @apply text-foreground;
 }
 
 a {
-    @apply underline text-link;
+    @apply underline text-link!;
 }
