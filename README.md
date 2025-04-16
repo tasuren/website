@@ -6,4 +6,8 @@
 
 - Bun
 - Astro
-- Tailwind CSS（preflightが`false`）
+- Tailwind CSS
+
+## コントリビューティング
+
+Issue以外受け付けていません。
