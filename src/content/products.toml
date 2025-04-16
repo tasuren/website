@@ -2,7 +2,7 @@
 id = "playark-sm"
 title = "Discord 顧客管理ソフト"
 description = """
-Arkプレイヤーの集いの顧客とゲームサーバーを管理するためのシステム。  
+Arkプレイヤーの集いの顧客とゲームサーバーを管理するためのシステム。
 顧客の契約情報に合わせてゲームサーバー上の権限を同期したりする。"""
 skills = ["python", "sqlite", "sqlalchemy", "stripe", "discord"]
 link = "https://playark.jp"
@@ -11,7 +11,7 @@ link = "https://playark.jp"
 id = "rt-discord-bot"
 title = "RT Discord Bot"
 description = """
-中高生の頃に作っていた、Discordコミュニティ管理サービス。現在は[Neody](https://neody.land/)で稼働中。  
+中高生の頃に作っていた、Discordコミュニティ管理サービス。現在は[Neody](https://neody.land/)で稼働中。
 僕のコンピュータ知識の基礎を固めたきっかけ。"""
 skills = ["python", "mysql", "linux", "kubernetes", "discord"]
 link = "https://rt.neody.land/"
@@ -20,16 +20,24 @@ link = "https://rt.neody.land/"
 id = "tibani-link"
 title = "Tibani Link"
 description = """
-千葉工業大学生専用の短縮URLサービス。  
+千葉工業大学生専用の短縮URLサービス。
 千葉工業大学のGoogleアカウントでログインすることで、自分の好きな短縮URLを作り放題！"""
-skills = ["html5", "typescript", "hono", "drizzle", "htmx", "tailwindcss", "cloudflare"]
+skills = [
+    "html5",
+    "typescript",
+    "hono",
+    "drizzle",
+    "htmx",
+    "tailwindcss",
+    "cloudflare",
+]
 link = "https://github.com/sofmes/tibani-link"
 
 [[products]]
 id = "shabe2x"
 title = "しゃべしゃべ"
 description = """
-HTMLをコピペできる、シンプルなシャドーイング支援アプリ。  
+HTMLをコピペできる、シンプルなシャドーイング支援アプリ。
 ウェブ音声 APIを使うことで、処理はローカルで完結する。"""
 skills = ["html5", "typescript", "solid", "tailwindcss"]
 link = "https://shabe2x.tasuren.jp/"
@@ -38,7 +46,7 @@ link = "https://shabe2x.tasuren.jp/"
 id = "tiwer"
 title = "Twier"
 description = """
-X（旧Twitter）投稿専用クライアント  
+X（旧Twitter）投稿専用クライアント
 タイムラインを開けない、文字通り投稿しかできないXクライアント。"""
 skills = ["typescript", "tauri"]
 link = "https://github.com/tasuren/twier"
@@ -47,7 +55,7 @@ link = "https://github.com/tasuren/twier"
 id = "freedom-wall"
 title = "FreedomWall"
 description = """
-Discordに利用規約違反せずに壁紙を付けれるアプリ。  
+Discordに利用規約違反せずに壁紙を付けれるアプリ。
 仕組みとしては、半透明な壁紙ウィンドウをDiscordの上に配置するだけ。改造はしない。後継を開発中..."""
 skills = ["html5", "css", "javascript", "rust"]
 link = "https://github.com/tasuren/freedom-wall"
@@ -63,7 +71,7 @@ link = "https://github.com/tasuren/website"
 id = "a-synthe"
 title = "aSynthe"
 description = """
-音程検出アプリ  
+音程検出アプリ
 マイクで拾った音の音程をフーリエ変換で求めるだけの単純なアプリ。完全に勉強のために作った、あまり実用性のないもの。"""
 skills = ["rust"]
 link = "https://github.com/tasuren/a-synthe"
@@ -72,7 +80,7 @@ link = "https://github.com/tasuren/a-synthe"
 id = "tsuchimod"
 title = "土ーと"
 description = """
-土でダイヤモンドが作れるMinecraftのMOD。  
+土でダイヤモンドが作れるMinecraftのMOD。
 小学６年生くらいの頃に作ったネタMOD。まさかバズるとは思ってなかった。HPのパスワード忘れて更新できない。"""
 skills = []
 link = "https://tsuchimod.kojyuro.com/"
@@ -83,3 +91,21 @@ title = "i21y"
 description = "Python向けi18nライブラリ  \nYAMLやJSONに対応して、キーを手軽に連結するヘルパー付き。"
 skills = ["python"]
 link = "https://github.com/tasuren/i21y"
+
+[[products]]
+id = "niconico-dl"
+title = "niconico-dl"
+description = """
+Pythonでニコニコ動画をダウンロードするライブラリ。中学３年くらいの頃に多分作ってた。
+恐らくもうAPIの変更で動かないので、後継の[niconico.py](https://github.com/niconicolibs/niconico.py)を使うの推奨。"""
+skills = ["python"]
+link = "https://github.com/tasuren/niconico-dl"
+
+[[products]]
+id = "ipcs"
+title = "ipcs"
+description = """
+高校生の頃に作ったWebSocketで多数のクライアントと通信をするためのライブラリ。名前はIPCを由来にしたが、結局RPCとして使えるようにした。
+今は使ってなくて更新を放置してる。"""
+skills = ["python"]
+link = "https://github.com/tasuren/ipcs"
