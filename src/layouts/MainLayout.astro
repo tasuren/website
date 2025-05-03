@@ -33,12 +33,10 @@ if (!title) console.warn("タイトルがないページがあります。", Ast
         <slot name="head" />
     </Head>
 
-    <body>
+    <body class="px-4">
         <Header />
 
-        <main
-            class="md:mx-auto not-md:px-4 md:max-w-[80ch] prose dark:prose-invert"
-        >
+        <main class="md:mx-auto md:max-w-[80ch] prose dark:prose-invert">
             <slot />
         </main>
 
