@@ -33,14 +33,14 @@ if (!title) console.warn("タイトルがないページがあります。", Ast
         <slot name="head" />
     </Head>
 
-    <body class="px-4">
+    <body>
         <Header />
 
-        <main class="md:mx-auto md:max-w-[80ch] prose dark:prose-invert">
+        <main class="md:mx-auto md:max-w-[80ch] prose dark:prose-invert not-md:px-4">
             <slot />
         </main>
 
-        <footer class="pt-10 pb-5">
+        <footer class="not-md:px-4 pt-10 pb-5">
             <div class="w-fit mx-auto">
                 <AccessCounter class="mb-1 w-full text-center" />
 
