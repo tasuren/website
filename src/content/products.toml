@@ -17,6 +17,34 @@ skills = ["python", "mysql", "linux", "kubernetes", "discord"]
 link = "https://rt.neody.land/"
 
 [[products]]
+id = "window-getter-rs"
+title = "window-getter-rs"
+description = """
+ウィンドウの情報を取得するためのRust向けライブラリ。
+WindowsとMacの両方に対応している。"""
+skills = ["rust"]
+link = "https://github.com/tasuren/window-getter-rs"
+
+[[products]]
+id = "window-observer-rs"
+title = "window-observer-rs"
+description = """
+ウィンドウの動きなどを追跡するためのRust向けライブラリ。
+WindowsとMacの両方に対応している。
+Discordに壁紙を合法的に付けるFreedomWallの後継で使うので実装した。"""
+skills = ["rust"]
+link = "https://github.com/tasuren/window-observer-rs"
+
+[[products]]
+id = "monica"
+title = "Monica"
+description = """
+スクリーン上に直接ペンがきができる、プレゼン補助アプリ。
+WindowsとMacに対応し、最低限の機能があるシンプルなアプリ。"""
+skills = ["tauri", "rust", "typescript", "solid", "html5", "tailwindcss"]
+link = "https://github.com/tasuren/monica"
+
+[[products]]
 id = "tibani-link"
 title = "Tibani Link"
 description = """
@@ -66,6 +94,13 @@ title = "ウェブサイト"
 description = "今あなたが閲覧中のウェブサイト"
 skills = ["html5", "typescript", "astro", "tailwindcss"]
 link = "https://github.com/tasuren/website"
+
+[[products]]
+id = "dpy-wav-sample"
+title = "discord.py wav再生"
+description = "discord.pyでFFmpegを使わずにwavファイルを再生するサンプル。"
+skills = ["discord", "python"]
+link = "https://github.com/tasuren/dpy-wav-sample"
 
 [[products]]
 id = "a-synthe"
