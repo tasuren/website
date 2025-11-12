@@ -11,10 +11,45 @@ link = "https://playark.jp"
 id = "rt-discord-bot"
 title = "RT Discord Bot"
 description = """
-中高生の頃に作っていた、Discordコミュニティ管理サービス。現在は[Neody](https://neody.land/)で稼働中。
+中高生の頃に作っていた、Discordコミュニティ管理サービス。現在は私は開発に関与しておらず、[Neody](https://neody.land/)が運営中。
 僕のコンピュータ知識の基礎を固めたきっかけ。"""
 skills = ["python", "mysql", "linux", "kubernetes", "discord"]
 link = "https://rt.neody.land/"
+
+[[products]]
+id = "monica"
+title = "Monica"
+description = """
+スクリーン上に直接ペンがきができる、プレゼン補助アプリ。
+WindowsとMacに対応し、最低限の機能があるシンプルなアプリ。"""
+skills = ["tauri", "rust", "typescript", "solid", "html5", "tailwindcss"]
+link = "https://github.com/tasuren/monica"
+
+[[products]]
+id = "rakugaki-city"
+title = "らくがきシティ"
+description = """ログイン不要の、開いてすぐ使える、概念説明用シンプル絵チャ。
+
+開いた画面のURLを共有するだけで、他人と絵チャを共有できる。"""
+skills = ["typescript", "hono", "html5", "css"]
+link = "https://rakugaki.city"
+
+[[products]]
+id = "tibani-link"
+title = "Tibani Link"
+description = """
+千葉工業大学生専用の短縮URLサービス。
+千葉工業大学のGoogleアカウントでログインすることで、自分の好きな短縮URLを作り放題！"""
+skills = [
+    "html5",
+    "typescript",
+    "hono",
+    "drizzle",
+    "htmx",
+    "tailwindcss",
+    "cloudflare",
+]
+link = "https://github.com/sofmes/tibani-link"
 
 [[products]]
 id = "window-getter-rs"
@@ -36,30 +71,13 @@ skills = ["rust"]
 link = "https://github.com/tasuren/window-observer-rs"
 
 [[products]]
-id = "monica"
-title = "Monica"
-description = """
-スクリーン上に直接ペンがきができる、プレゼン補助アプリ。
-WindowsとMacに対応し、最低限の機能があるシンプルなアプリ。"""
-skills = ["tauri", "rust", "typescript", "solid", "html5", "tailwindcss"]
-link = "https://github.com/tasuren/monica"
-
-[[products]]
-id = "tibani-link"
-title = "Tibani Link"
-description = """
-千葉工業大学生専用の短縮URLサービス。
-千葉工業大学のGoogleアカウントでログインすることで、自分の好きな短縮URLを作り放題！"""
-skills = [
-    "html5",
-    "typescript",
-    "hono",
-    "drizzle",
-    "htmx",
-    "tailwindcss",
-    "cloudflare",
-]
-link = "https://github.com/sofmes/tibani-link"
+id = "overkami"
+title = "overkami (オーバーカミ)"
+description = """昔作った[Freedom Wall](https://web.archive.org/web/20231016114730/https://freedom-wall.tasuren.jp/)のリメイク。
+アプリを改造せずにアプリに壁紙をつけれる。
+tauriとwindow-observer-rsを使って効率的な動作がするようにし、UIも綺麗になった。"""
+skills = ["rust", "typescript", "tauri", "solid", "html5", "tailwindcss"]
+link = "https://web.archive.org/web/20231016114730/https://freedom-wall.tasuren.jp/"
 
 [[products]]
 id = "shabe2x"
@@ -78,15 +96,6 @@ X（旧Twitter）投稿専用クライアント
 タイムラインを開けない、文字通り投稿しかできないXクライアント。"""
 skills = ["typescript", "tauri"]
 link = "https://github.com/tasuren/twier"
-
-[[products]]
-id = "freedom-wall"
-title = "FreedomWall"
-description = """
-Discordに利用規約違反せずに壁紙を付けれるアプリ。
-仕組みとしては、半透明な壁紙ウィンドウをDiscordの上に配置するだけ。改造はしない。後継を開発中..."""
-skills = ["html5", "css", "javascript", "rust"]
-link = "https://github.com/tasuren/freedom-wall"
 
 [[products]]
 id = "website"
