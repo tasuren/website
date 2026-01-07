@@ -17,6 +17,14 @@ skills = ["python", "mysql", "linux", "kubernetes", "discord"]
 link = "https://rt.neody.land/"
 
 [[products]]
+id = "cef-layer-sharing-demo"
+title = "CEF Layer Sharing Demo"
+description = """
+ChatGPT AtlasのOWLアーキテクチャで使われている、プロセス間のChromium画面共有のCEFを使ったデモ。"""
+skills = ["rust"]
+link = "https://github.com/tasuren/cef-layer-sharing-demo"
+
+[[products]]
 id = "monica"
 title = "Monica"
 description = """
