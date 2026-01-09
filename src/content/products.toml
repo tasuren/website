@@ -85,7 +85,7 @@ description = """昔作った[Freedom Wall](https://web.archive.org/web/20231016
 アプリを改造せずにアプリに壁紙をつけれる。
 tauriとwindow-observer-rsを使って効率的な動作がするようにし、UIも綺麗になった。"""
 skills = ["rust", "typescript", "tauri", "solid", "html5", "tailwindcss"]
-link = "https://web.archive.org/web/20231016114730/https://freedom-wall.tasuren.jp/"
+link = "https://github.com/tasuren/overkami"
 
 [[products]]
 id = "shabe2x"
