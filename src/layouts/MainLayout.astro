@@ -2,7 +2,6 @@
 import "@/styles/global.css";
 import AccessCounter from "@components/AccessCounter.astro";
 import Head, { type Props as HeadProps } from "@components/Head.astro";
-import Header from "@components/Header.astro";
 
 interface Props extends HeadProps {
     frontmatter?: HeadProps;
@@ -15,13 +14,6 @@ const { title, description, keywords, type, properties } = props;
 if (!title) console.warn("タイトルがないページがあります。", Astro.self.name);
 ---
 
-<style is:global>
-    ul,
-    li {
-        margin: 0;
-    }
-</style>
-
 <html lang="ja">
     <Head
         title={title}
@@ -33,10 +25,8 @@ if (!title) console.warn("タイトルがないページがあります。", Ast
         <slot name="head" />
     </Head>
 
-    <body>
-        <Header />
-
-        <main class="md:mx-auto md:max-w-[80ch] prose dark:prose-invert not-md:px-4">
+    <body class="pt-10">
+        <main class="md:mx-auto md:max-w-[80ch] prose dark:prose-invert px-4">
             <slot />
         </main>
 

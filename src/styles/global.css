@@ -2,9 +2,9 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-    --color-foreground: #ffe4e1;
-    --color-link: #d9333f;
-    --color-background: oklch(0.25 0.0705 21.71);
+    --color-foreground: white;
+    --color-link: #66A3FF;
+    --color-background: black;
     --color-card: oklch(0.34 0.1365 18.43);
 }
 

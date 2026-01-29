@@ -1,10 +1,9 @@
 # tasuren's website
 
-[髙木祐来のウェブサイト](https://tasuren.jp)のソースコードです。
+[髙木祐来のウェブサイト](https://tasuren.jp)を管理するためのリポジトリです。
 
 ## 技術スタック
 
-- Bun
 - Astro
 - Tailwind CSS
 
