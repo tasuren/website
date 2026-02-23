@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>（リアルタイムじゃない）ストップウォッチ</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --btn-bg: #fcfcfc;
+            --btn-border: #cccccc;
+            --btn-active: #eeeeee;
+            color-scheme: light;
+        }
+
+        :root[data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #f0f0f0;
+            --btn-bg: #333333;
+            --btn-border: #444444;
+            --btn-active: #555555;
+            color-scheme: dark;
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: var(--bg-color);
+            font-family: sans-serif;
+            color: var(--text-color);
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        /* 初期設定完了後のみアニメーションを有効化 */
+        body.theme-initialized {
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        #display {
+            font-size: 80px;
+            margin-bottom: 40px;
+            font-variant-numeric: tabular-nums;
+            min-height: 1.2em;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+        }
+
+        #actionBtn {
+            padding: 20px 60px;
+            font-size: 24px;
+            cursor: pointer;
+            border: 1px solid var(--btn-border);
+            background-color: var(--btn-bg);
+            color: var(--text-color);
+            border-radius: 4px;
+            min-width: 200px;
+            outline: none;
+        }
+
+        body.theme-initialized #actionBtn {
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+        }
+
+        #actionBtn:active {
+            background-color: var(--btn-active);
+        }
+
+        #themeBtn {
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid var(--btn-border);
+            background-color: var(--btn-bg);
+            color: var(--text-color);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="theme-toggle">
+    <button id="themeBtn">テーマ切替</button>
+</div>
+
+<div class="container">
+    <div id="display">00:00:00.000</div>
+    <div class="controls">
+        <button id="actionBtn">スタート</button>
+    </div>
+</div>
+
+<script>
+    // --- テーマ管理 ---
+    const themeBtn = document.getElementById('themeBtn');
+    const root = document.documentElement;
+    const body = document.body;
+
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    let currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+    
+    // 1. まずテーマを適用
+    setTheme(currentTheme);
+
+    // 2. ブラウザが描画を完了した後にtransitionを有効化
+    // RequestAnimationFrameを使い、描画のタイミングを調整
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            body.classList.add('theme-initialized');
+        });
+    });
+
+    themeBtn.addEventListener('click', () => {
+        currentTheme = (currentTheme === 'light') ? 'dark' : 'light';
+        setTheme(currentTheme);
+        localStorage.setItem('theme', currentTheme);
+        themeBtn.blur();
+    });
+
+    function setTheme(theme) {
+        if (theme === 'dark') {
+            root.setAttribute('data-theme', 'dark');
+        } else {
+            root.removeAttribute('data-theme');
+        }
+    }
+
+    // --- ストップウォッチ論理 ---
+    let startTime;
+    let isRunning = false;
+
+    const display = document.getElementById('display');
+    const actionBtn = document.getElementById('actionBtn');
+
+    function formatTime(ms) {
+        const hours = Math.floor(ms / 3600000);
+        const minutes = Math.floor((ms % 3600000) / 60000);
+        const seconds = Math.floor((ms % 60000) / 1000);
+        const milliseconds = ms % 1000;
+
+        return (
+            String(hours).padStart(2, '0') + ':' +
+            String(minutes).padStart(2, '0') + ':' +
+            String(seconds).padStart(2, '0') + '.' +
+            String(milliseconds).padStart(3, '0')
+        );
+    }
+
+    function toggleTimer() {
+        if (!isRunning) {
+            startTime = Date.now();
+            isRunning = true;
+            display.textContent = "計測中...";
+            actionBtn.textContent = "ストップ";
+        } else {
+            const endTime = Date.now();
+            const elapsedTime = endTime - startTime;
+            isRunning = false;
+            display.textContent = formatTime(elapsedTime);
+            actionBtn.textContent = "再スタート";
+        }
+    }
+
+    actionBtn.addEventListener('click', () => {
+        toggleTimer();
+        actionBtn.blur();
+    });
+
+    window.addEventListener('keydown', (e) => {
+        if (e.code === 'Space') {
+            e.preventDefault();
+            toggleTimer();
+        }
+    });
+</script>
+
+</body>
+</html>
