@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <title>カーソル回避ゲーム</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                background: #000; /* 黒背景 */
+                color: #fff; /* 白文字 */
+                height: 100%;
+                overflow: hidden; /* 画面外へのスクロール禁止 */
+                font-family:
+                    system-ui,
+                    -apple-system,
+                    Segoe UI,
+                    Roboto,
+                    Helvetica,
+                    Arial,
+                    "Hiragino Kaku Gothic ProN",
+                    Meiryo,
+                    "Noto Sans JP",
+                    sans-serif;
+                user-select: none;
+                cursor: default; /* デフォルトのカーソルをそのまま表示 */
+            }
+
+            #ui {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                display: flex;
+                gap: 16px;
+                align-items: center;
+                padding: 10px 12px;
+                background: linear-gradient(
+                    to bottom,
+                    rgba(0, 0, 0, 0.8),
+                    rgba(0, 0, 0, 0)
+                );
+                pointer-events: none;
+            }
+
+            #ui .chip {
+                pointer-events: auto;
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.25);
+                border-radius: 999px;
+                padding: 6px 10px;
+                font-size: 14px;
+                white-space: nowrap;
+                font-variant-numeric: tabular-nums;
+            }
+
+            #gameCanvas {
+                display: block;
+                width: 100vw;
+                height: 100vh;
+            }
+
+            #overlay {
+                position: fixed;
+                inset: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: rgba(0, 0, 0, 0.6);
+                color: #fff;
+                text-align: center;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 160ms ease-out;
+                padding: 20px;
+            }
+            #overlay.show {
+                opacity: 1;
+                pointer-events: auto;
+            }
+            #overlay .panel {
+                border: 1px solid rgba(255, 255, 255, 0.25);
+                background: rgba(0, 0, 0, 0.6);
+                border-radius: 12px;
+                padding: 20px;
+                max-width: 520px;
+                width: 100%;
+            }
+            #overlay h1 {
+                margin: 0 0 12px;
+                font-size: 24px;
+                letter-spacing: 0.02em;
+            }
+            #overlay p {
+                margin: 6px 0;
+                opacity: 0.9;
+            }
+            #overlay button {
+                margin-top: 14px;
+                background: #fff;
+                color: #000;
+                border: none;
+                border-radius: 8px;
+                padding: 10px 14px;
+                font-weight: 600;
+                cursor: pointer;
+            }
+            #overlay button:active {
+                transform: translateY(1px);
+            }
+            a,
+            a:visited {
+                color: #fff;
+            }
+
+            #unsupported {
+                display: none;
+                position: fixed;
+                inset: 0;
+                align-items: center;
+                justify-content: center;
+                background: #000;
+                color: #fff;
+                text-align: center;
+                padding: 20px;
+                z-index: 100;
+            }
+            @media (pointer: coarse) {
+                #unsupported {
+                    display: flex;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="unsupported">
+            <div class="panel" style="border: 1px solid rgba(255,255,255,0.25); background: rgba(0,0,0,0.6); border-radius: 12px; padding: 20px; max-width: 400px; width: 100%;">
+                <h1 style="margin: 0 0 12px; font-size: 24px;">非対応デバイス</h1>
+                <p style="margin: 6px 0; opacity: 0.9;">このゲームはマウス操作が必要です。</p>
+                <p style="margin: 6px 0; opacity: 0.9;">PC のブラウザからアクセスしてください。</p>
+            </div>
+        </div>
+
+        <div id="ui">
+            <div class="chip">時間: <span id="time">0.00</span>s</div>
+            <div class="chip">ベスト: <span id="best">0.00</span>s</div>
+            <div class="chip">銃: <span id="guns">0</span></div>
+            <div class="chip">弾: <span id="bullets">0</span></div>
+            <div class="chip">
+                操作: マウスで避ける／画面外に出たらゲームオーバー
+            </div>
+        </div>
+
+        <canvas id="gameCanvas"></canvas>
+
+        <div id="overlay" class="show" aria-live="polite" aria-modal="true">
+            <div class="panel">
+                <h1>カーソル回避ゲーム</h1>
+                <p>白い銃がマウスカーソルに狙いを定め、定期的に発砲します。</p>
+                <p>画面外にカーソルが出た瞬間にゲームオーバー。</p>
+                <p>長く生き延びた時間がスコアになります。</p>
+                <button type="button" id="startBtn">スタート</button>
+                <p style="margin-top: 10px; font-size: 12px; opacity: 0.8">
+                    ヒント:
+                    角や端は危険。大きく弧を描くように動くと当たりにくいかも。
+                </p>
+            </div>
+        </div>
+
+        <script>
+            // ゲーム設定
+            const SETTINGS = {
+                gun: {
+                    spawnIntervalStart: 3.0, // 最初のスポーン間隔(s)
+                    spawnIntervalMin: 0.7, // 最小スポーン間隔(s)
+                    spawnIntervalDecay: 0.995, // 経時で短くなる率(毎フレーム)
+                    size: 18, // 銃の長さ(白)
+                    thickness: 4, // 銃の太さ
+                    fireCooldown: [1.2, 2.4], // 発砲クールダウン(ランダム範囲, s)
+                    bulletSpeed: [240, 360], // 弾速(ピクセル/秒)
+                    spreadAngle: (6 * Math.PI) / 180, // 少しぶれさせる
+                },
+                bullet: {
+                    radius: 3, // 弾の半径
+                    maxLifetime: 8.0, // 弾の最大寿命(s)
+                },
+                player: {
+                    hitRadius: 8, // 当たり判定(カーソル点の代わりに微小半径)
+                },
+            };
+
+            // キャンバスと描画
+            const canvas = document.getElementById("gameCanvas");
+            const ctx = canvas.getContext("2d", { alpha: false });
+            const overlay = document.getElementById("overlay");
+            const startBtn = document.getElementById("startBtn");
+            const timeEl = document.getElementById("time");
+            const bestEl = document.getElementById("best");
+            const gunsEl = document.getElementById("guns");
+            const bulletsEl = document.getElementById("bullets");
+
+            // DPI対応
+            function resizeCanvas() {
+                const dpr = Math.max(
+                    1,
+                    Math.min(window.devicePixelRatio || 1, 2)
+                );
+                canvas.width = Math.floor(innerWidth * dpr);
+                canvas.height = Math.floor(innerHeight * dpr);
+                canvas.style.width = `${innerWidth}px`;
+                canvas.style.height = `${innerHeight}px`;
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            }
+            window.addEventListener("resize", resizeCanvas);
+            resizeCanvas();
+
+            // ユーティリティ
+            const randRange = (a, b) => a + Math.random() * (b - a);
+            const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+            const dist2 = (ax, ay, bx, by) => {
+                const dx = ax - bx,
+                    dy = ay - by;
+                return dx * dx + dy * dy;
+            };
+
+            // ゲーム状態
+            let running = false;
+            let startTime = 0;
+            let elapsed = 0;
+            let best = Number(localStorage.getItem("cursor_dodge_best") || 0);
+
+            let guns = [];
+            let bullets = [];
+            let spawnInterval = SETTINGS.gun.spawnIntervalStart;
+            let spawnTimer = 0;
+
+            const mouse = {
+                x: innerWidth / 2,
+                y: innerHeight / 2,
+                inside: false,
+            };
+
+            // マウス座標トラッキング
+            function setInsideFromEvent(e) {
+                const x = e.clientX;
+                const y = e.clientY;
+                mouse.x = x;
+                mouse.y = y;
+                mouse.inside =
+                    x >= 0 && y >= 0 && x < innerWidth && y < innerHeight;
+            }
+            window.addEventListener("mousemove", (e) => {
+                setInsideFromEvent(e);
+                // ゲーム開始後に外へ出たら即ゲームオーバー
+                if (running && !mouse.inside) {
+                    gameOver();
+                }
+            });
+            // 画面から出たら検知（mouseleave は信頼性向上の補助）
+            document.addEventListener("mouseleave", () => {
+                mouse.inside = false;
+                if (running) gameOver();
+            });
+            // 再入場で inside 復帰
+            document.addEventListener("mouseenter", (e) => {
+                setInsideFromEvent(e);
+            });
+
+            // 銃と弾
+            function spawnGun() {
+                // 画面端から少し内側に
+                const margin = 24;
+                const side = Math.floor(Math.random() * 4);
+                let x, y;
+                if (side === 0) {
+                    // 上
+                    x = randRange(margin, innerWidth - margin);
+                    y = margin;
+                } else if (side === 1) {
+                    // 右
+                    x = innerWidth - margin;
+                    y = randRange(margin, innerHeight - margin);
+                } else if (side === 2) {
+                    // 下
+                    x = randRange(margin, innerWidth - margin);
+                    y = innerHeight - margin;
+                } else {
+                    // 左
+                    x = margin;
+                    y = randRange(margin, innerHeight - margin);
+                }
+                const gun = {
+                    x,
+                    y,
+                    angle: 0,
+                    fireCd: randRange(...SETTINGS.gun.fireCooldown),
+                };
+                guns.push(gun);
+            }
+
+            function updateGuns(dt) {
+                for (const g of guns) {
+                    // ターゲット角度（マウスへ）
+                    const dx = mouse.x - g.x;
+                    const dy = mouse.y - g.y;
+                    g.angle = Math.atan2(dy, dx);
+
+                    // 発砲クールダウン
+                    g.fireCd -= dt;
+                    if (g.fireCd <= 0) {
+                        fireFromGun(g);
+                        g.fireCd = randRange(...SETTINGS.gun.fireCooldown);
+                    }
+                }
+                gunsEl.textContent = guns.length.toString();
+            }
+
+            function fireFromGun(g) {
+                // 少しぶれた角度
+                const jitter =
+                    (Math.random() * 2 - 1) * SETTINGS.gun.spreadAngle;
+                const ang = g.angle + jitter;
+                const spd = randRange(...SETTINGS.gun.bulletSpeed);
+                const vx = Math.cos(ang) * spd;
+                const vy = Math.sin(ang) * spd;
+
+                // 銃口の先端位置
+                const ox = Math.cos(g.angle) * (SETTINGS.gun.size * 0.6);
+                const oy = Math.sin(g.angle) * (SETTINGS.gun.size * 0.6);
+
+                bullets.push({
+                    x: g.x + ox,
+                    y: g.y + oy,
+                    vx,
+                    vy,
+                    life: 0,
+                });
+            }
+
+            function updateBullets(dt) {
+                const r = SETTINGS.bullet.radius;
+                const r2 = (r + SETTINGS.player.hitRadius) ** 2;
+                const maxLife = SETTINGS.bullet.maxLifetime;
+
+                // 更新と衝突
+                for (const b of bullets) {
+                    b.x += b.vx * dt;
+                    b.y += b.vy * dt;
+                    b.life += dt;
+
+                    // プレイヤー衝突（カーソル付近との距離）
+                    if (mouse.inside) {
+                        if (dist2(b.x, b.y, mouse.x, mouse.y) <= r2) {
+                            gameOver();
+                            return;
+                        }
+                    }
+                }
+                // 画面外長距離の弾や寿命切れを削除
+                const margin = 40;
+                bullets = bullets.filter(
+                    (b) =>
+                        b.life <= maxLife &&
+                        b.x > -margin &&
+                        b.y > -margin &&
+                        b.x < innerWidth + margin &&
+                        b.y < innerHeight + margin
+                );
+                bulletsEl.textContent = bullets.length.toString();
+            }
+
+            function draw() {
+                // 背景（黒）
+                ctx.fillStyle = "#000";
+                ctx.fillRect(0, 0, innerWidth, innerHeight);
+
+                // 弾（白）
+                ctx.fillStyle = "#fff";
+                for (const b of bullets) {
+                    ctx.beginPath();
+                    ctx.arc(b.x, b.y, SETTINGS.bullet.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // 銃（白い棒）
+                ctx.strokeStyle = "#fff";
+                ctx.lineWidth = SETTINGS.gun.thickness;
+                ctx.lineCap = "round";
+                for (const g of guns) {
+                    const len = SETTINGS.gun.size;
+                    const bx = Math.cos(g.angle);
+                    const by = Math.sin(g.angle);
+                    const x1 = g.x - bx * (len * 0.4);
+                    const y1 = g.y - by * (len * 0.4);
+                    const x2 = g.x + bx * (len * 0.6);
+                    const y2 = g.y + by * (len * 0.6);
+                    ctx.beginPath();
+                    ctx.moveTo(x1, y1);
+                    ctx.lineTo(x2, y2);
+                    ctx.stroke();
+
+                    // 根本の小さなピボット
+                    ctx.beginPath();
+                    ctx.arc(g.x, g.y, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // 任意：デバッグ用の当たり半径をうっすら描く（デフォルトOFF）
+                // ctx.globalAlpha = 0.1;
+                // ctx.beginPath();
+                // ctx.arc(mouse.x, mouse.y, SETTINGS.player.hitRadius, 0, Math.PI*2);
+                // ctx.fillStyle = '#fff';
+                // ctx.fill();
+                // ctx.globalAlpha = 1.0;
+            }
+
+            // メインループ
+            let lastTs = 0;
+            function loop(ts) {
+                if (!running) return;
+                if (!lastTs) lastTs = ts;
+                const dt = clamp((ts - lastTs) / 1000, 0, 0.05); // フレーム時間上限
+                lastTs = ts;
+
+                // 時間
+                elapsed = (performance.now() - startTime) / 1000;
+                timeEl.textContent = elapsed.toFixed(2);
+
+                // スポーンタイマーを進め、銃を追加
+                spawnTimer -= dt;
+                if (spawnTimer <= 0) {
+                    spawnGun();
+                    spawnTimer = spawnInterval;
+                }
+                // スポーン間隔は徐々に短縮（下限あり）
+                spawnInterval = Math.max(
+                    SETTINGS.gun.spawnIntervalMin,
+                    spawnInterval * SETTINGS.gun.spawnIntervalDecay
+                );
+
+                // 更新
+                updateGuns(dt);
+                updateBullets(dt);
+
+                // 描画
+                draw();
+
+                requestAnimationFrame(loop);
+            }
+
+            function resetGame() {
+                guns = [];
+                bullets = [];
+                spawnInterval = SETTINGS.gun.spawnIntervalStart;
+                spawnTimer = 0.2; // 最初の銃をすぐ出す
+                elapsed = 0;
+                timeEl.textContent = "0.00";
+                gunsEl.textContent = "0";
+                bulletsEl.textContent = "0";
+                lastTs = 0;
+            }
+
+            function startGame() {
+                resetGame();
+                overlay.classList.remove("show");
+                running = true;
+                startTime = performance.now();
+
+                // マウスがキャンバス外なら中点に初期化（ゲームオーバー即時回避）
+                if (!mouse.inside) {
+                    mouse.x = innerWidth / 2;
+                    mouse.y = innerHeight / 2;
+                    mouse.inside = true;
+                }
+
+                requestAnimationFrame(loop);
+            }
+
+            function gameOver() {
+                if (!running) return;
+                running = false;
+
+                // ベスト更新
+                if (elapsed > best) {
+                    best = elapsed;
+                    localStorage.setItem("cursor_dodge_best", String(best));
+                }
+
+                bestEl.textContent = best.toFixed(2);
+
+                // 結果表示
+                const resultText = `
+                  <div class="panel">
+                    <h1>ゲームオーバー</h1>
+                    <p>生存時間: <strong>${elapsed.toFixed(2)}s</strong></p>
+                    <p>ベスト: <strong>${best.toFixed(2)}s</strong></p>
+                    <p>銃の数: ${guns.length} ／ 弾の数: ${bullets.length}</p>
+                    <button id="retryBtn">リトライ</button>
+                    <p style="margin-top:10px; font-size:12px; opacity:0.8;">
+                      画面外に出ると即終了。一定時間ごとに銃が増え、難易度が上がっていきます。
+                    </p>
+                  </div>
+                `;
+                overlay.innerHTML = resultText;
+                overlay.classList.add("show");
+                document.getElementById("retryBtn").addEventListener(
+                    "click",
+                    () => {
+                        // 初期のオーバーレイUIを復元してから開始
+                        overlay.innerHTML = `
+                          <div class="panel">
+                            <h1>カーソル回避ゲーム</h1>
+                            <p>白い銃がマウスカーソルに狙いを定め、定期的に発砲します。</p>
+                            <p>画面外にカーソルが出た瞬間にゲームオーバー。</p>
+                            <p>長く生き延びた時間がスコアになります。</p>
+                            <button id="startBtn">スタート</button>
+                            <p style="margin-top:10px; font-size:12px; opacity:0.8;">ヒント: 角や端は危険。大きく弧を描くように動くと当たりにくいかも。</p>
+                          </div>
+                        `;
+                        document
+                            .getElementById("startBtn")
+                            .addEventListener("click", startGame);
+                        startGame();
+                    },
+                    { once: true }
+                );
+            }
+
+            // 初期化
+            bestEl.textContent = best.toFixed(2);
+            startBtn.addEventListener("click", startGame);
+
+            // 初回描画（静止画）
+            draw();
+        </script>
+    </body>
+</html>
